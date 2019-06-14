@@ -1,0 +1,24 @@
+{
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-standard",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
+    ]
+  },
+  "rules": {
+    "interface-name": false,
+    "jsx-no-multiline-js": false,
+    "jsx-no-lambda": false,
+    "curly": [
+      true,
+      "ignore-same-line"
+    ],
+    "object-literal-sort-keys": false
+  }
+}
