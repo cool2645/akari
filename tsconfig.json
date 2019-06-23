@@ -10,7 +10,8 @@
     "declaration": true,
     "declarationDir": "./@types",
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "strictNullChecks": true
   },
   "include": [
     "./src/**/*"

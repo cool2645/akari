@@ -40,6 +40,12 @@ module.exports = {
         contentTypes: [`post`, `author`, 'category', 'tag'],
       },
     },
-    `gatsby-mdx`
+    `gatsby-mdx`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `typography`,
+      },
+    },
   ],
 }
