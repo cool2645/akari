@@ -6,16 +6,15 @@
  */
 
 import { graphql, StaticQuery } from 'gatsby'
-import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
 import Header from './header'
-import './layout.css'
+import '../layout.css'
 
 const Layout = ({ children }: any) => (
   <StaticQuery
     query={graphql`
-      query SiteTitleQuery {
+      query SiteTitleQuery2645 {
         site {
           siteMetadata {
             title
@@ -25,7 +24,9 @@ const Layout = ({ children }: any) => (
     `}
     render={data => (
       <>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header
+          siteTitle={data.site.siteMetadata.title}
+        />
         <div
           style={{
             margin: '0 auto',
@@ -45,9 +46,5 @@ const Layout = ({ children }: any) => (
     )}
   />
 )
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout

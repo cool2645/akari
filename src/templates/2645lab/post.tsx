@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
-import * as React from 'react'
-import Layout from '../../components/layout'
 import { MDXRenderer } from 'gatsby-mdx'
+import * as React from 'react'
+import Layout from '../../components/2645lab/layout'
 
 export default ({ data }: any) => {
   console.log(data)

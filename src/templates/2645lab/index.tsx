@@ -1,14 +1,17 @@
 import { graphql } from 'gatsby'
 import * as React from 'react'
 
-import Layout from '../../components/layout'
+import Authors from '../../components/2645lab/authors'
+import Layout from '../../components/2645lab/layout'
 import SEO from '../../components/seo'
+import authors from '../../static/authors'
 
 export default ({ data }: any) => {
   console.log(data)
   return (
     <Layout>
       <SEO title="Home" />
+      <Authors authors={authors} />
       <h4>{data.allPost.totalCount} Posts</h4>
       {data.allPost.nodes.map((node: any) => (
         <div key={node.slug}>
