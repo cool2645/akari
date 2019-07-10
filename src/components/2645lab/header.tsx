@@ -1,6 +1,6 @@
 import * as React from 'react'
 import paint from '../../images/paint.svg'
-import styles from "./header.module.styl"
+import styles from './header.module.styl'
 
 export interface HeaderProps {
   siteTitle: string

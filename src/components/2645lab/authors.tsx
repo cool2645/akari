@@ -26,7 +26,7 @@ const ListItem = (props: ListItemProps) => (
       }
     </div>
     <div className={styles.b1} >
-      {props.avatarUrl ? <img src={props.avatarUrl} alt='avatar' /> : ''}
+      {props.avatarUrl ? <img src={props.avatarUrl} alt="avatar" /> : ''}
     </div>
     <div className={styles.b2} />
   </li>

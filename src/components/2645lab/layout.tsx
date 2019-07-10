@@ -8,8 +8,9 @@
 import { graphql, StaticQuery } from 'gatsby'
 import * as React from 'react'
 
-import Header from './header'
 import '../layout.css'
+import Button from './button'
+import Header from './header'
 
 const Layout = ({ children }: any) => (
   <StaticQuery
@@ -38,8 +39,11 @@ const Layout = ({ children }: any) => (
           <main>{children}</main>
           <footer>
             © {new Date().getFullYear()}, Built with{' '}
-            <a href="https://www.gatsbyjs.org">Gatsby</a> and{' '}
-            <a href="https://strapi.io/">Strapi</a>
+            <a target="__blank" href="https://www.gatsbyjs.org">Gatsby</a> and{' '}
+            <a target="__blank" href="https://strapi.io/">Strapi</a>,
+            Theme <a target="__blank" href="https://github.com/cool2645/akari">Akari</a>
+            <br />
+            来和梨子签订契约，成为<Button text="魔法少女" background="#f4c900" />吧！
           </footer>
         </div>
       </>

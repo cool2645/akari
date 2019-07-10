@@ -20,6 +20,7 @@
       "ignore-same-line"
     ],
     "object-literal-sort-keys": false,
-    "no-console": false
+    "no-console": false,
+    "quotemark": [true, "single", "jsx-double", "avoid-escape", "avoid-template"]
   }
 }

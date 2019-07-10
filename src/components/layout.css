@@ -47,6 +47,10 @@ a:active,
 a:hover {
   outline-width: 0;
 }
+a,
+a:hover {
+  color: #ff5700;
+}
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
@@ -200,7 +204,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  font-family: Cantarell, georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -251,7 +255,7 @@ h2 {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1.62671rem;
+  font-size: 1.45rem;
   line-height: 1.1;
 }
 h3 {
@@ -268,7 +272,7 @@ h3 {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1.38316rem;
+  font-size: 1.22rem;
   line-height: 1.1;
 }
 h4 {
