@@ -2,13 +2,14 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-mdx'
 import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
+import styles from './post.module.styl'
 
 export default ({ data }: any) => {
   console.log(data)
   const post = data.post
   return (
     <Layout>
-      <div>
+      <div className={styles.post}>
         <h1>{post.title}</h1>
         <MDXRenderer>{post.childMdx.code.body}</MDXRenderer>
       </div>

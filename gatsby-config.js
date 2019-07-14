@@ -41,7 +41,30 @@ module.exports = {
         contentTypes: [`post`, `author`, 'category', 'tag'],
       },
     },
-    `gatsby-mdx`,
+    {
+      resolve: `gatsby-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590
+            }
+          },
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: {
+                sh: 'shell',
+              },
+              aliases: {},
+              showLineNumbers: false,
+            },
+          },
+        ]
+      }
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {

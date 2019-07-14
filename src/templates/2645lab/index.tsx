@@ -9,7 +9,6 @@ import Layout from '../../components/2645lab/layout'
 import SEO from '../../components/seo'
 import authors from '../../static/authors'
 import styles from './index.module.styl'
-import { css } from '@emotion/core'
 
 function getBackgroundByAuthor(name: string): string {
   const author = authors.find(a => a.name === name)
@@ -36,7 +35,7 @@ export default ({ data }: any) => {
       {data.allPost.nodes.map((node: any, index: number) => {
         const d = new Date(node.publish_at)
         return (
-          <div key={node.slug}>
+          <div key={node.slug} className={styles.post}>
             <Link to={`/posts/${node.slug}`}>
               <h2 className={styles.title}>
                 <AuthorTag key={index}
@@ -71,6 +70,7 @@ export const query = graphql`
       filter: { is_public: { eq: true }, category: { slug: { eq: "2645lab" } } }
       limit: $limit
       skip: $skip
+      sort: { order: DESC, fields: publish_at }
     ) {
       nodes {
         category {
