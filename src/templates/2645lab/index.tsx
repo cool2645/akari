@@ -44,7 +44,7 @@ export default ({ data }: any) => {
                            avatarUrl={node.author.avatar} />
                 <span>
                   {node.title}
-                  <time dateTime={node.publish_at}>— {
+                  <time dateTime={node.publish_at}> — {
                     `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
                   }</time>
                 </span>
@@ -79,7 +79,7 @@ export const query = graphql`
         title
         slug
         childMdx {
-          excerpt
+          excerpt(pruneLength: 300)
         }
         author {
           avatar
