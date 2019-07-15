@@ -4,24 +4,93 @@ import { MDXRenderer } from 'gatsby-mdx'
 import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
 import styles from './post.module.styl'
+import Alert from '../../components/alert'
 
-import Hr from '../../components/post/hr'
+import Hr from '../../components/hr'
 
-export default ({ data }: any) => {
-  console.log(data)
-  const post = data.post
-  return (
-    <Layout>
-      <div className={styles.post}>
-        <h1>{post.title}</h1>
-        <MDXProvider components={{
-          hr: Hr,
-        }}>
-          <MDXRenderer>{post.childMdx.code.body}</MDXRenderer>
-        </MDXProvider>
-      </div>
-    </Layout>
-  )
+export default class extends React.Component<any> {
+
+  constructor(props: any) {
+    super(props)
+  }
+
+  public render() {
+    const { post } = this.props.data
+    const pd = new Date(post.publish_at)
+    const d = this.dateOfUpdate()
+    return (
+      <Layout>
+        <div className={styles.post}>
+          <h1>{post.title}</h1>
+          <div className={styles.authorMeta}>
+            {
+              post.is_repost ?
+                <span>转载，</span> : ''
+            }
+            <span className={styles.author}>
+              {post.is_repost ? 'by ' : 'By '}
+              {post.author.name}
+            </span>
+            ，
+            <span className={styles.publishTime}>
+              {pd.getFullYear()}-{pd.getMonth() + 1}-{pd.getDate()}
+            </span>
+          </div>
+          {
+            this.dayByUpdate() > 365 ?
+              <Alert
+                content={`本文最后更新于 ${
+                  this.dayByUpdate()
+                  } 天前（${
+                  d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()
+                  }），其中的信息可能已经有所发展或者不再适用于现阶段。`}
+                level="warn"
+              /> : ''
+          }
+          <Alert
+            content={`本文全长 ${
+              post.childMdx.wordCount.words
+              } 字，全部读完大约需要 ${
+              post.childMdx.timeToRead
+              } 分钟。`}
+            level="info"
+          />
+          <MDXProvider components={{
+            hr: Hr,
+            alert: Alert,
+          }}>
+            <MDXRenderer>{post.childMdx.code.body}</MDXRenderer>
+          </MDXProvider>
+        </div>
+        <div className={styles.copyrightNotice}>
+          {
+            post.childCopyrightNotice ?
+              <MDXRenderer>
+                {post.childCopyrightNotice.childMdx.code.body}
+              </MDXRenderer> :
+              <>
+                除特殊说明以外，本网站文章采用 <a
+                  target="_blank"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/">
+                    知识共享署名-相同方式共享 4.0 国际许可协议
+                </a> 进行许可。
+              </>
+          }
+        </div>
+      </Layout>
+    )
+  }
+
+  private dateOfUpdate() {
+    const { post } = this.props.data
+    return new Date(post.update_at || post.publish_at)
+  }
+
+  private dayByUpdate() {
+    return Math.floor(
+      (new Date().getTime() - this.dateOfUpdate().getTime()) / 86400000)
+  }
+
 }
 
 export const query = graphql`
@@ -66,6 +135,7 @@ export const query = graphql`
       is_public
       is_repost
       publish_at
+      update_at
       slug
       title
     }

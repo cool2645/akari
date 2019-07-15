@@ -1,10 +1,10 @@
 import { graphql, Link } from 'gatsby'
 import * as React from 'react'
 
-import AuthorTag from '../../components/2645lab/author-tag'
+import AuthorTag from '../../components/author-tag'
 import Authors from '../../components/2645lab/authors'
-import Button from '../../components/2645lab/button'
-import '../../components/2645lab/font.css'
+import Button from '../../components/button'
+import '../../components/font.css'
 import Layout from '../../components/2645lab/layout'
 import SEO from '../../components/seo'
 import authors from '../../static/authors'
@@ -39,13 +39,15 @@ export default ({ data }: any) => {
             <Link to={`/posts/${node.slug}`}>
               <h2 className={styles.title}>
                 <AuthorTag key={index}
-                           background={getBackgroundByAuthor(node.is_repost ? 'repost' : node.author.name)}
+                           background={
+                             getBackgroundByAuthor(node.is_repost ? 'repost' : node.author.name)
+                           }
                            name={node.is_repost ? '转载' : node.author.name}
                            avatarUrl={node.author.avatar} />
                 <span>
                   {node.title}
                   <time dateTime={node.publish_at}> — {
-                    `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
+                    `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
                   }</time>
                 </span>
               </h2>
@@ -54,7 +56,10 @@ export default ({ data }: any) => {
               {node.childMdx.excerpt}
               <Link to={`/posts/${node.slug}`}>
                 <Button text="阅读全文"
-                        background={getBackgroundByAuthor(node.is_repost ? 'repost' : node.author.name)} />
+                        background={
+                          getBackgroundByAuthor(node.is_repost ? 'repost' : node.author.name)
+                        }
+                />
               </Link>
             </p>
           </div>
