@@ -48,8 +48,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 590
-            }
+              maxWidth: 590,
+            },
           },
           {
             resolve: 'gatsby-remark-prismjs',
@@ -62,8 +62,8 @@ module.exports = {
               showLineNumbers: false,
             },
           },
-        ]
-      }
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-typography`,

@@ -1,8 +1,11 @@
+import { MDXProvider } from '@mdx-js/react'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-mdx'
 import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
 import styles from './post.module.styl'
+
+import Hr from '../../components/post/hr'
 
 export default ({ data }: any) => {
   console.log(data)
@@ -11,7 +14,11 @@ export default ({ data }: any) => {
     <Layout>
       <div className={styles.post}>
         <h1>{post.title}</h1>
-        <MDXRenderer>{post.childMdx.code.body}</MDXRenderer>
+        <MDXProvider components={{
+          hr: Hr,
+        }}>
+          <MDXRenderer>{post.childMdx.code.body}</MDXRenderer>
+        </MDXProvider>
       </div>
     </Layout>
   )

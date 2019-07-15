@@ -10,4 +10,44 @@
   pre {
     margin-bottom 1.45rem
   }
+
+  blockquote {
+    color #888;
+    border-left 0
+    padding 1.5em 1.1em 1.5em 1.1em
+    margin-left 0
+    margin-right 0
+    position: relative
+    font-size 1rem
+    font-style normal
+
+    ul {
+      margin-left 2.45rem
+    }
+  }
+
+  blockquote:before {
+    color #888
+    content "\201C"
+    font-size 5em
+    position absolute
+    left -15px
+    top 30px
+    line-height 0.1em
+    font-family sans-serif
+    font-style italic
+  }
+
+  blockquote:after {
+    color #888
+    content "\201D"
+    font-size 5em
+    position absolute
+    right 10px
+    bottom -30px
+    line-height 0.1em
+    font-family sans-serif
+    font-style italic
+  }
+
 }

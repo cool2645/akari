@@ -1,6 +1,6 @@
+import { css } from '@emotion/core'
 import * as React from 'react'
 import styles from './author-tag.module.styl'
-import { css } from '@emotion/core'
 
 export interface AuthorTagProps {
   avatarUrl: string

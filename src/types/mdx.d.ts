@@ -5,3 +5,10 @@ declare module 'gatsby-mdx' {
   export { MDXComponent, MDXRenderer }
   export default MDXComponent
 }
+
+declare module '@mdx-js/react' {
+  let MDXProvider: (props: {
+    children: JSX.Element
+    components: { [key: string]: (props: any) => JSX.Element }
+  }) => JSX.Element
+}

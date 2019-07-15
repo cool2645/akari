@@ -1,9 +1,9 @@
 import { graphql, Link } from 'gatsby'
 import * as React from 'react'
 
+import AuthorTag from '../../components/2645lab/author-tag'
 import Authors from '../../components/2645lab/authors'
 import Button from '../../components/2645lab/button'
-import AuthorTag from '../../components/2645lab/author-tag'
 import '../../components/2645lab/font.css'
 import Layout from '../../components/2645lab/layout'
 import SEO from '../../components/seo'
