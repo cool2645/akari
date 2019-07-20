@@ -1,3 +1,4 @@
+import { Link } from 'gatsby'
 import * as React from 'react'
 import paint from '../../images/paint.svg'
 import styles from './header.module.styl'
@@ -11,9 +12,11 @@ const Header = (props: HeaderProps) => (
     <div className={styles.headerImg}>
       <img src={paint} alt="title" />
       <div className={styles.banner}>
-        <h1>
-          {props.siteTitle}
-        </h1>
+        <Link to="/" className={styles.title} >
+          <h1>
+            {props.siteTitle}
+          </h1>
+        </Link>
       </div>
     </div>
   </header>

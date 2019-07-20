@@ -56,7 +56,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   const _2645lab_index_pages = graphql(`
     query {
-      allPost(limit: 15) {
+      allPost(limit: 10) {
         pageInfo {
           pageCount
           perPage

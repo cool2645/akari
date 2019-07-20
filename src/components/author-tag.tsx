@@ -9,9 +9,12 @@ export interface AuthorTagProps {
 }
 
 export default (props: AuthorTagProps) => (
-  <div className={styles.authorTag} css={css`
-    background: ${props.background};
-`} >
+  <div
+    className={styles.authorTag}
+    css={css`
+      background: ${props.background};
+    `}
+  >
     <img src={props.avatarUrl} alt="avatar" />
     <span>{props.name}</span>
   </div>

@@ -71,5 +71,11 @@ module.exports = {
         pathToConfigModule: `typography`,
       },
     },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `2645-shi-yan-shi`,
+      },
+    },
   ],
 }

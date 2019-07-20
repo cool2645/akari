@@ -7,9 +7,12 @@ export interface HrProps {
 }
 
 export default (props: HrProps) => (
-  <hr className={styles.hr} css={css`
+  <hr
+    className={styles.hr}
+    css={css`
     &:after {
       content: '${props.content}';
     }
-`} />
+`}
+  />
 )

@@ -1,10 +1,13 @@
 import { MDXProvider } from '@mdx-js/react'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-mdx'
+import { Disqus } from 'gatsby-plugin-disqus'
 import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
-import styles from './post.module.styl'
 import Alert from '../../components/alert'
+import SimplePagination from '../../components/simple-pagination'
+import config from '../../static/site'
+import styles from './post.module.styl'
 
 import Hr from '../../components/hr'
 
@@ -15,7 +18,12 @@ export default class extends React.Component<any> {
   }
 
   public render() {
-    const { post } = this.props.data
+    const { post, previous, next } = this.props.data
+    const disqusConfig = {
+      url: `${config.url + location.pathname}`,
+      identifier: post.slug,
+      title: post.title,
+    }
     const pd = new Date(post.publish_at)
     const d = this.dateOfUpdate()
     return (
@@ -50,7 +58,7 @@ export default class extends React.Component<any> {
           <Alert
             content={`本文全长 ${
               post.childMdx.wordCount.words
-              } 字，全部读完大约需要 ${
+              } 词，全部读完大约需要 ${
               post.childMdx.timeToRead
               } 分钟。`}
             level="info"
@@ -77,6 +85,13 @@ export default class extends React.Component<any> {
               </>
           }
         </div>
+        <SimplePagination
+          previousName={previous ? `上一篇：${previous.title}` : '已是第一篇'}
+          previousUrl={previous ? `/posts/${previous.slug}` : ''}
+          nextName={next ? `下一篇：${next.title}` : '已是最后一篇'}
+          nextUrl={next ? `/posts/${next.slug}` : ''}
+        />
+        <Disqus className={styles.disqus} config={disqusConfig} />
       </Layout>
     )
   }

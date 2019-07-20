@@ -1,0 +1,52 @@
+.simple-pagination {
+  display flex
+  justify-content space-between
+  margin-bottom 1.45rem
+
+  @media screen and (max-width: 680px) {
+    flex-direction column
+
+    &.force2row {
+      flex-direction row
+    }
+  }
+
+  .link {
+
+    max-width 300px
+
+    .left {
+      text-align left
+    }
+
+    .right {
+      text-align right
+    }
+
+    @media screen and (max-width: 680px) {
+      max-width 100%
+
+      .right {
+        text-align left
+      }
+    }
+
+
+    &.force2row {
+      max-width 100%
+
+      .right {
+        text-align left
+      }
+    }
+
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+  }
+
+  a, span {
+    color #666
+    font-size 1rem
+  }
+}

@@ -12,8 +12,11 @@ export interface ButtonProps {
 export default (props: ButtonProps) => (
   <div className={styles.buttonWrap}>
     <h3 className={styles.buttonText}>{props.text}</h3>
-    <div className={styles.button} css={css`
-      border-bottom-color: ${props.background};
-`} />
+    <div
+      className={styles.button}
+      css={css`
+        border-bottom-color: ${props.background};
+      `}
+    />
   </div>
 )

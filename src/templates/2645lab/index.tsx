@@ -1,12 +1,13 @@
 import { graphql, Link } from 'gatsby'
 import * as React from 'react'
 
-import AuthorTag from '../../components/author-tag'
 import Authors from '../../components/2645lab/authors'
+import Layout from '../../components/2645lab/layout'
+import AuthorTag from '../../components/author-tag'
 import Button from '../../components/button'
 import '../../components/font.css'
-import Layout from '../../components/2645lab/layout'
 import SEO from '../../components/seo'
+import SimplePagination from '../../components/simple-pagination'
 import authors from '../../static/authors'
 import styles from './index.module.styl'
 
@@ -20,19 +21,12 @@ function getBackgroundByAuthor(name: string): string {
 }
 
 export default ({ data }: any) => {
-  console.log(data)
+  const { nodes, pageInfo } = data.allPost
   return (
     <Layout>
       <SEO title="Home" />
       <Authors authors={authors} />
-      <nav>
-        <ul className={styles.nav}>
-          <li><Link to={'/'}>文章</Link></li>
-          <li><Link to={'/archive'}>归档</Link></li>
-          <li><Link to={'/posts/about'}>关于</Link></li>
-        </ul>
-      </nav>
-      {data.allPost.nodes.map((node: any, index: number) => {
+      {nodes.map((node: any, index: number) => {
         const d = new Date(node.publish_at)
         return (
           <div key={node.slug} className={styles.post}>
@@ -65,6 +59,16 @@ export default ({ data }: any) => {
           </div>
         )
       })}
+      {
+        (pageInfo.hasNextPage || pageInfo.hasPreviousPage)
+          ? <SimplePagination
+            previousName={pageInfo.hasNextPage ? '更早以前' : ''}
+            previousUrl={`/pages/${pageInfo.currentPage + 1}`}
+            nextName={pageInfo.hasPreviousPage ? '更新以后' : ''}
+            nextUrl={`/pages/${pageInfo.currentPage - 1}`}
+            force2col={true} showIcon={true}
+          /> : ''
+      }
     </Layout>
   )
 }

@@ -8,8 +8,8 @@
 import { graphql, StaticQuery } from 'gatsby'
 import * as React from 'react'
 
-import '../layout.css'
 import Button from '../button'
+import '../layout.css'
 import Header from './header'
 
 const Layout = ({ children }: any) => (
