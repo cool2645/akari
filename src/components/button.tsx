@@ -7,10 +7,11 @@ export interface ButtonProps {
   text: string
   href?: string
   background?: string
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => any
 }
 
 export default (props: ButtonProps) => (
-  <div className={styles.buttonWrap}>
+  <div className={styles.buttonWrap} onClick={props.onClick}>
     <h3 className={styles.buttonText}>{props.text}</h3>
     <div
       className={styles.button}

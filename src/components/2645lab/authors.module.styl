@@ -62,6 +62,7 @@
     .b2 {
       z-index 21
       background-color #fff
+      transition: background-color .2s ease-in-out 0s
     }
 
     &:first-child {
@@ -199,5 +200,9 @@
     }
   }
 
+}
+
+:global(.nightly) .list .list-item .b2 {
+  background-color #000
 }
 

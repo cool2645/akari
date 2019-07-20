@@ -5,6 +5,7 @@
   padding 0 0.8em
   margin 0.5em 0.5em 2em
   z-index 70
+  cursor pointer
 }
 
 .button {
@@ -25,4 +26,9 @@
   z-index 72
   font-family 'Hanyi ShangWei Shoushu'
   font-size 1.25em
+  transition: color .2s ease-in-out 0s
+}
+
+:global(.nightly) .button-text {
+  color #fff
 }

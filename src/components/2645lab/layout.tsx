@@ -12,43 +12,92 @@ import Button from '../button'
 import '../layout.css'
 import Header from './header'
 
-const Layout = ({ children }: any) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery2645 {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <Header
-          siteTitle={data.site.siteMetadata.title}
-        />
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 800,
-            padding: '0px 1.0875rem 1.45rem',
-            paddingTop: 0,
-          }}
-        >
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with{' '}
-            <a target="__blank" href="https://www.gatsbyjs.org">Gatsby</a> and{' '}
-            <a target="__blank" href="https://strapi.io/">Strapi</a>,
-            Theme <a target="__blank" href="https://github.com/cool2645/akari">Akari</a>
-            <br />
-            来和梨子签订契约，成为<Button text="魔法少女" background="#f4c900" />吧！
-          </footer>
-        </div>
-      </>
-    )}
-  />
-)
+import autobind from 'autobind-decorator'
+import styles from './layout.module.styl'
 
-export default Layout
+export interface LayoutProps {
+  onNightModeToggled?: (nightMode: boolean) => void
+}
+
+interface LayoutState {
+  nightMode: boolean
+}
+
+export default class extends React.Component<LayoutProps, LayoutState> {
+
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      // tslint:disable-next-line: strict-type-predicates
+      nightMode: typeof localStorage !== 'undefined'
+        ? localStorage.getItem('nightMode') === 'true' : false,
+    }
+   this.onToggledNightMode()
+  }
+
+  public render() {
+    const { children } = this.props
+
+    return (
+      <StaticQuery
+        query={graphql`
+          query SiteTitleQuery2645 {
+            site {
+              siteMetadata {
+                title
+              }
+            }
+          }
+        `}
+        render={data => (
+          <>
+            <Header
+              siteTitle={data.site.siteMetadata.title}
+            />
+            <div
+              className={`${styles.layout}
+               ${this.state.nightMode ? styles.nightMode : ''}`}
+            >
+              <main>{children}</main>
+              <footer>
+                © {new Date().getFullYear()}, Built with{' '}
+                <a target="__blank" href="https://www.gatsbyjs.org">Gatsby</a> and{' '}
+                <a target="__blank" href="https://strapi.io/">Strapi</a>,
+                  Theme <a target="__blank" href="https://github.com/cool2645/akari" className={styles.theme}>
+                  {this.state.nightMode ? <span className={styles.hoshi}>Hoshi</span> : ''}<span>Akari</span>
+                </a>
+                <br />
+                来和梨子签订契约，成为<Button text="魔法少女" background="#f4c900"
+                                   onClick={this.toggleNightMode} />吧！
+              </footer>
+            </div>
+          </>
+        )}
+      />
+    )
+  }
+
+  @autobind
+  private toggleNightMode() {
+    this.setState({
+      nightMode: !this.state.nightMode,
+    }, this.onToggledNightMode)
+  }
+
+  @autobind
+  private onToggledNightMode() {
+    // tslint:disable-next-line: strict-type-predicates
+    if (typeof document !== 'undefined') {
+      document.body.className = this.state.nightMode ? 'nightly' : ''
+
+      if (this.props.onNightModeToggled) {
+        this.props.onNightModeToggled(this.state.nightMode)
+      }
+
+      // tslint:disable-next-line: strict-type-predicates
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('nightMode', this.state.nightMode + '')
+      }
+    }
+  }
+}

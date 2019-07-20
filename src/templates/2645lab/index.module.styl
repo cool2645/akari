@@ -1,34 +1,6 @@
-ul.nav {
-  list-style none
-  margin 0 0 0.4rem 0
-  display inline-flex
-
-  li {
-    margin 15px 20px 30px
-    font-family "Hanyi ShangWei Shoushu"
-    font-size 2.2em
-
-    &:first-child {
-      margin-left 0
-    }
-
-    &:last-child {
-      margin-right 0
-    }
-
-    a, a:hover {
-      color: #000
-    }
-
-    a:hover {
-      text-shadow 0.5px 0.5px 0.5px
-    }
-  }
-
-}
-
 .title {
   color #000
+  transition: color .2s ease-in-out 0s
   display inline-block
 
   span {
@@ -36,6 +8,10 @@ ul.nav {
   }
 
   margin-bottom 0.625rem
+}
+
+:global(.nightly) .title {
+  color #fff
 }
 
 .post {

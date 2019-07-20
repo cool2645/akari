@@ -10,4 +10,17 @@
   background #fff
   z-index 2
   padding 0 0.5em
+  transition: all .2s ease-in-out 0s
 }
+
+:global(.nightly) {
+  .hr {
+    background #ddd
+  }
+
+  .hr:after {
+    background #000
+    color #fff
+  }
+}
+

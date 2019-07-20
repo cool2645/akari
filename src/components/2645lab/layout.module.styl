@@ -1,0 +1,27 @@
+.layout {
+  margin: 0 auto
+  max-width 800px
+  padding 0 1.0875rem 1.45rem
+}
+
+.theme {
+  transition: all .2s ease-in-out 0s
+  position relative
+
+  span {
+    transition: all .2s ease-in-out 0s
+    position relative
+  }
+
+  span.hoshi {
+    color #fff
+  }
+}
+
+:global(.nightly) {
+   .theme {
+     span {
+       text-shadow 0 0 10px #fff;
+     }
+   }
+}

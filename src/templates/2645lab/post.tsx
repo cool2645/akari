@@ -21,7 +21,7 @@ export default class extends React.Component<any> {
   public render() {
     const { post, previous, next } = this.props.data
     const disqusConfig = {
-      url: `${config.url + location.pathname}`,
+      url: `${config.url + this.props.location.pathname}`,
       identifier: post.slug,
       title: post.title,
     }

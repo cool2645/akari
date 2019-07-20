@@ -7,6 +7,7 @@ export default [
     guestBookUrl: '',
     friendsUrl: '',
     backgroundColor: '#a5dbf7',
+    backgroundColorDark: '#005eae',
     color: '',
   },
   {
@@ -17,6 +18,7 @@ export default [
     guestBookUrl: '',
     friendsUrl: '',
     backgroundColor: '#f5bbd4',
+    backgroundColorDark: '#d10080',
     color: '',
   },
 ]

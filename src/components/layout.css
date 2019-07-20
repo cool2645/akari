@@ -7,6 +7,19 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: all .2s ease-in-out 0s
+}
+body.nightly {
+  background: #000;
+  color: #fff;
+}
+body.nightly h1,
+body.nightly h2,
+body.nightly h3,
+body.nightly h4,
+body.nightly h5,
+body.nightly h6 {
+  color: #fff;
 }
 article,
 aside,

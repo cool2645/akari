@@ -12,67 +12,89 @@ import SimplePagination from '../../components/simple-pagination'
 import authors from '../../static/authors'
 import styles from './index.module.styl'
 
-function getBackgroundByAuthor(name: string): string {
-  const author = authors.find(a => a.name === name)
-  if (author && author.backgroundColor) {
-    return author.backgroundColor
-  }
-  if (name === 'repost') return '#9ac71b'
-  else return '#f4c900'
+interface IndexState {
+  nightMode: boolean
 }
 
-export default ({ data }: any) => {
-  const { nodes, pageInfo } = data.allPost
-  return (
-    <Layout>
-      <SEO title="Home" />
-      <Authors authors={authors} />
-      {nodes.map((node: any, index: number) => {
-        const d = new Date(node.publish_at)
-        return (
-          <div key={node.slug} className={styles.post}>
-            <Link to={`/posts/${node.slug}`}>
-              <h2 className={styles.title}>
-                <AuthorTag key={index}
-                           background={
-                             getBackgroundByAuthor(node.is_repost ? 'repost' : node.author.name)
-                           }
-                           name={node.is_repost ? '转载' : node.author.name}
-                           avatarUrl={node.author.avatar} />
-                <span>
-                  {node.title}
-                  <time dateTime={node.publish_at}> — {
-                    `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
-                  }</time>
-                </span>
-              </h2>
-            </Link>
-            <p>
-              {node.childMdx.excerpt}
+export default class extends React.Component<any, IndexState> {
+
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      nightMode: false
+    }
+  }
+
+  public render() {
+    const { data } = this.props
+    const { nodes, pageInfo } = data.allPost
+    return (
+      <Layout onNightModeToggled={nightMode => this.setState({ nightMode })}>
+        <SEO title="Home" />
+        <Authors authors={authors} />
+        {nodes.map((node: any, index: number) => {
+          const d = new Date(node.publish_at)
+          return (
+            <div key={node.slug} className={styles.post}>
               <Link to={`/posts/${node.slug}`}>
-                <Button text="阅读全文"
-                        background={
-                          getBackgroundByAuthor(node.is_repost ? 'repost' : node.author.name)
-                        }
-                />
+                <h2 className={styles.title}>
+                  <AuthorTag key={index}
+                             background={
+                               this.getBackgroundByAuthor(
+                                 node.is_repost ? 'repost' : node.author.name,
+                                 this.state.nightMode,
+                               )
+                             }
+                             name={node.is_repost ? '转载' : node.author.name}
+                             avatarUrl={node.author.avatar} />
+                  <span>
+                  {node.title}
+                    <time dateTime={node.publish_at}> — {
+                      `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
+                    }</time>
+                </span>
+                </h2>
               </Link>
-            </p>
-          </div>
-        )
-      })}
-      {
-        (pageInfo.hasNextPage || pageInfo.hasPreviousPage)
-          ? <SimplePagination
-            previousName={pageInfo.hasNextPage ? '更早以前' : ''}
-            previousUrl={`/pages/${pageInfo.currentPage + 1}`}
-            nextName={pageInfo.hasPreviousPage ? '更新以后' : ''}
-            nextUrl={`/pages/${pageInfo.currentPage - 1}`}
-            force2col={true} showIcon={true}
-          /> : ''
-      }
-      <ScrollToTop />
-    </Layout>
-  )
+              <p>
+                {node.childMdx.excerpt}
+                <Link to={`/posts/${node.slug}`}>
+                  <Button text="阅读全文"
+                          background={
+                            this.getBackgroundByAuthor(
+                              node.is_repost ? 'repost' : node.author.name,
+                              this.state.nightMode,
+                            )
+                          }
+                  />
+                </Link>
+              </p>
+            </div>
+          )
+        })}
+        {
+          (pageInfo.hasNextPage || pageInfo.hasPreviousPage)
+            ? <SimplePagination
+              previousName={pageInfo.hasNextPage ? '更早以前' : ''}
+              previousUrl={`/pages/${pageInfo.currentPage + 1}`}
+              nextName={pageInfo.hasPreviousPage ? '更新以后' : ''}
+              nextUrl={`/pages/${pageInfo.currentPage - 1}`}
+              force2col={true} showIcon={true}
+            /> : ''
+        }
+        <ScrollToTop />
+      </Layout>
+    )
+  }
+
+  private getBackgroundByAuthor(name: string, nightMode?: boolean): string {
+    const author = authors.find(a => a.name === name)
+    if (author && author.backgroundColor) {
+      return nightMode ? author.backgroundColorDark : author.backgroundColor
+    }
+    if (name === 'repost') return nightMode ? '#007542' : '#9ac71b'
+    else return  nightMode ? '#ee8e00' : '#f4c900'
+  }
+
 }
 
 export const query = graphql`
