@@ -6,6 +6,7 @@ import Layout from '../../components/2645lab/layout'
 import AuthorTag from '../../components/author-tag'
 import Button from '../../components/button'
 import '../../components/font.css'
+import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import SimplePagination from '../../components/simple-pagination'
 import authors from '../../static/authors'
@@ -69,6 +70,7 @@ export default ({ data }: any) => {
             force2col={true} showIcon={true}
           /> : ''
       }
+      <ScrollToTop />
     </Layout>
   )
 }

@@ -5,6 +5,7 @@ import { Disqus } from 'gatsby-plugin-disqus'
 import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
+import ScrollToTop from '../../components/scroll-to-top'
 import SimplePagination from '../../components/simple-pagination'
 import config from '../../static/site'
 import styles from './post.module.styl'
@@ -33,12 +34,15 @@ export default class extends React.Component<any> {
           <div className={styles.authorMeta}>
             {
               post.is_repost ?
-                <span>转载，</span> : ''
+                <><span>由 </span>
+                  <span className={styles.author}>
+                    {post.author.name}
+                  </span>
+                  <span> 转载</span>
+                </> : <span className={styles.author}>
+                    {post.author.name}
+                  </span>
             }
-            <span className={styles.author}>
-              {post.is_repost ? 'by ' : 'By '}
-              {post.author.name}
-            </span>
             ，
             <span className={styles.publishTime}>
               {pd.getFullYear()}-{pd.getMonth() + 1}-{pd.getDate()}
@@ -92,6 +96,7 @@ export default class extends React.Component<any> {
           nextUrl={next ? `/posts/${next.slug}` : ''}
         />
         <Disqus className={styles.disqus} config={disqusConfig} />
+        <ScrollToTop />
       </Layout>
     )
   }
