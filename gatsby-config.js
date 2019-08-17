@@ -77,5 +77,28 @@ module.exports = {
         shortname: `2645-shi-yan-shi`,
       },
     },
+    {
+      resolve: `gatsby-source-twitter`,
+      options: {
+        credentials: {
+          consumer_key: process.env.TWITTER_CONSUMER_KEY,
+          consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+          access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+          access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+        },
+        queries: {
+          rikorikorilove: {
+            endpoint: 'statuses/user_timeline',
+            params: {
+              screen_name: 'rikorikorilove',
+              include_rts: true,
+              exclude_replies: true,
+              tweet_mode: 'extended',
+              count: 100,
+            },
+          },
+        },
+      },
+    },
   ],
 }

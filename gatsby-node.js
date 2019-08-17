@@ -6,6 +6,7 @@
 
 const crypto = require(`crypto`)
 const path = require(`path`)
+const fs = require(`fs`)
 
 const digest = data => {
   return crypto
@@ -53,6 +54,15 @@ Promise.chain = function(arr) {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
+  const createJSON = pageData => {
+    const filePath = `public/json-data/${pageData.path}`
+    const dir = path.dirname(filePath)
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+    const dataToSave = JSON.stringify(pageData.context)
+    fs.writeFile(filePath, dataToSave, err => {
+      if (err) return console.error(err)
+    })
+  }
 
   const _2645lab_index_pages = graphql(`
     query {
@@ -119,5 +129,56 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  return Promise.chain([_2645lab_index_pages, _2645lab_public_posts])
+  const _riko_twitter_data = graphql(`
+    query {
+      allTwitterStatusesUserTimelineRikorikorilove {
+        nodes {
+          full_text
+          retweeted_status {
+            full_text
+            extended_entities {
+              media {
+                media_url_https
+              }
+            }
+            source
+          }
+          id_str
+          extended_entities {
+            media {
+              media_url_https
+            }
+          }
+          source
+        }
+      }
+    }
+  `).then(result => {
+    const perPage = 20
+    const pageCount = Math.ceil(
+      result.data.allTwitterStatusesUserTimelineRikorikorilove.nodes.length /
+        perPage
+    )
+    for (let i = 1; i <= pageCount; i++) {
+      createJSON({
+        path: `twitter/rikorikolove/${i}.json`,
+        context: {
+          nodes: result.data.allTwitterStatusesUserTimelineRikorikorilove.nodes.slice(
+            (i - 1) * 20,
+            i * 20
+          ),
+          pageInfo: {
+            pageCount,
+            perPage,
+          },
+        },
+      })
+    }
+  })
+
+  return Promise.chain([
+    _2645lab_index_pages,
+    _2645lab_public_posts,
+    _riko_twitter_data,
+  ])
 }
