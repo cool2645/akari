@@ -20,7 +20,7 @@ const ListItem = (props: ListItemProps) => (
   <li className={`${styles.listItem}`}>
     <div className={styles.b0}>
       {
-        props.href ?
+        !props.href ?
           <span>{props.text}</span> :
           <Link to={props.href}>{props.text}</Link>
       }
