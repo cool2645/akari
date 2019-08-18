@@ -1,0 +1,41 @@
+.post {
+
+  h2 {
+    margin-top 1.5rem
+  }
+
+  blockquote {
+    text-align center
+    p {
+      width 100%
+      border-left none
+      margin-left 0
+    }
+  }
+
+  p {
+    padding-left 10px
+    border-left #ff5d8a solid 2px
+  }
+
+  @media screen and (min-width: 780px) {
+    p {
+      width calc(50% - 5px)
+      display inline-block
+      vertical-align top
+    }
+
+    p:nth-child(2n - 1) {
+      margin-right 5px
+    }
+
+    p:nth-child(2n) {
+      margin-left 5px
+    }
+  }
+
+  strong {
+    font-size 1.05rem
+  }
+
+}
