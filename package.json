@@ -40,6 +40,7 @@
     "gatsby-source-twitter": "^3.0.0",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.21",
+    "pre-commit": "^1.2.2",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -63,6 +64,10 @@
     "gatsby"
   ],
   "license": "MIT",
+  "pre-commit": [
+    "format",
+    "lint"
+  ],
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",

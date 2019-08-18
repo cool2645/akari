@@ -1,0 +1,103 @@
+.side-bar {
+  position fixed
+  top 0
+  height 100%
+  bottom auto
+  width 25%
+  max-width 350px
+  background-color #f5bbd4
+  z-index 100
+
+  @media screen and (max-width: 780px) {
+    width 75%
+    transform translateX(-400px)
+    transition transform ease-in 0.2s
+  }
+
+  &.show {
+    @media screen and (max-width: 780px) {
+      transform translateX(0)
+    }
+  }
+
+  .header {
+    margin 80% 0 0
+    text-align right
+    top auto
+  }
+
+  h1 {
+    margin 1rem 2rem
+    font-size 2em
+    color #fff
+  }
+
+  ul {
+    margin 0
+    li {
+      font-size 1.25em
+      line-height 2.25em
+      display block
+      margin 0
+      padding 0 2rem
+      color #fff
+
+      &.active, &:hover {
+        background-color #ff5d8a
+      }
+    }
+  }
+
+}
+
+.title-bar {
+  display none
+  @media screen and (max-width: 780px) {
+    display block
+  }
+  background-color #f5bbd4
+  width 100%
+  position fixed
+  top 0
+  span, h1 {
+    margin 1rem 2rem
+    font-size 2em
+    color #fff
+    text-align center
+  }
+}
+
+.placeholder {
+  position relative
+  width 25%
+  max-width 350px
+  height 100%
+}
+
+.title {
+  span {
+    position absolute
+  }
+}
+
+.underlay {
+  position fixed
+  top 0
+  height 100%
+  bottom auto
+  left 0
+  right 0
+  background rgba(0, 0, 0, 0.4)
+  z-index 99
+  display none
+
+  &.show {
+    display block
+  }
+}
+
+:global(.nightly) {
+  .side-bar, .title-bar {
+    background-color #d10080
+  }
+}
