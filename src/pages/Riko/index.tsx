@@ -28,7 +28,11 @@ export default ({ data }: any) => (
                     time={node.publish_at}
                     full_text={node.full_text}
                     url={`https://twitter.com/rikorikorilove/status/${node.id_str}`}
-                    extended_entities={node.extended_entities}
+                    extended_entities={
+                      node.extended_entities ||
+                      (node.retweeted_status ? node.retweeted_status.extended_entities
+                        : null)
+                    }
                     source={node.source}
                     retweeted_status={node.retweeted_status}
                   />
@@ -63,6 +67,20 @@ export const query = graphql`
           extended_entities {
             media {
               media_url_https
+              sizes {
+                large {
+                  h
+                  w
+                }
+                medium {
+                  h
+                  w
+                }
+                small {
+                  h
+                  w
+                }
+              }
             }
           }
           source
@@ -78,6 +96,20 @@ export const query = graphql`
         extended_entities {
           media {
             media_url_https
+            sizes {
+              large {
+                h
+                w
+              }
+              medium {
+                h
+                w
+              }
+              small {
+                h
+                w
+              }
+            }
           }
         }
         source
