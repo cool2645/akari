@@ -43,10 +43,10 @@ export default (props: CardProps) => {
     <div className={styles.cardContent}>
       { props.children }
       <footer>
-        · { new Date(props.time).toLocaleString() } · {
+        <span><time>{ new Date(props.time).toLocaleString() }</time></span><span>{
         props.href.startsWith('/') ? <Link to={props.href}>来自 { via }</Link>
           : <a href={props.href} target="_blank">来自 { via }</a>
-      } ·
+      }</span>
       </footer>
     </div>
   </div>
