@@ -60,7 +60,7 @@ export default class extends React.Component<{}, NavState> {
                 <Link to="/Riko">
                   <li className={
                     globalHistory.location.pathname === '/Riko' ? styles.active : ''
-                  }>动态
+                  }>最近动态
                   </li>
                 </Link>
                 <Link to="/">

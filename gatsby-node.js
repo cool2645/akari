@@ -181,6 +181,11 @@ exports.createPages = ({ graphql, actions }) => {
             source
             favorite_count
             retweet_count
+            user {
+              screen_name
+              name
+              profile_image_url_https
+            }
           }
           id_str
           extended_entities {

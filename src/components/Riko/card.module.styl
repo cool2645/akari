@@ -1,0 +1,33 @@
+.card-content {
+  padding 1rem
+  color #000
+
+  footer {
+    font-size 0.8rem
+    font-weight bold
+    color #ccc
+    margin-top 3px
+    margin-bottom -5px
+  }
+
+}
+
+.card {
+  border #dfdfdf 1px solid
+  box-shadow #efefef 1px 1px 1px
+  img {
+    display block
+    margin 0
+  }
+}
+
+:global(.nightly) {
+  .card-content {
+    color #fff
+  }
+
+  .card {
+    border #333 1px solid
+    box-shadow #111 1px 1px 1px
+  }
+}
