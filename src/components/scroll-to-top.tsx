@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import autobind from 'autobind-decorator'
-import neko from '../images/neko.webp'
 import styles from './scroll-to-top.module.styl'
 
 interface ScrollToTopState {
@@ -34,9 +33,7 @@ export default class extends React.Component<{}, ScrollToTopState> {
       <div
         className={`${styles.scrollToTop} ${this.state.top ? styles.hide : ''}`}
         onClick={this.scrollToTop}
-      >
-        <img src={neko} alt="Scroll to top" />
-      </div>
+      />
     )
   }
 

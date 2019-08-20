@@ -20,6 +20,13 @@ export default class extends React.Component<{}, NavState> {
     }
   }
 
+  public componentWillUnmount() {
+    // tslint:disable-next-line
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'auto'
+    }
+  }
+
   public render() {
     return (
       <nav className={styles.placeholder}>
@@ -47,19 +54,19 @@ export default class extends React.Component<{}, NavState> {
               <ul>
                 <Link to="/Riko/about">
                   <li className={
-                    globalHistory.location.pathname === '/Riko/about' ? styles.active : ''
+                    globalHistory.location.pathname.replace(/\/+$/, '') === '/Riko/about' ? styles.active : ''
                   }>关于梨子
                   </li>
                 </Link>
                 <Link to="/Riko/friends">
                   <li className={
-                    globalHistory.location.pathname === '/Riko/friends' ? styles.active : ''
+                    globalHistory.location.pathname.replace(/\/+$/, '') === '/Riko/friends' ? styles.active : ''
                   }>友情链接
                   </li>
                 </Link>
                 <Link to="/Riko">
                   <li className={
-                    globalHistory.location.pathname === '/Riko' ? styles.active : ''
+                    globalHistory.location.pathname.replace(/\/+$/, '') === '/Riko' ? styles.active : ''
                   }>最近动态
                   </li>
                 </Link>

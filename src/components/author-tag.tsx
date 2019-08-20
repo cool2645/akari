@@ -15,7 +15,11 @@ export default (props: AuthorTagProps) => (
       background: ${props.background};
     `}
   >
-    <img src={props.avatarUrl} alt="avatar" />
+    <div
+      className={styles.img}
+      css={css`
+      background-image: url("${props.avatarUrl}")`}
+    />
     <span>{props.name}</span>
   </div>
 )

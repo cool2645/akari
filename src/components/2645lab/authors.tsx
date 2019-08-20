@@ -1,3 +1,4 @@
+import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 import * as React from 'react'
 import styles from './authors.module.styl'
@@ -26,7 +27,10 @@ const ListItem = (props: ListItemProps) => (
       }
     </div>
     <div className={styles.b1} >
-      {props.avatarUrl ? <img src={props.avatarUrl} alt="avatar" /> : ''}
+      {props.avatarUrl ? <div className={styles.img}
+                              css={css`
+                                    background-image: url("${props.avatarUrl}");
+                                   `} /> : ''}
     </div>
     <div className={styles.b2} />
   </li>
