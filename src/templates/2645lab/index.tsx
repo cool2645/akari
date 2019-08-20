@@ -1,6 +1,7 @@
 import { graphql, Link } from 'gatsby'
 import * as React from 'react'
-
+// @ts-ignore
+import { siteMetadata } from '../../../gatsby-config'
 import Authors from '../../components/2645lab/authors'
 import Layout from '../../components/2645lab/layout'
 import AuthorTag from '../../components/author-tag'
@@ -9,7 +10,6 @@ import '../../components/font.css'
 import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import SimplePagination from '../../components/simple-pagination'
-import authors from '../../static/authors'
 import styles from './index.module.styl'
 
 interface IndexState {
@@ -31,7 +31,7 @@ export default class extends React.Component<any, IndexState> {
     return (
       <Layout onNightModeToggled={nightMode => this.setState({ nightMode })}>
         <SEO title="Home" />
-        <Authors authors={authors} />
+        <Authors authors={siteMetadata.authors} />
         {nodes.map((node: any, index: number) => {
           const d = new Date(node.publish_at)
           return (
@@ -87,7 +87,7 @@ export default class extends React.Component<any, IndexState> {
   }
 
   private getBackgroundByAuthor(name: string, nightMode?: boolean): string {
-    const author = authors.find(a => a.name === name)
+    const author = siteMetadata.authors.find((a: any) => a.name === name)
     if (author && author.backgroundColor) {
       return nightMode ? author.backgroundColorDark : author.backgroundColor
     }

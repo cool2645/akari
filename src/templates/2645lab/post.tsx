@@ -3,11 +3,12 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-mdx'
 import { Disqus } from 'gatsby-plugin-disqus'
 import * as React from 'react'
+// @ts-ignore
+import { siteMetadata } from '../../../gatsby-config'
 import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
 import ScrollToTop from '../../components/scroll-to-top'
 import SimplePagination from '../../components/simple-pagination'
-import config from '../../static/site'
 import styles from './post.module.styl'
 
 import Hr from '../../components/hr'
@@ -21,7 +22,7 @@ export default class extends React.Component<any> {
   public render() {
     const { post, previous, next } = this.props.data
     const disqusConfig = {
-      url: `${config.url + this.props.location.pathname}`,
+      url: `${siteMetadata.url + this.props.location.pathname}`,
       identifier: post.slug,
       title: post.title,
     }

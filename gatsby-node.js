@@ -4,9 +4,11 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const crypto = require(`crypto`)
-const path = require(`path`)
-const fs = require(`fs`)
+const crypto = require('crypto')
+const path = require('path')
+const fs = require('fs')
+const { createRemoteFileNode } = require('gatsby-source-filesystem')
+const { siteMetadata } = require('./gatsby-config')
 
 const digest = data => {
   return crypto
@@ -15,11 +17,28 @@ const digest = data => {
     .digest(`hex`)
 }
 
-exports.onCreateNode = ({ node, actions }) => {
+exports.sourceNodes = async ({ actions, store, cache }) => {
+  const { createNode } = actions
+  for (const author of siteMetadata.authors) {
+    try {
+      await createRemoteFileNode({
+        url: author.avatarUrl,
+        store,
+        cache,
+        createNode,
+        createNodeId: () => `${author.name}-local-image`,
+      })
+    } catch (err) {
+      console.error('avatar image download ERROR:', err)
+    }
+  }
+}
+
+exports.onCreateNode = async ({ node, actions, store, cache }) => {
   const { createNode } = actions
   if (node.internal.type === 'StrapiPost') {
     if (node.copyright_notice) {
-      createNode({
+      await createNode({
         id: node.id + '-copyright-notice',
         parent: node.id + '-markdown',
         children: [],
@@ -31,7 +50,7 @@ exports.onCreateNode = ({ node, actions }) => {
         },
       })
     }
-    createNode({
+    await createNode({
       ...node,
       id: node.id + '-markdown',
       parent: node.id,
@@ -43,26 +62,50 @@ exports.onCreateNode = ({ node, actions }) => {
         contentDigest: digest(node),
       },
     })
+    return
   }
-  if (
-    node.internal.type === 'Post' &&
-    node.category.slug == '2645lab' &&
-    node.is_public
-  ) {
-    createNode({
-      ...node,
-      id: node.id + '-status',
-      type: 'post',
-      internal: {
-        type: 'Status',
-        content: node.content,
-        contentDigest: digest(node),
-      },
-    })
-  } else if (
-    node.internal.type === 'twitterStatusesUserTimelineRikorikorilove'
-  ) {
-    createNode({
+
+  if (node.internal.type === 'Post') {
+    if (
+      node.internal.type === 'Post' &&
+      node.category.slug == '2645lab' &&
+      node.is_public
+    ) {
+      await createNode({
+        ...node,
+        id: node.id + '-status',
+        type: 'post',
+        internal: {
+          type: 'Status',
+          content: node.content,
+          contentDigest: digest(node),
+        },
+      })
+    }
+    return
+  }
+
+  if (node.internal.type === 'twitterStatusesUserTimelineRikorikorilove') {
+    let extended_entities = node.extended_entities
+    if (!extended_entities && node.retweeted_status) {
+      extended_entities = node.retweeted_status.extended_entities
+    }
+    let fileNode
+    if (extended_entities && extended_entities.media) {
+      try {
+        fileNode = await createRemoteFileNode({
+          url: extended_entities.media[0].media_url_https,
+          parentNodeId: node.id + '-status',
+          store,
+          cache,
+          createNode,
+          createNodeId: () => `${node.id}-status-local-image`,
+        })
+      } catch (err) {
+        console.error('twitter image download ERROR:', err)
+      }
+    }
+    await createNode({
       ...node,
       id: node.id + '-status',
       type: 'twitter',
@@ -70,6 +113,7 @@ exports.onCreateNode = ({ node, actions }) => {
         name: '梨子',
       },
       publish_at: new Date(node.created_at).toISOString(),
+      children: fileNode ? [fileNode.id] : [],
       internal: {
         type: 'Status',
         content: node.full_text,
