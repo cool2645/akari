@@ -88,6 +88,18 @@ export default class extends React.Component<LayoutProps, LayoutState> {
   private onToggledNightMode() {
     // tslint:disable-next-line: strict-type-predicates
     if (typeof document !== 'undefined') {
+      if (!this.state.nightMode) {
+        if (!document.akari.console.akari) {
+          document.akari.console.akari = 'Akari means brightness, 明り.'
+          console.log(document.akari.console.akari)
+        }
+      } else {
+        if (!document.akari.console.hoshiakari) {
+          document.akari.console.hoshiakari = 'HoshiAkari means light of the star, 星明かり.'
+          console.log(document.akari.console.hoshiakari)
+        }
+      }
+
       document.body.className = this.state.nightMode ? 'nightly' : ''
 
       if (this.props.onNightModeToggled) {

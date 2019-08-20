@@ -4,18 +4,30 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-// You can delete this file if you're not using it
 require('prismjs/themes/prism.css')
+const { version } = require('./package.json')
 
 if (
   window.navigator.userAgent.indexOf('Firefox') === -1 &&
   window.navigator.userAgent.indexOf('Chrome') !== -1
 ) {
+  console.warn("You don't need Chrome.")
   console.warn(
-    '嘿！还在用吃相难看的 Chrome/Chromium 浏览器吗，换 Firefox 试试吧'
+    "Firefox's performance is comparable to Chrome's nowadays and comes with awesome tools and better privacy protection that Chrome lacks."
   )
   console.warn(
-    '下载专为开发者定制的 Firefox Developer Edition：https://www.mozilla.org/zh-CN/firefox/developer/'
+    'If you still cannot make up your mind, at least you give it a try. Download the Firefox Developer Edition, specially designed for web developers: https://www.mozilla.org/firefox/developer/'
   )
-  console.warn('让我们一同反对垄断，捍卫隐私安全，维护网络中立')
+  console.warn('Privacy and network neutrality matter.')
 }
+
+document.akari = {
+  version,
+  console: {},
+}
+
+console.log(
+  `\n %c © 2645 实验室 | Akari v${document.akari.version} %c \n\n`,
+  'color:#fefefe;background:linear-gradient(to right,#ee8e00,#f4c900,#fff796);padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;',
+  'color:#fefefe;background:#fff796;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;'
+)
