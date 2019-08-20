@@ -68,6 +68,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
                         }
                         source={node.source}
                         retweeted_status={node.retweeted_status}
+                        childFile={node.childFile}
                       />
                       : <PostCard
                         time={node.publish_at}
@@ -136,57 +137,20 @@ export const query = graphql`
         full_text
         retweeted_status {
           full_text
-          extended_entities {
-            media {
-              media_url_https
-              sizes {
-                large {
-                  h
-                  w
-                }
-                medium {
-                  h
-                  w
-                }
-                small {
-                  h
-                  w
-                }
-              }
-            }
-          }
-          source
-          favorite_count
-          retweet_count
           user {
             screen_name
             name
-            profile_image_url_https
           }
         }
         id_str
-        extended_entities {
-          media {
-            media_url_https
-            sizes {
-              large {
-                h
-                w
-              }
-              medium {
-                h
-                w
-              }
-              small {
-                h
-                w
-              }
+        source
+        childFile {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
             }
           }
         }
-        source
-        retweet_count
-        favorite_count
         category {
           slug
         }

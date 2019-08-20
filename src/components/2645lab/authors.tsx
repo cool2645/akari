@@ -5,7 +5,9 @@ import styles from './authors.module.styl'
 
 export interface AuthorProps {
   name: string
-  avatarUrl: string
+  childFile: {
+    publicURL: string
+  }
   homeUrl: string
   guestBookUrl: string
   friendsUrl: string
@@ -38,7 +40,7 @@ const ListItem = (props: ListItemProps) => (
 
 const List = (props: AuthorProps) => {
   const listItemsData = [
-    { text: props.name, avatarUrl: props.avatarUrl, href: props.homeUrl },
+    { text: props.name, avatarUrl: props.childFile.publicURL, href: props.homeUrl },
     { text: '留言板', href: props.guestBookUrl },
     { text: '友情链接', href: props.friendsUrl },
   ]

@@ -1,7 +1,5 @@
 import { graphql, Link } from 'gatsby'
 import * as React from 'react'
-// @ts-ignore
-import { siteMetadata } from '../../../gatsby-config'
 import Authors from '../../components/2645lab/authors'
 import Layout from '../../components/2645lab/layout'
 import AuthorTag from '../../components/author-tag'
@@ -31,7 +29,7 @@ export default class extends React.Component<any, IndexState> {
     return (
       <Layout onNightModeToggled={nightMode => this.setState({ nightMode })}>
         <SEO title="Home" />
-        <Authors authors={siteMetadata.authors} />
+        <Authors authors={data.allAuthor.nodes} />
         {nodes.map((node: any, index: number) => {
           const d = new Date(node.publish_at)
           return (
@@ -46,7 +44,7 @@ export default class extends React.Component<any, IndexState> {
                                )
                              }
                              name={node.is_repost ? '转载' : node.author.name}
-                             avatarUrl={node.author.avatar} />
+                             avatarUrl={this.getLocalAvatar(node.author.avatar)} />
                   <span>
                   {node.title}
                     <time dateTime={node.publish_at}> — {
@@ -87,7 +85,8 @@ export default class extends React.Component<any, IndexState> {
   }
 
   private getBackgroundByAuthor(name: string, nightMode?: boolean): string {
-    const author = siteMetadata.authors.find((a: any) => a.name === name)
+    const { data } = this.props
+    const author = data.allAuthor.nodes.find((a: any) => a.name === name)
     if (author && author.backgroundColor) {
       return nightMode ? author.backgroundColorDark : author.backgroundColor
     }
@@ -95,10 +94,32 @@ export default class extends React.Component<any, IndexState> {
     else return  nightMode ? '#ee8e00' : '#f4c900'
   }
 
+  private getLocalAvatar(avatar: string) {
+    const { data } = this.props
+    const author = data.allAuthor.nodes.find((a: any) => a.avatarUrl === avatar)
+    if (author) return author.childFile.publicURL
+    return avatar
+  }
+
 }
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
+    allAuthor {
+      nodes {
+        childFile {
+          publicURL
+        }
+        avatarUrl
+        friendsUrl
+        color
+        guestBookUrl
+        homeUrl
+        name
+        backgroundColor
+        backgroundColorDark
+      }
+    }
     allPost(
       filter: { is_public: { eq: true }, category: { slug: { eq: "2645lab" } } }
       limit: $limit

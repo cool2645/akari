@@ -10,6 +10,11 @@ interface TwitterCardProps {
   extended_entities?: any
   source: string
   retweeted_status?: any
+  childFile?: {
+    childImageSharp: {
+      fluid: any
+    }
+  }
 }
 
 export default (props: TwitterCardProps) => {
@@ -18,17 +23,10 @@ export default (props: TwitterCardProps) => {
   if (props.retweeted_status) {
     fullText = fullText.replace(/^RT @[a-zA-Z0-9_]+:/, '')
   }
-  const imgSizeObj = props.extended_entities && props.extended_entities.media[0].sizes ?
-    props.extended_entities.media[0].sizes.large
-      || props.extended_entities.media[0].sizes.medium
-      || props.extended_entities.media[0].sizes.small : null
   return <Card time={props.time}
                via={`!Twitter${source}`}
                href={props.url}
-               cover_url={props.extended_entities ?
-                 props.extended_entities.media[0].media_url_https : ''}
-               cover_height={imgSizeObj ?
-                 imgSizeObj.h / imgSizeObj.w * 100 + '%' : ''}
+               cover_fluid={props.childFile ? props.childFile.childImageSharp.fluid : null}
   >
     {
       props.retweeted_status ?

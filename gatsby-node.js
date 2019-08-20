@@ -4,24 +4,25 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const crypto = require('crypto')
 const path = require('path')
 const fs = require('fs')
 const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const { siteMetadata } = require('./gatsby-config')
 
-const digest = data => {
-  return crypto
-    .createHash(`md5`)
-    .update(JSON.stringify(data))
-    .digest(`hex`)
-}
-
-exports.sourceNodes = async ({ actions, store, cache }) => {
+exports.sourceNodes = async ({
+  actions,
+  store,
+  cache,
+  createNodeId,
+  createContentDigest,
+}) => {
   const { createNode } = actions
   for (const author of siteMetadata.authors) {
+    const nodeId = createNodeId(`author-${author.name}`)
+    let fileNode
     try {
-      await createRemoteFileNode({
+      fileNode = await createRemoteFileNode({
+        parentNodeId: nodeId,
         url: author.avatarUrl,
         store,
         cache,
@@ -31,10 +32,26 @@ exports.sourceNodes = async ({ actions, store, cache }) => {
     } catch (err) {
       console.error('avatar image download ERROR:', err)
     }
+    await createNode({
+      id: nodeId,
+      ...author,
+      children: fileNode ? [fileNode.id] : [],
+      internal: {
+        type: 'Author',
+        content: JSON.stringify(author),
+        contentDigest: createContentDigest(author),
+      },
+    })
   }
 }
 
-exports.onCreateNode = async ({ node, actions, store, cache }) => {
+exports.onCreateNode = async ({
+  node,
+  actions,
+  store,
+  cache,
+  createContentDigest,
+}) => {
   const { createNode } = actions
   if (node.internal.type === 'StrapiPost') {
     if (node.copyright_notice) {
@@ -46,7 +63,7 @@ exports.onCreateNode = async ({ node, actions, store, cache }) => {
           type: 'CopyrightNotice',
           mediaType: 'text/markdown',
           content: node.copyright_notice,
-          contentDigest: digest(node.copyright_notice),
+          contentDigest: createContentDigest(node.copyright_notice),
         },
       })
     }
@@ -59,7 +76,7 @@ exports.onCreateNode = async ({ node, actions, store, cache }) => {
         type: 'Post',
         mediaType: 'text/markdown',
         content: node.content,
-        contentDigest: digest(node),
+        contentDigest: createContentDigest(node),
       },
     })
     return
@@ -78,7 +95,7 @@ exports.onCreateNode = async ({ node, actions, store, cache }) => {
         internal: {
           type: 'Status',
           content: node.content,
-          contentDigest: digest(node),
+          contentDigest: createContentDigest(node),
         },
       })
     }
@@ -117,7 +134,7 @@ exports.onCreateNode = async ({ node, actions, store, cache }) => {
       internal: {
         type: 'Status',
         content: node.full_text,
-        contentDigest: digest(node),
+        contentDigest: createContentDigest(node),
       },
     })
   }
