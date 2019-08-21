@@ -4,4 +4,20 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-// You can delete this file if you're not using it
+const React = require('react')
+const { dom } = require('@fortawesome/fontawesome-svg-core')
+
+export const onPreRenderHTML = ({
+  getHeadComponents,
+  replaceHeadComponents,
+}) => {
+  const headComponents = getHeadComponents()
+  headComponents.push(
+    <style
+      id="fontawesome-ssr"
+      key="fontawesome-ssr"
+      dangerouslySetInnerHTML={{ __html: dom.css() }}
+    />
+  )
+  replaceHeadComponents(headComponents)
+}

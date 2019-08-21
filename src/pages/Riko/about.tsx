@@ -3,8 +3,6 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-mdx';
 import { Disqus } from 'gatsby-plugin-disqus';
 import * as React from 'react';
-// @ts-ignore
-import { siteMetadata } from '../../../gatsby-config'
 import Alert from '../../components/alert';
 import Hr from '../../components/hr';
 import Layout from '../../components/Riko/layout';
@@ -14,7 +12,7 @@ import styles from '../../templates/2645lab/post.module.styl';
 
 export default ({ data, location }: any) => {
   const disqusConfig = {
-    url: `${siteMetadata.url + location.pathname}`,
+    url: `${data.site.siteMetadata.siteUrl + location.pathname}`,
     identifier: data.post.slug,
     title: data.post.title
   }
@@ -56,6 +54,11 @@ export const query = graphql`
       update_at
       slug
       title
+    }
+    site {
+      siteMetadata {
+        siteUrl
+      }
     }
   }
 `

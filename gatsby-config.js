@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `2645 实验室`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: ``,
     author: `梨子`,
     authors: [
       {
@@ -27,7 +27,7 @@ module.exports = {
         color: '',
       },
     ],
-    url: 'https://www.cool2645.com',
+    siteUrl: 'https://www.cool2645.com',
   },
   plugins: [
     `gatsby-plugin-typescript`,
@@ -58,6 +58,68 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allPost } }) => {
+              return allPost.nodes.map(node => {
+                return Object.assign(
+                  {},
+                  {
+                    title: node.title,
+                    description: node.excerpt,
+                    date: node.publish_at,
+                    url: `${site.siteMetadata.siteUrl}/posts/${node.slug}`,
+                    guid: `${site.siteMetadata.siteUrl}/posts/${node.slug}`,
+                  }
+                )
+              })
+            },
+            query: `
+              {
+                allPost(
+                  filter: {
+                    is_public: { eq: true }
+                    category: { slug: { eq: "2645lab" } }
+                  }
+                  sort: { order: DESC, fields: publish_at }
+                ) {
+                  nodes {
+                    childMdx {
+                      excerpt(pruneLength: 300)
+                    }
+                    slug
+                    publish_at
+                    title
+                  }
+                }
+              }
+            `,
+            output: '/feed.xml',
+            title: '2645 实验室',
+            // optional configuration to insert feed reference in pages:
+            // if `string` is used, it will be used to create RegExp and then test if pathname of
+            // current page satisfied this regular expression;
+            // if not provided or `undefined`, all pages will have feed reference inserted
+            match: '^/posts/',
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-source-strapi`,
       options: {

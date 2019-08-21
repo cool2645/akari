@@ -3,8 +3,6 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-mdx'
 import { Disqus } from 'gatsby-plugin-disqus'
 import * as React from 'react'
-// @ts-ignore
-import { siteMetadata } from '../../../gatsby-config'
 import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
 import ScrollToTop from '../../components/scroll-to-top'
@@ -21,9 +19,9 @@ export default class extends React.Component<any> {
   }
 
   public render() {
-    const { post, previous, next } = this.props.data
+    const { post, previous, next, site } = this.props.data
     const disqusConfig = {
-      url: `${siteMetadata.url + this.props.location.pathname}`,
+      url: `${site.siteMetadata.siteUrl + this.props.location.pathname}`,
       identifier: post.slug,
       title: post.title,
     }
@@ -161,6 +159,11 @@ export const query = graphql`
       update_at
       slug
       title
+    }
+    site {
+      siteMetadata {
+        siteUrl
+      }
     }
   }
 `
