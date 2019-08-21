@@ -1,7 +1,5 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// tslint:disable-next-line:no-implicit-dependencies
-import { globalHistory } from '@reach/router'
 import autobind from 'autobind-decorator'
 import { Link } from 'gatsby'
 import * as React from 'react'
@@ -52,23 +50,14 @@ export default class extends React.Component<{}, NavState> {
             </div>
             <div className={styles.links}>
               <ul>
-                <Link to="/Riko/about">
-                  <li className={
-                    globalHistory.location.pathname.replace(/\/+$/, '') === '/Riko/about' ? styles.active : ''
-                  }>关于梨子
-                  </li>
+                <Link to="/Riko/about" activeClassName={styles.active}>
+                  <li>关于梨子</li>
                 </Link>
-                <Link to="/Riko/friends">
-                  <li className={
-                    globalHistory.location.pathname.replace(/\/+$/, '') === '/Riko/friends' ? styles.active : ''
-                  }>友情链接
-                  </li>
+                <Link to="/Riko/friends" activeClassName={styles.active}>
+                  <li>友情链接</li>
                 </Link>
-                <Link to="/Riko">
-                  <li className={
-                    globalHistory.location.pathname.replace(/\/+$/, '') === '/Riko' ? styles.active : ''
-                  }>最近动态
-                  </li>
+                <Link to="/Riko" activeClassName={styles.active}>
+                  <li>最近动态</li>
                 </Link>
                 <Link to="/">
                   <li>技术文章</li>

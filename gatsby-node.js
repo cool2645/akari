@@ -13,16 +13,14 @@ exports.sourceNodes = async ({
   actions,
   store,
   cache,
-  createNodeId,
   createContentDigest,
 }) => {
   const { createNode } = actions
   for (const author of siteMetadata.authors) {
-    const nodeId = createNodeId(`author-${author.name}`)
     let fileNode
     try {
       fileNode = await createRemoteFileNode({
-        parentNodeId: nodeId,
+        parentNodeId: `author-${author.name}`,
         url: author.avatarUrl,
         store,
         cache,
@@ -33,7 +31,7 @@ exports.sourceNodes = async ({
       console.error('avatar image download ERROR:', err)
     }
     await createNode({
-      id: nodeId,
+      id: `author-${author.name}`,
       ...author,
       children: fileNode ? [fileNode.id] : [],
       internal: {

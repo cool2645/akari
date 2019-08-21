@@ -21,6 +21,7 @@
     "@types/react-helmet": "^5.0.8",
     "autobind-decorator": "^2.4.0",
     "babel-preset-gatsby": "^0.2.7",
+    "font-spider": "^1.3.5",
     "gatsby": "^2.9.2",
     "gatsby-image": "^2.1.4",
     "gatsby-mdx": "^0.6.3",
@@ -72,7 +73,7 @@
     "lint"
   ],
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build && cd ./public && font-spider --no-backup --map \"/static\",\"./static\" *.html",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx} gatsby-node.js gatsby-browser.js gatsby-config.js gatsby-ssr.js",
     "start": "npm run develop",
