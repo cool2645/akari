@@ -12,6 +12,7 @@ import SimplePagination from '../../components/simple-pagination'
 import styles from './post.module.styl'
 
 import Hr from '../../components/hr'
+import SEO from '../../components/seo';
 
 export default class extends React.Component<any> {
 
@@ -30,6 +31,7 @@ export default class extends React.Component<any> {
     const d = this.dateOfUpdate()
     return (
       <Layout>
+        <SEO title={post.title} />
         <div className={styles.post}>
           <h1>{post.title}</h1>
           <div className={styles.authorMeta}>

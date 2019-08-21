@@ -7,6 +7,7 @@ import Layout from '../../components/Riko/layout'
 import PostCard from '../../components/Riko/post-card'
 import TwitterCard from '../../components/Riko/twitter-card'
 import ScrollToTop from '../../components/scroll-to-top';
+import SEO from '../../components/seo';
 import styles from './index.module.styl'
 
 interface StatusPageProps {
@@ -45,6 +46,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
   public render() {
     return (
       <Layout>
+        <SEO title="最近动态" siteTitle="梨园" />
         <div className={styles.container}>
           <h1>最近动态</h1>
           <Masonry

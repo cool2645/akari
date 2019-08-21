@@ -9,6 +9,7 @@ import Alert from '../../components/alert';
 import Hr from '../../components/hr';
 import Layout from '../../components/Riko/layout';
 import ScrollToTop from '../../components/scroll-to-top';
+import SEO from '../../components/seo';
 import styles from '../../templates/2645lab/post.module.styl';
 
 export default ({ data, location }: any) => {
@@ -19,6 +20,7 @@ export default ({ data, location }: any) => {
   }
   return (
     <Layout>
+      <SEO title="关于梨子" siteTitle="梨园" />
       <h1>{data.post.title}</h1>
       <div className={styles.post}>
         <MDXProvider components={{
