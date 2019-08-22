@@ -9,6 +9,12 @@ const fs = require('fs')
 const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const { siteMetadata } = require('./gatsby-config')
 
+function dateDiff(date1, date2) {
+  date1 = date1 ? new Date(date1) : new Date()
+  date2 = date2 ? new Date(date2) : new Date()
+  return (date2 - date1) / 1000 / 60 / 60 / 24
+}
+
 exports.sourceNodes = async ({
   actions,
   store,
@@ -80,27 +86,29 @@ exports.onCreateNode = async ({
     return
   }
 
-  if (node.internal.type === 'Post') {
-    if (
-      node.internal.type === 'Post' &&
-      node.category.slug == '2645lab' &&
-      node.is_public
-    ) {
-      await createNode({
-        ...node,
-        id: node.id + '-status',
-        type: 'post',
-        internal: {
-          type: 'Status',
-          content: node.content,
-          contentDigest: createContentDigest(node),
-        },
-      })
-    }
+  if (
+    node.internal.type === 'Post' &&
+    node.category.slug == '2645lab' &&
+    node.is_public &&
+    dateDiff(node.publish_at) < 180
+  ) {
+    await createNode({
+      ...node,
+      id: node.id + '-status',
+      type: 'post',
+      internal: {
+        type: 'Status',
+        content: node.content,
+        contentDigest: createContentDigest(node),
+      },
+    })
     return
   }
 
-  if (node.internal.type === 'twitterStatusesUserTimelineRikorikorilove') {
+  if (
+    node.internal.type === 'twitterStatusesUserTimelineRikorikorilove' &&
+    dateDiff(node.created_at) < 180
+  ) {
     let extended_entities = node.extended_entities
     if (!extended_entities && node.retweeted_status) {
       extended_entities = node.retweeted_status.extended_entities
@@ -193,6 +201,7 @@ exports.createPages = ({ graphql, actions }) => {
           is_public: { eq: true }
           category: { slug: { eq: "2645lab" } }
         }
+        sort: { order: ASC, fields: publish_at }
       ) {
         edges {
           node {
