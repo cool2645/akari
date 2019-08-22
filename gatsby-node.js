@@ -5,7 +5,6 @@
  */
 
 const path = require('path')
-const fs = require('fs')
 const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const { siteMetadata } = require('./gatsby-config')
 
@@ -49,6 +48,9 @@ exports.sourceNodes = async ({
   }
 }
 
+let postStatus = false
+let twitterStatus = false
+
 exports.onCreateNode = async ({
   node,
   actions,
@@ -90,7 +92,7 @@ exports.onCreateNode = async ({
     node.internal.type === 'Post' &&
     node.category.slug == '2645lab' &&
     node.is_public &&
-    dateDiff(node.publish_at) < 180
+    (!postStatus || dateDiff(node.publish_at) < 180)
   ) {
     await createNode({
       ...node,
@@ -102,12 +104,13 @@ exports.onCreateNode = async ({
         contentDigest: createContentDigest(node),
       },
     })
+    postStatus = true
     return
   }
 
   if (
     node.internal.type === 'twitterStatusesUserTimelineRikorikorilove' &&
-    dateDiff(node.created_at) < 180
+    (!twitterStatus || dateDiff(node.created_at) < 180)
   ) {
     let extended_entities = node.extended_entities
     if (!extended_entities && node.retweeted_status) {
@@ -143,6 +146,7 @@ exports.onCreateNode = async ({
         contentDigest: createContentDigest(node),
       },
     })
+    twitterStatus = true
   }
 }
 
@@ -154,16 +158,6 @@ Promise.chain = function(arr) {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  const createJSON = pageData => {
-    const filePath = `public/json-data/${pageData.path}`
-    const dir = path.dirname(filePath)
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
-    const dataToSave = JSON.stringify(pageData.context)
-    fs.writeFile(filePath, dataToSave, err => {
-      if (err) return console.error(err)
-    })
-  }
-
   const _2645lab_index_pages = graphql(`
     query {
       allPost(limit: 10) {

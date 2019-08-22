@@ -151,6 +151,7 @@ module.exports = {
               showLineNumbers: false,
             },
           },
+          `gatsby-remark-mathjax`,
         ],
       },
     },
