@@ -76,7 +76,7 @@
     "lint"
   ],
   "scripts": {
-    "build": "gatsby build && cd ./public && font-spider --no-backup --map \"/static\",\"./static\" *.html",
+    "build": "gatsby build && cp _redirects public && cd ./public && font-spider --no-backup --map \"/static\",\"./static\" *.html",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx} gatsby-node.js gatsby-browser.js gatsby-config.js gatsby-ssr.js",
     "start": "npm run develop",
