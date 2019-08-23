@@ -8,9 +8,9 @@ module.exports = {
         name: 'Bittersweet',
         avatarUrl:
           'https://secure.gravatar.com/avatar/9f6bc88b62a0055492fd5ae916678aa5?s=96&d=mm&r=g',
-        homeUrl: '/Bittersweet',
-        guestBookUrl: '/Bittersweet/about',
-        friendsUrl: '/Bittersweet/friends',
+        homeUrl: '/404',
+        guestBookUrl: '/404',
+        friendsUrl: '/404',
         backgroundColor: '#a5dbf7',
         backgroundColorDark: '#005eae',
         color: '',
