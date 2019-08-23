@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-mdx';
 import { Disqus } from 'gatsby-plugin-disqus';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import * as React from 'react';
 import Alert from '../../components/alert';
 import Hr from '../../components/hr';
@@ -25,7 +25,7 @@ export default ({ data, location }: any) => {
           hr: Hr,
           alert: Alert
         }}>
-          <MDXRenderer>{data.post.childMdx.code.body}</MDXRenderer>
+          <MDXRenderer>{data.post.childMdx.body}</MDXRenderer>
         </MDXProvider>
         <Alert
           content="和文章无关的留言就写在这里吧~"
@@ -46,9 +46,7 @@ export const query = graphql`
           depth
           value
         }
-        code {
-          body
-        }
+        body
       }
       publish_at
       update_at

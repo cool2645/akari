@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { graphql } from 'gatsby'
-import { MDXRenderer } from 'gatsby-mdx'
 import { Disqus } from 'gatsby-plugin-disqus'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
@@ -72,14 +72,14 @@ export default class extends React.Component<any> {
             hr: Hr,
             alert: Alert,
           }}>
-            <MDXRenderer>{post.childMdx.code.body}</MDXRenderer>
+            <MDXRenderer>{post.childMdx.body}</MDXRenderer>
           </MDXProvider>
         </div>
         <div className={styles.copyrightNotice}>
           {
             post.childCopyrightNotice ?
               <MDXRenderer>
-                {post.childCopyrightNotice.childMdx.code.body}
+                {post.childCopyrightNotice.childMdx.body}
               </MDXRenderer> :
               <>
                 除特殊说明以外，本网站文章采用 <a
@@ -135,9 +135,7 @@ export const query = graphql`
       }
       childCopyrightNotice {
         childMdx {
-          code {
-            body
-          }
+          body
         }
       }
       childMdx {
@@ -145,9 +143,7 @@ export const query = graphql`
           depth
           value
         }
-        code {
-          body
-        }
+        body
         timeToRead
         wordCount {
           words
