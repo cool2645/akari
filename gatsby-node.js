@@ -8,12 +8,6 @@ const path = require('path')
 const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const { siteMetadata } = require('./gatsby-config')
 
-function dateDiff(date1, date2) {
-  date1 = date1 ? new Date(date1) : new Date()
-  date2 = date2 ? new Date(date2) : new Date()
-  return (date2 - date1) / 1000 / 60 / 60 / 24
-}
-
 exports.sourceNodes = async ({
   actions,
   store,
@@ -47,9 +41,6 @@ exports.sourceNodes = async ({
     })
   }
 }
-
-let postStatus = false
-let twitterStatus = false
 
 exports.onCreateNode = async ({
   node,
@@ -91,8 +82,7 @@ exports.onCreateNode = async ({
   if (
     node.internal.type === 'Post' &&
     node.category.slug == '2645lab' &&
-    node.is_public &&
-    (!postStatus || dateDiff(node.publish_at) < 180)
+    node.is_public
   ) {
     await createNode({
       ...node,
@@ -108,10 +98,7 @@ exports.onCreateNode = async ({
     return
   }
 
-  if (
-    node.internal.type === 'twitterStatusesUserTimelineRikorikorilove' &&
-    (!twitterStatus || dateDiff(node.created_at) < 180)
-  ) {
+  if (node.internal.type === 'twitterStatusesUserTimelineRikorikorilove') {
     let extended_entities = node.extended_entities
     if (!extended_entities && node.retweeted_status) {
       extended_entities = node.retweeted_status.extended_entities

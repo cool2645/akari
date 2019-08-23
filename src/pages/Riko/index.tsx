@@ -1,14 +1,14 @@
 import autobind from 'autobind-decorator';
 import { graphql } from 'gatsby';
-import * as React from 'react'
+import * as React from 'react';
 import Masonry from 'react-masonry-component';
-import Hr from '../../components/hr'
-import Layout from '../../components/Riko/layout'
-import PostCard from '../../components/Riko/post-card'
-import TwitterCard from '../../components/Riko/twitter-card'
+import Hr from '../../components/hr';
+import Layout from '../../components/Riko/layout';
+import PostCard from '../../components/Riko/post-card';
+import TwitterCard from '../../components/Riko/twitter-card';
 import ScrollToTop from '../../components/scroll-to-top';
 import SEO from '../../components/seo';
-import styles from './index.module.styl'
+import styles from './index.module.styl';
 
 interface StatusPageProps {
   data: any
@@ -20,26 +20,26 @@ interface StatusPageState {
 
 export default class extends React.Component<StatusPageProps, StatusPageState> {
 
-  private readonly perPage = 20
+  private readonly perPage = 20;
 
   constructor(props: StatusPageProps) {
-    super(props)
+    super(props);
     this.state = {
       displayedNodes: props.data.allStatus.nodes.slice(0, this.perPage)
-    }
+    };
   }
 
   public componentDidMount() {
     // tslint:disable-next-line: strict-type-predicates
     if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', this.checkAndLoadMore)
+      window.addEventListener('scroll', this.checkAndLoadMore);
     }
   }
 
   public componentWillUnmount() {
     // tslint:disable-next-line: strict-type-predicates
     if (typeof window !== 'undefined') {
-      window.removeEventListener('scroll', this.checkAndLoadMore)
+      window.removeEventListener('scroll', this.checkAndLoadMore);
     }
   }
 
@@ -88,7 +88,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
           <ScrollToTop />
         </div>
       </Layout>
-    )
+    );
   }
 
   private getElementTop(element: HTMLElement | null) {
@@ -112,19 +112,19 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
 
   private showMore() {
     if (this.state.displayedNodes.length === this.props.data.allStatus.nodes.length) {
-      return
+      return;
     }
     if (this.state.displayedNodes.length + this.perPage >= this.props.data.allStatus.nodes.length) {
       this.setState({
         displayedNodes: this.props.data.allStatus.nodes
-      })
-      return
+      });
+      return;
     }
     this.setState({
       displayedNodes: this.props.data.allStatus.nodes.slice(
         0, this.state.displayedNodes.length + this.perPage
       )
-    })
+    });
   }
 
 }
@@ -133,9 +133,11 @@ export const query = graphql`
     allStatus(
       filter: { author: { name: { eq: "梨子" } } }
       sort: { order: DESC, fields: publish_at }
+      limit: 100
     ) {
       nodes {
         type
+        publish_at
         full_text
         retweeted_status {
           full_text
@@ -161,14 +163,8 @@ export const query = graphql`
         childMdx {
           excerpt(pruneLength: 300)
         }
-        author {
-          avatar
-          name
-          email
-        }
-        publish_at
         is_repost
       }
     }
   }
-`
+`;
