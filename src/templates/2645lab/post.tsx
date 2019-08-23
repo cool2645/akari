@@ -5,17 +5,28 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
+import Hr from '../../components/hr'
 import ScrollToTop from '../../components/scroll-to-top'
+import SEO from '../../components/seo';
 import SimplePagination from '../../components/simple-pagination'
 import styles from './post.module.styl'
-
-import Hr from '../../components/hr'
-import SEO from '../../components/seo';
 
 export default class extends React.Component<any> {
 
   constructor(props: any) {
     super(props)
+  }
+
+  public componentDidMount() {
+    if (top.MathJax) {
+      top.MathJax.Hub.Queue(['Typeset', top.MathJax.Hub])
+    }
+  }
+
+  public componentDidUpdate() {
+    if (top.MathJax) {
+      top.MathJax.Hub.Queue(['Typeset', top.MathJax.Hub])
+    }
   }
 
   public render() {

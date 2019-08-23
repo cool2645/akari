@@ -1,3 +1,5 @@
+import { MDXProvider } from '@mdx-js/react'
+
 /**
  * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
  *
@@ -17,6 +19,13 @@ export const onPreRenderHTML = ({
       id="fontawesome-ssr"
       key="fontawesome-ssr"
       dangerouslySetInnerHTML={{ __html: dom.css() }}
+    />
+  )
+  headComponents.push(
+    <script
+      key="mathjax"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+      async={true}
     />
   )
   replaceHeadComponents(headComponents)

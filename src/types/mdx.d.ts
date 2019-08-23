@@ -12,3 +12,7 @@ declare module '@mdx-js/react' {
     components: { [key: string]: (props: any) => JSX.Element }
   }) => JSX.Element
 }
+
+interface Window {
+  MathJax: any
+}

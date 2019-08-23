@@ -133,6 +133,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         gatsbyRemarkPlugins: [
+          `gatsby-remark-mathjax`,
           `gatsby-remark-external-links`,
           {
             resolve: `gatsby-remark-images`,
@@ -151,7 +152,6 @@ module.exports = {
               showLineNumbers: false,
             },
           },
-          `gatsby-remark-mathjax`,
         ],
       },
     },
