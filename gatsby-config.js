@@ -66,6 +66,14 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+
+    // remove old blog.cool2645.com service-worker
+    {
+      resolve: `gatsby-plugin-remove-serviceworker`,
+      options: {
+        filename: 'service-worker.js',
+      },
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
