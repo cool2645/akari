@@ -94,7 +94,6 @@ exports.onCreateNode = async ({
         contentDigest: createContentDigest(node),
       },
     })
-    postStatus = true
     return
   }
 
@@ -133,7 +132,6 @@ exports.onCreateNode = async ({
         contentDigest: createContentDigest(node),
       },
     })
-    twitterStatus = true
   }
 }
 
