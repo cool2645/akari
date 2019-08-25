@@ -73,9 +73,9 @@ export default class extends React.Component<any> {
           }
           <Alert
             content={`本文全长 ${
-              post.childMdx.wordCount.words
-              } 词，全部读完大约需要 ${
-              post.childMdx.timeToRead
+              this.countWords()
+              } 字，全部读完大约需要 ${
+              this.timeToRead()
               } 分钟。`}
             level="info"
           />
@@ -113,14 +113,24 @@ export default class extends React.Component<any> {
     )
   }
 
-  private dateOfUpdate() {
+  private dateOfUpdate(): Date {
     const { post } = this.props.data
     return new Date(post.update_at || post.publish_at)
   }
 
-  private dayByUpdate() {
+  private dayByUpdate(): number {
     return Math.floor(
       (new Date().getTime() - this.dateOfUpdate().getTime()) / 86400000)
+  }
+
+  private countWords(): number {
+    const str = this.props.data.post.childMdx.rawBody
+    const matches = str.match(/[\u00ff-\uffff]|\S+/g)
+    return matches ? matches.length : 0
+  }
+
+  private timeToRead(): number {
+    return Math.ceil(this.countWords() / 350)
   }
 
 }
@@ -155,10 +165,7 @@ export const query = graphql`
           value
         }
         body
-        timeToRead
-        wordCount {
-          words
-        }
+        rawBody
       }
       is_public
       is_repost
