@@ -27,7 +27,7 @@ module.exports = {
         color: '',
       },
     ],
-    siteUrl: 'https://www.cool2645.com',
+    siteUrl: 'https://blog.cool2645.com',
   },
   plugins: [
     `gatsby-plugin-typescript`,
