@@ -173,13 +173,10 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  const _2645lab_public_posts = graphql(`
+  const _2645lab_posts = graphql(`
     query {
       allPost(
-        filter: {
-          is_public: { eq: true }
-          category: { slug: { eq: "2645lab" } }
-        }
+        filter: { category: { slug: { eq: "2645lab" } } }
         sort: { order: ASC, fields: publish_at }
       ) {
         edges {
@@ -209,5 +206,5 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  return Promise.chain([_2645lab_index_pages, _2645lab_public_posts])
+  return Promise.chain([_2645lab_index_pages, _2645lab_posts])
 }
