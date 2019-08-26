@@ -173,10 +173,13 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  const _2645lab_posts = graphql(`
+  const _2645lab_public_posts = graphql(`
     query {
       allPost(
-        filter: { category: { slug: { eq: "2645lab" } } }
+        filter: {
+          is_public: { eq: true }
+          category: { slug: { eq: "2645lab" } }
+        }
         sort: { order: ASC, fields: publish_at }
       ) {
         edges {
@@ -206,5 +209,36 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  return Promise.chain([_2645lab_index_pages, _2645lab_posts])
+  const _2645lab_private_posts = graphql(`
+    query {
+      allPost(
+        filter: {
+          is_public: { eq: false }
+          category: { slug: { eq: "2645lab" } }
+        }
+      ) {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `).then(result => {
+    result.data.allPost.edges.forEach(({ node, next, previous }) => {
+      createPage({
+        path: `posts/${node.slug}`,
+        component: path.resolve(`./src/templates/2645lab/post.tsx`),
+        context: {
+          slug: node.slug,
+        },
+      })
+    })
+  })
+
+  return Promise.chain([
+    _2645lab_index_pages,
+    _2645lab_public_posts,
+    _2645lab_private_posts,
+  ])
 }

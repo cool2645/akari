@@ -101,12 +101,15 @@ export default class extends React.Component<any> {
               </>
           }
         </div>
-        <SimplePagination
-          previousName={previous ? `上一篇：${previous.title}` : '已是第一篇'}
-          previousUrl={previous ? `/posts/${previous.slug}` : ''}
-          nextName={next ? `下一篇：${next.title}` : '已是最后一篇'}
-          nextUrl={next ? `/posts/${next.slug}` : ''}
-        />
+        {
+          post.is_public ?
+          <SimplePagination
+            previousName={previous ? `上一篇：${previous.title}` : '已是第一篇'}
+            previousUrl={previous ? `/posts/${previous.slug}` : ''}
+            nextName={next ? `下一篇：${next.title}` : '已是最后一篇'}
+            nextUrl={next ? `/posts/${next.slug}` : ''}
+          /> : ''
+        }
         <Disqus className={styles.disqus} config={disqusConfig} />
         <ScrollToTop />
       </Layout>
