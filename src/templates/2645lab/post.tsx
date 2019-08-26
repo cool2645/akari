@@ -40,7 +40,7 @@ export default class extends React.Component<any> {
     const d = this.dateOfUpdate()
     return (
       <Layout>
-        <SEO title={post.title} />
+        <SEO title={post.title} description={post.childMdx.excerpt} />
         <div className={styles.post}>
           <h1>{post.title}</h1>
           <div className={styles.authorMeta}>
@@ -166,6 +166,7 @@ export const query = graphql`
         }
         body
         rawBody
+        excerpt(pruneLength: 200)
       }
       is_public
       is_repost

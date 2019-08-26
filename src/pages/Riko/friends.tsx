@@ -19,7 +19,7 @@ export default ({ data, location }: any) => {
   }
   return (
     <Layout>
-      <SEO title="友情链接" siteTitle="梨园" />
+      <SEO title="友情链接" siteTitle="梨园" description="和梨子成为好朋友吧！" />
       <h1>{data.post.title}</h1>
       <div className={`${styles.post} ${styles2.post}`}>
         <MDXProvider components={{

@@ -28,7 +28,9 @@ export default class extends React.Component<any, IndexState> {
     const { nodes, pageInfo } = data.allPost
     return (
       <Layout onNightModeToggled={nightMode => this.setState({ nightMode })}>
-        <SEO title={pageInfo.currentPage === 1 ? '主页' : `文章列表：第 ${pageInfo.currentPage} 页`} />
+        <SEO title={pageInfo.currentPage === 1 ? '主页' : `文章列表：第 ${pageInfo.currentPage} 页`}
+             description={data.site.siteMetadata.description}
+        />
         <Authors authors={data.allAuthor.nodes} />
         {nodes.map((node: any, index: number) => {
           const d = new Date(node.publish_at)
@@ -105,6 +107,11 @@ export default class extends React.Component<any, IndexState> {
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
+    site {
+      siteMetadata {
+        description
+      }
+    }
     allAuthor {
       nodes {
         childFile {

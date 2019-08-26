@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `2645 实验室`,
-    description: ``,
+    description: `2645 实验室是 2645 工作室的技术博客。`,
     author: `梨子`,
     authors: [
       {

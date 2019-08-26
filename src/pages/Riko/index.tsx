@@ -46,7 +46,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
   public render() {
     return (
       <Layout>
-        <SEO title="最近动态" siteTitle="梨园" />
+        <SEO title="最近动态" siteTitle="梨园" description="这只梨子最近在哪自闭呢？" />
         <div className={styles.container}>
           <h1>最近动态</h1>
           <Masonry
