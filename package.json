@@ -34,6 +34,7 @@
     "gatsby-plugin-react-helmet": "^3.1.5",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-sharp": "^2.2.17",
+    "gatsby-plugin-sitemap": "^2.2.10",
     "gatsby-plugin-stylus": "^2.1.5",
     "gatsby-plugin-tslint": "^0.0.2",
     "gatsby-plugin-typescript": "^2.1.5",
