@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import autobind from 'autobind-decorator'
 import { Link } from 'gatsby'
 import * as React from 'react'
+
 import styles from './nav.module.styl'
 
 interface NavState {
@@ -11,21 +12,21 @@ interface NavState {
 
 export default class extends React.Component<{}, NavState> {
 
-  constructor(props: {}) {
+  constructor (props: {}) {
     super(props)
     this.state = {
       mobileShowSideBar: false
     }
   }
 
-  public componentWillUnmount() {
+  public componentWillUnmount () {
     // tslint:disable-next-line
     if (typeof document !== 'undefined') {
       document.body.style.overflow = 'auto'
     }
   }
 
-  public render() {
+  public render () {
     return (
       <nav className={styles.placeholder}>
         <div className={styles.titleBar}>
@@ -36,8 +37,9 @@ export default class extends React.Component<{}, NavState> {
             </h1>
           </a>
         </div>
-        <div className={`${styles.underlay} ${this.state.mobileShowSideBar ? styles.show : ''}`}
-             onClick={this.toggleNavBar}
+        <div
+          className={`${styles.underlay} ${this.state.mobileShowSideBar ? styles.show : ''}`}
+          onClick={this.toggleNavBar}
         />
         <div className={`${styles.sideBar} ${this.state.mobileShowSideBar ? styles.show : ''}`}>
           <div className={styles.header}>
@@ -71,7 +73,7 @@ export default class extends React.Component<{}, NavState> {
   }
 
   @autobind
-  private toggleNavBar(e: React.MouseEvent) {
+  private toggleNavBar (e: React.MouseEvent) {
     e.preventDefault()
     this.setState({
       mobileShowSideBar: !this.state.mobileShowSideBar
@@ -79,7 +81,7 @@ export default class extends React.Component<{}, NavState> {
       // tslint:disable-next-line
       if (typeof document !== 'undefined') {
         document.body.style.overflow =
-          this.state.mobileShowSideBar ? 'hidden' : 'auto';
+          this.state.mobileShowSideBar ? 'hidden' : 'auto'
       }
     })
   }

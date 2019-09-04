@@ -1,4 +1,4 @@
-interface Document {
+interface Window {
   akari: {
     version: string
     console: {

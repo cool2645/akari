@@ -12,7 +12,7 @@ exports.sourceNodes = async ({
   actions,
   store,
   cache,
-  createContentDigest,
+  createContentDigest
 }) => {
   const { createNode } = actions
   for (const author of siteMetadata.authors) {
@@ -24,7 +24,7 @@ exports.sourceNodes = async ({
         store,
         cache,
         createNode,
-        createNodeId: () => `${author.name}-local-image`,
+        createNodeId: () => `${author.name}-local-image`
       })
     } catch (err) {
       console.error('avatar image download ERROR:', err)
@@ -36,8 +36,8 @@ exports.sourceNodes = async ({
       internal: {
         type: 'Author',
         content: JSON.stringify(author),
-        contentDigest: createContentDigest(author),
-      },
+        contentDigest: createContentDigest(author)
+      }
     })
   }
 }
@@ -47,7 +47,7 @@ exports.onCreateNode = async ({
   actions,
   store,
   cache,
-  createContentDigest,
+  createContentDigest
 }) => {
   const { createNode } = actions
   if (node.internal.type === 'StrapiPost') {
@@ -60,8 +60,8 @@ exports.onCreateNode = async ({
           type: 'CopyrightNotice',
           mediaType: 'text/markdown',
           content: node.copyright_notice,
-          contentDigest: createContentDigest(node.copyright_notice),
-        },
+          contentDigest: createContentDigest(node.copyright_notice)
+        }
       })
     }
     await createNode({
@@ -73,15 +73,15 @@ exports.onCreateNode = async ({
         type: 'Post',
         mediaType: 'text/markdown',
         content: node.content,
-        contentDigest: createContentDigest(node),
-      },
+        contentDigest: createContentDigest(node)
+      }
     })
     return
   }
 
   if (
     node.internal.type === 'Post' &&
-    node.category.slug == '2645lab' &&
+    node.category.slug === '2645lab' &&
     node.is_public
   ) {
     await createNode({
@@ -91,8 +91,8 @@ exports.onCreateNode = async ({
       internal: {
         type: 'Status',
         content: node.content,
-        contentDigest: createContentDigest(node),
-      },
+        contentDigest: createContentDigest(node)
+      }
     })
     return
   }
@@ -111,7 +111,7 @@ exports.onCreateNode = async ({
           store,
           cache,
           createNode,
-          createNodeId: () => `${node.id}-status-local-image`,
+          createNodeId: () => `${node.id}-status-local-image`
         })
       } catch (err) {
         console.error('twitter image download ERROR:', err)
@@ -122,20 +122,20 @@ exports.onCreateNode = async ({
       id: node.id + '-status',
       type: 'twitter',
       author: {
-        name: '梨子',
+        name: '梨子'
       },
       publish_at: new Date(node.created_at).toISOString(),
       children: fileNode ? [fileNode.id] : [],
       internal: {
         type: 'Status',
         content: node.full_text,
-        contentDigest: createContentDigest(node),
-      },
+        contentDigest: createContentDigest(node)
+      }
     })
   }
 }
 
-Promise.chain = function(arr) {
+Promise.chain = function (arr) {
   return arr.reduce((p, fn) => {
     return p.then(() => fn)
   }, Promise.resolve())
@@ -156,20 +156,20 @@ exports.createPages = ({ graphql, actions }) => {
     for (let i = 1; i <= result.data.allPost.pageInfo.pageCount; i++) {
       createPage({
         path: `pages/${i}`,
-        component: path.resolve(`./src/templates/2645lab/index.tsx`),
+        component: path.resolve('./src/templates/2645lab/index.tsx'),
         context: {
           skip: (i - 1) * result.data.allPost.pageInfo.perPage,
-          limit: result.data.allPost.pageInfo.perPage,
-        },
+          limit: result.data.allPost.pageInfo.perPage
+        }
       })
     }
     createPage({
-      path: `/`,
-      component: path.resolve(`./src/templates/2645lab/index.tsx`),
+      path: '/',
+      component: path.resolve('./src/templates/2645lab/index.tsx'),
       context: {
         skip: 0,
-        limit: result.data.allPost.pageInfo.perPage,
-      },
+        limit: result.data.allPost.pageInfo.perPage
+      }
     })
   })
 
@@ -199,12 +199,12 @@ exports.createPages = ({ graphql, actions }) => {
     result.data.allPost.edges.forEach(({ node, next, previous }) => {
       createPage({
         path: `posts/${node.slug}`,
-        component: path.resolve(`./src/templates/2645lab/post.tsx`),
+        component: path.resolve('./src/templates/2645lab/post.tsx'),
         context: {
           slug: node.slug,
           previous: previous && previous.slug,
-          next: next && next.slug,
-        },
+          next: next && next.slug
+        }
       })
     })
   })
@@ -228,10 +228,10 @@ exports.createPages = ({ graphql, actions }) => {
     result.data.allPost.edges.forEach(({ node, next, previous }) => {
       createPage({
         path: `posts/${node.slug}`,
-        component: path.resolve(`./src/templates/2645lab/post.tsx`),
+        component: path.resolve('./src/templates/2645lab/post.tsx'),
         context: {
-          slug: node.slug,
-        },
+          slug: node.slug
+        }
       })
     })
   })
@@ -239,6 +239,6 @@ exports.createPages = ({ graphql, actions }) => {
   return Promise.chain([
     _2645lab_index_pages,
     _2645lab_public_posts,
-    _2645lab_private_posts,
+    _2645lab_private_posts
   ])
 }

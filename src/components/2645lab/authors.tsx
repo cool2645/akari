@@ -1,6 +1,7 @@
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 import * as React from 'react'
+
 import styles from './authors.module.styl'
 
 export interface AuthorProps {
@@ -29,10 +30,13 @@ const ListItem = (props: ListItemProps) => (
       }
     </div>
     <div className={styles.b1} >
-      {props.avatarUrl ? <div className={styles.img}
-                              css={css`
-                                    background-image: url("${props.avatarUrl}");
-                                   `} /> : ''}
+      {props.avatarUrl ?
+        <div
+          className={styles.img}
+          css={css`
+            background-image: url("${props.avatarUrl}");
+          `}
+        /> : ''}
     </div>
     <div className={styles.b2} />
   </li>
@@ -42,7 +46,7 @@ const List = (props: AuthorProps) => {
   const listItemsData = [
     { text: props.name, avatarUrl: props.childFile.publicURL, href: props.homeUrl },
     { text: '留言板', href: props.guestBookUrl },
-    { text: '友情链接', href: props.friendsUrl },
+    { text: '友情链接', href: props.friendsUrl }
   ]
   return (
     <ul className={styles.list} >
@@ -57,11 +61,13 @@ const List = (props: AuthorProps) => {
 }
 
 export default (props: { authors: AuthorProps[] }) => {
-  return <div className={styles.authorsRow}>
-    {
-      props.authors.map((author, index) => (
-        <List {...author} key={index} />
-      ))
-    }
-  </div>
+  return (
+    <div className={styles.authorsRow}>
+      {
+        props.authors.map((author, index) => (
+          <List {...author} key={index} />
+        ))
+      }
+    </div>
+  )
 }

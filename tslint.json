@@ -1,10 +1,8 @@
 {
-  "rulesDirectory": ["tslint-plugin-prettier"],
   "extends": [
     "tslint:latest",
     "tslint-react",
-    "tslint-config-standard",
-    "tslint-config-prettier"
+    "tslint-config-standard"
   ],
   "linterOptions": {
     "exclude": [
@@ -14,13 +12,18 @@
   "rules": {
     "interface-name": false,
     "jsx-no-multiline-js": false,
-    "jsx-no-lambda": false,
-    "curly": [
+    "ordered-imports": [
       true,
-      "ignore-same-line"
+      {
+        "grouped-imports": true
+      }
     ],
-    "object-literal-sort-keys": false,
-    "no-console": false,
-    "quotemark": [true, "single", "jsx-double", "avoid-escape", "avoid-template"]
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape",
+      "avoid-template",
+      "jsx-double"
+    ]
   }
 }

@@ -1,14 +1,16 @@
-import autobind from 'autobind-decorator';
-import { graphql } from 'gatsby';
-import * as React from 'react';
-import Masonry from 'react-masonry-component';
-import Hr from '../../components/hr';
-import Layout from '../../components/Riko/layout';
-import PostCard from '../../components/Riko/post-card';
-import TwitterCard from '../../components/Riko/twitter-card';
-import ScrollToTop from '../../components/scroll-to-top';
-import SEO from '../../components/seo';
-import styles from './index.module.styl';
+import autobind from 'autobind-decorator'
+import { graphql } from 'gatsby'
+import * as React from 'react'
+import Masonry from 'react-masonry-component'
+
+import Hr from '../../components/hr'
+import Layout from '../../components/Riko/layout'
+import PostCard from '../../components/Riko/post-card'
+import TwitterCard from '../../components/Riko/twitter-card'
+import ScrollToTop from '../../components/scroll-to-top'
+import SEO from '../../components/seo'
+
+import styles from './index.module.styl'
 
 interface StatusPageProps {
   data: any
@@ -20,30 +22,30 @@ interface StatusPageState {
 
 export default class extends React.Component<StatusPageProps, StatusPageState> {
 
-  private readonly perPage = 20;
+  private readonly perPage = 20
 
-  constructor(props: StatusPageProps) {
-    super(props);
+  constructor (props: StatusPageProps) {
+    super(props)
     this.state = {
       displayedNodes: props.data.allStatus.nodes.slice(0, this.perPage)
-    };
-  }
-
-  public componentDidMount() {
-    // tslint:disable-next-line: strict-type-predicates
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', this.checkAndLoadMore);
     }
   }
 
-  public componentWillUnmount() {
+  public componentDidMount () {
     // tslint:disable-next-line: strict-type-predicates
     if (typeof window !== 'undefined') {
-      window.removeEventListener('scroll', this.checkAndLoadMore);
+      window.addEventListener('scroll', this.checkAndLoadMore)
     }
   }
 
-  public render() {
+  public componentWillUnmount () {
+    // tslint:disable-next-line: strict-type-predicates
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('scroll', this.checkAndLoadMore)
+    }
+  }
+
+  public render () {
     return (
       <Layout>
         <SEO title="最近动态" siteTitle="梨园" description="这只梨子最近在哪自闭呢？" />
@@ -54,8 +56,9 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
           >
             {
               this.state.displayedNodes.map((node: any) => (
-                <div key={node.slug || node.id_str}
-                     className={styles.statusCard}
+                <div
+                  key={node.slug || node.id_str}
+                  className={styles.statusCard}
                 >
                   {
                     node.type === 'twitter' ?
@@ -88,43 +91,44 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
           <ScrollToTop />
         </div>
       </Layout>
-    );
+    )
   }
 
-  private getElementTop(element: HTMLElement | null) {
-    if (element === null) return 0;
-    let actualTop = element.offsetTop;
-    let current = element.offsetParent;
+  private getElementTop (element: HTMLElement | null) {
+    if (element === null) return 0
+    let actualTop = element.offsetTop
+    let current = element.offsetParent
     while (current !== null) {
-      actualTop += (current as HTMLElement).offsetTop;
-      current = (current as HTMLElement).offsetParent;
+      actualTop += (current as HTMLElement).offsetTop
+      current = (current as HTMLElement).offsetParent
     }
-    return actualTop;
-  };
+    return actualTop
+  }
 
   @autobind
-  private checkAndLoadMore() {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const eleTop = this.getElementTop(document.querySelector(`.${styles.statusCard}:last-child`));
-    const windowHeight = (window as any).visualViewport ? (window as any).visualViewport.height : window.innerHeight + 100;
-    if (scrollTop + windowHeight >= eleTop) this.showMore();
+  private checkAndLoadMore () {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    const eleTop = this.getElementTop(document.querySelector(`.${styles.statusCard}:last-child`))
+    const windowHeight = (window as any).visualViewport
+      ? (window as any).visualViewport.height : window.innerHeight + 100
+    if (scrollTop + windowHeight >= eleTop) this.showMore()
   }
 
-  private showMore() {
+  private showMore () {
     if (this.state.displayedNodes.length === this.props.data.allStatus.nodes.length) {
-      return;
+      return
     }
     if (this.state.displayedNodes.length + this.perPage >= this.props.data.allStatus.nodes.length) {
       this.setState({
         displayedNodes: this.props.data.allStatus.nodes
-      });
-      return;
+      })
+      return
     }
     this.setState({
       displayedNodes: this.props.data.allStatus.nodes.slice(
         0, this.state.displayedNodes.length + this.perPage
       )
-    });
+    })
   }
 
 }
@@ -167,4 +171,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`

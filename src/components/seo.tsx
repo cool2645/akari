@@ -10,7 +10,7 @@ import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 
-function SEO({ description, lang, meta, title, siteTitle }: any) {
+function SEO ({ description, lang, meta, title, siteTitle }: any) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -30,60 +30,60 @@ function SEO({ description, lang, meta, title, siteTitle }: any) {
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang
       }}
       title={title}
       titleTemplate={`%s | ${siteTitle || site.siteMetadata.title}`}
       meta={[
         {
-          name: 'description',
           content: metaDescription,
+          name: 'description'
         },
         {
-          property: 'og:title',
           content: title,
+          property: 'og:title'
         },
         {
-          property: 'og:description',
           content: metaDescription,
+          property: 'og:description'
         },
         {
-          property: 'og:type',
           content: 'website',
+          property: 'og:type'
         },
         {
-          name: 'twitter:card',
           content: 'summary',
+          name: 'twitter:card'
         },
         {
-          name: 'twitter:creator',
           content: site.siteMetadata.author,
+          name: 'twitter:creator'
         },
         {
-          name: 'twitter:title',
           content: title,
+          name: 'twitter:title'
         },
         {
-          name: 'twitter:description',
           content: metaDescription,
-        },
+          name: 'twitter:description'
+        }
       ].concat(meta)}
     />
   )
 }
 
 SEO.defaultProps = {
-  lang: 'en',
-  meta: [],
   description: '',
+  lang: 'en',
+  meta: []
 }
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
   siteTitle: PropTypes.string,
+  title: PropTypes.string.isRequired
 }
 
 export default SEO

@@ -2,6 +2,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
 import * as React from 'react'
+
 import styles from './simple-pagination.module.styl'
 
 export interface SimplePaginationProps {

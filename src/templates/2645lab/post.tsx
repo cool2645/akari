@@ -3,38 +3,40 @@ import { graphql } from 'gatsby'
 import { Disqus } from 'gatsby-plugin-disqus'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import * as React from 'react'
+
 import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
 import Hr from '../../components/hr'
 import ScrollToTop from '../../components/scroll-to-top'
-import SEO from '../../components/seo';
+import SEO from '../../components/seo'
 import SimplePagination from '../../components/simple-pagination'
+
 import styles from './post.module.styl'
 
 export default class extends React.Component<any> {
 
-  constructor(props: any) {
+  constructor (props: any) {
     super(props)
   }
 
-  public componentDidMount() {
+  public componentDidMount () {
     if (top.MathJax) {
       top.MathJax.Hub.Queue(['Typeset', top.MathJax.Hub])
     }
   }
 
-  public componentDidUpdate() {
+  public componentDidUpdate () {
     if (top.MathJax) {
       top.MathJax.Hub.Queue(['Typeset', top.MathJax.Hub])
     }
   }
 
-  public render() {
+  public render () {
     const { post, previous, next, site } = this.props.data
     const disqusConfig = {
-      url: `${site.siteMetadata.siteUrl + this.props.location.pathname}`,
       identifier: post.slug,
       title: post.title,
+      url: `${site.siteMetadata.siteUrl + this.props.location.pathname}`
     }
     const pd = new Date(post.publish_at)
     const d = this.dateOfUpdate()
@@ -79,10 +81,12 @@ export default class extends React.Component<any> {
               } 分钟。`}
             level="info"
           />
-          <MDXProvider components={{
-            hr: Hr,
-            alert: Alert,
-          }}>
+          <MDXProvider
+            components={{
+              alert: Alert,
+              hr: Hr
+            }}
+          >
             <MDXRenderer>{post.childMdx.body}</MDXRenderer>
           </MDXProvider>
         </div>
@@ -95,8 +99,8 @@ export default class extends React.Component<any> {
               <>
                 除特殊说明以外，本网站文章采用 <a
                   target="_blank"
-                  href="http://creativecommons.org/licenses/by-sa/4.0/">
-                    知识共享署名-相同方式共享 4.0 国际许可协议
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                >知识共享署名-相同方式共享 4.0 国际许可协议
                 </a> 进行许可。
               </>
           }
@@ -116,23 +120,23 @@ export default class extends React.Component<any> {
     )
   }
 
-  private dateOfUpdate(): Date {
+  private dateOfUpdate (): Date {
     const { post } = this.props.data
     return new Date(post.update_at || post.publish_at)
   }
 
-  private dayByUpdate(): number {
+  private dayByUpdate (): number {
     return Math.floor(
       (new Date().getTime() - this.dateOfUpdate().getTime()) / 86400000)
   }
 
-  private countWords(): number {
+  private countWords (): number {
     const str = this.props.data.post.childMdx.rawBody
     const matches = str.match(/[\u00ff-\uffff]|\S+/g)
     return matches ? matches.length : 0
   }
 
-  private timeToRead(): number {
+  private timeToRead (): number {
     return Math.ceil(this.countWords() / 350)
   }
 

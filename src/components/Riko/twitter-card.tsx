@@ -1,6 +1,7 @@
 import { faRetweet } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
+
 import Card from './card'
 
 interface TwitterCardProps {
@@ -23,17 +24,20 @@ export default (props: TwitterCardProps) => {
   if (props.retweeted_status) {
     fullText = fullText.replace(/^RT @[a-zA-Z0-9_]+:/, '')
   }
-  return <Card time={props.time}
-               via={`!Twitter${source}`}
-               href={props.url}
-               cover_fluid={props.childFile ? props.childFile.childImageSharp.fluid : null}
-  >
-    {
-      props.retweeted_status ?
-        <>
-          <a href={`https://twitter.com/${props.retweeted_status.user.screen_name}`}>
-            <FontAwesomeIcon icon={faRetweet} /> { props.retweeted_status.user.name }</a>
-        </> : ''
-    } { fullText }
-  </Card>
+  return (
+    <Card
+      time={props.time}
+      via={`!Twitter${source}`}
+      href={props.url}
+      cover_fluid={props.childFile ? props.childFile.childImageSharp.fluid : null}
+    >
+      {
+        props.retweeted_status ?
+          <>
+            <a href={`https://twitter.com/${props.retweeted_status.user.screen_name}`}>
+              <FontAwesomeIcon icon={faRetweet} /> {props.retweeted_status.user.name}</a>
+          </> : ''
+      } {fullText}
+    </Card>
+  )
 }

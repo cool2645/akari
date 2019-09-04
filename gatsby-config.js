@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `2645 实验室`,
-    description: `2645 实验室是 2645 工作室的技术博客。`,
-    author: `梨子`,
+    title: '2645 实验室',
+    description: '2645 实验室是 2645 工作室的技术博客。',
+    author: '梨子',
     authors: [
       {
         name: 'Bittersweet',
@@ -13,7 +13,7 @@ module.exports = {
         friendsUrl: '/404',
         backgroundColor: '#a5dbf7',
         backgroundColorDark: '#005eae',
-        color: '',
+        color: ''
       },
       {
         name: '梨子',
@@ -24,44 +24,44 @@ module.exports = {
         friendsUrl: '/Riko/friends',
         backgroundColor: '#f5bbd4',
         backgroundColorDark: '#d10080',
-        color: '',
-      },
+        color: ''
+      }
     ],
-    siteUrl: 'https://blog.cool2645.com',
+    siteUrl: 'https://blog.cool2645.com'
   },
   plugins: [
-    `gatsby-plugin-typescript`,
+    'gatsby-plugin-typescript',
     'gatsby-plugin-webpack-bundle-analyzer',
-    `gatsby-plugin-stylus`,
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-stylus',
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
+        name: 'images',
+        path: `${__dirname}/src/images`
+      }
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `2645实验室`,
-        short_name: `2645实验室`,
-        start_url: `/`,
-        background_color: `#ee8e00`,
-        theme_color: `#ee8e00`,
-        display: `minimal-ui`,
-        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
-      },
+        name: '2645实验室',
+        short_name: '2645实验室',
+        start_url: '/',
+        background_color: '#ee8e00',
+        theme_color: '#ee8e00',
+        display: 'minimal-ui',
+        icon: 'src/images/favicon.png' // This path is relative to the root of the site.
+      }
     },
     {
-      resolve: `gatsby-plugin-nprogress`,
+      resolve: 'gatsby-plugin-nprogress',
       options: {
-        color: `tomato`,
-        showSpinner: false,
-      },
+        color: 'tomato',
+        showSpinner: false
+      }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
@@ -69,13 +69,13 @@ module.exports = {
 
     // remove old blog.cool2645.com service-worker
     {
-      resolve: `gatsby-plugin-remove-serviceworker`,
+      resolve: 'gatsby-plugin-remove-serviceworker',
       options: {
-        filename: 'service-worker.js',
-      },
+        filename: 'service-worker.js'
+      }
     },
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: 'gatsby-plugin-feed',
       options: {
         query: `
           {
@@ -100,7 +100,7 @@ module.exports = {
                     description: node.excerpt,
                     date: node.publish_at,
                     url: `${site.siteMetadata.siteUrl}/posts/${node.slug}`,
-                    guid: `${site.siteMetadata.siteUrl}/posts/${node.slug}`,
+                    guid: `${site.siteMetadata.siteUrl}/posts/${node.slug}`
                   }
                 )
               })
@@ -131,66 +131,66 @@ module.exports = {
             // if `string` is used, it will be used to create RegExp and then test if pathname of
             // current page satisfied this regular expression;
             // if not provided or `undefined`, all pages will have feed reference inserted
-            match: '^/posts/',
-          },
-        ],
-      },
+            match: '^/posts/'
+          }
+        ]
+      }
     },
-    `gatsby-plugin-sitemap`,
+    'gatsby-plugin-sitemap',
     {
-      resolve: `gatsby-source-strapi`,
+      resolve: 'gatsby-source-strapi',
       options: {
-        apiURL: `https://cms.cool2645.com`,
+        apiURL: 'https://cms.cool2645.com',
         queryLimit: 1000, // Default to 100
-        contentTypes: [`post`, `author`, 'category', 'tag'],
-      },
+        contentTypes: ['post', 'author', 'category', 'tag']
+      }
     },
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
-          `gatsby-remark-mathjax`,
-          `gatsby-remark-external-links`,
+          'gatsby-remark-mathjax',
+          'gatsby-remark-external-links',
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 590,
-            },
+              maxWidth: 590
+            }
           },
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
               classPrefix: 'language-',
               inlineCodeMarker: {
-                sh: 'shell',
+                sh: 'shell'
               },
               aliases: {},
-              showLineNumbers: false,
-            },
-          },
-        ],
-      },
+              showLineNumbers: false
+            }
+          }
+        ]
+      }
     },
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: `typography`,
-      },
+        pathToConfigModule: 'typography'
+      }
     },
     {
-      resolve: `gatsby-plugin-disqus`,
+      resolve: 'gatsby-plugin-disqus',
       options: {
-        shortname: `2645-shi-yan-shi`,
-      },
+        shortname: '2645-shi-yan-shi'
+      }
     },
     {
-      resolve: `gatsby-source-twitter`,
+      resolve: 'gatsby-source-twitter',
       options: {
         credentials: {
           consumer_key: process.env.TWITTER_CONSUMER_KEY,
           consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
           access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-          access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+          access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
         },
         queries: {
           rikorikorilove: {
@@ -200,11 +200,11 @@ module.exports = {
               include_rts: true,
               exclude_replies: true,
               tweet_mode: 'extended',
-              count: 100,
-            },
-          },
-        },
-      },
-    },
-  ],
+              count: 100
+            }
+          }
+        }
+      }
+    }
+  ]
 }

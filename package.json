@@ -21,6 +21,13 @@
     "@types/react-helmet": "^5.0.8",
     "autobind-decorator": "^2.4.0",
     "babel-preset-gatsby": "^0.2.7",
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.2.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-standard": "^4.0.1",
     "font-spider": "^1.3.5",
     "gatsby": "^2.13.79",
     "gatsby-image": "^2.2.13",
@@ -58,35 +65,30 @@
     "react-masonry-component": "^6.2.1",
     "react-typography": "^0.16.19",
     "tslint": "^5.17.0",
-    "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-loader": "^3.5.4",
-    "tslint-plugin-prettier": "^2.0.1",
     "tslint-react": "^4.0.0",
     "typescript": "^3.5.2",
     "typography": "^0.16.19",
     "typography-theme-alton": "^0.16.19"
-  },
-  "devDependencies": {
-    "prettier": "^1.18.2"
   },
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
   "pre-commit": [
-    "format",
-    "lint"
+    "lint",
+    "gitadd"
   ],
   "scripts": {
     "build": "gatsby build && cp _redirects public && cd ./public && font-spider --no-backup --map \"/static\",\"./static\" *.html",
     "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx,ts,tsx} gatsby-node.js gatsby-browser.js gatsby-config.js gatsby-ssr.js",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "type-check": "tsc --noEmit",
-    "lint": "tslint --fix --project ."
+    "lint": "eslint --fix . && tslint --fix --project .",
+    "gitadd": "git add -A"
   },
   "repository": {
     "type": "git",

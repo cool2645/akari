@@ -1,8 +1,9 @@
+import autobind from 'autobind-decorator'
 import * as React from 'react'
 
-import autobind from 'autobind-decorator'
 import Layout from '../components/2645lab/layout'
 import SEO from '../components/seo'
+
 import styles from './404.module.styl'
 
 interface NotFoundPageState {
@@ -12,16 +13,16 @@ interface NotFoundPageState {
 }
 
 export default class extends React.Component<{}, NotFoundPageState> {
-  constructor(props: {}) {
+  constructor (props: {}) {
     super(props)
     this.state = {
-      hitokoto: '这是个假地址，我们上当了',
       from: '[法]雨果《悲惨世界》,刘佳婷译,吉林大学出版社2008.10,110页',
-      loading: false,
+      hitokoto: '这是个假地址，我们上当了',
+      loading: false
     }
   }
 
-  public render() {
+  public render () {
     return (
       <Layout>
         <SEO title="404: Not found" />
@@ -41,32 +42,32 @@ export default class extends React.Component<{}, NotFoundPageState> {
   }
 
   @autobind
-  private getHitokoto(e: React.MouseEvent) {
+  private getHitokoto (e: React.MouseEvent) {
     e.preventDefault()
     if (this.state.loading) return
     this.setState(
       {
-        loading: true,
+        loading: true
       },
       () =>
-        fetch('https://v1.hitokoto.cn/?c=a')
-          .then(res => res.json())
-          .then(data => {
+        window.fetch('https://v1.hitokoto.cn/?c=a')
+          .then((res) => res.json())
+          .then((data) => {
             if (data.hitokoto) {
               this.setState({
-                hitokoto: data.hitokoto,
                 from: data.from,
-                loading: false,
+                hitokoto: data.hitokoto,
+                loading: false
               })
             } else throw new Error(JSON.stringify(data))
           })
           .catch((err: Error) => {
             this.setState({
-              hitokoto: err.message,
               from: err.stack
                 ? err.stack.toString()
                 : `getHitokoto/</<@${window.location.origin}/commons.js:86391:15`,
-              loading: false,
+              hitokoto: err.message,
+              loading: false
             })
           })
     )

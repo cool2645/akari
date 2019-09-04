@@ -1,5 +1,6 @@
 import { css } from '@emotion/core'
 import * as React from 'react'
+
 import styles from './author-tag.module.styl'
 
 export interface AuthorTagProps {

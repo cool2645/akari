@@ -7,8 +7,10 @@
 
 import autobind from 'autobind-decorator'
 import * as React from 'react'
+
 import Footer from '../footer'
 import '../layout.css'
+
 import styles from './layout.module.styl'
 import Nav from './nav'
 
@@ -22,18 +24,18 @@ interface LayoutState {
 
 export default class extends React.Component<LayoutProps, LayoutState> {
 
-  constructor(props: any) {
+  constructor (props: any) {
     super(props)
     this.state = {
       nightMode:
       // tslint:disable-next-line: strict-type-predicates
         typeof localStorage !== 'undefined'
           ? localStorage.getItem('nightMode') === 'true'
-          : false,
+          : false
     }
   }
 
-  public render() {
+  public render () {
     const { children } = this.props
 
     return (
@@ -51,9 +53,9 @@ export default class extends React.Component<LayoutProps, LayoutState> {
   }
 
   @autobind
-  private onToggledNightMode(nightMode: boolean) {
+  private onToggledNightMode (nightMode: boolean) {
     this.setState({
-      nightMode,
+      nightMode
     })
     if (this.props.onNightModeToggled) {
       this.props.onNightModeToggled(nightMode)

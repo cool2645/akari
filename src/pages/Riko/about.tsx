@@ -1,30 +1,33 @@
-import { MDXProvider } from '@mdx-js/react';
-import { graphql } from 'gatsby';
-import { Disqus } from 'gatsby-plugin-disqus';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-import * as React from 'react';
-import Alert from '../../components/alert';
-import Hr from '../../components/hr';
-import Layout from '../../components/Riko/layout';
-import ScrollToTop from '../../components/scroll-to-top';
-import SEO from '../../components/seo';
-import styles from '../../templates/2645lab/post.module.styl';
+import { MDXProvider } from '@mdx-js/react'
+import { graphql } from 'gatsby'
+import { Disqus } from 'gatsby-plugin-disqus'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import * as React from 'react'
+
+import Alert from '../../components/alert'
+import Hr from '../../components/hr'
+import Layout from '../../components/Riko/layout'
+import ScrollToTop from '../../components/scroll-to-top'
+import SEO from '../../components/seo'
+import styles from '../../templates/2645lab/post.module.styl'
 
 export default ({ data, location }: any) => {
   const disqusConfig = {
-    url: `${data.site.siteMetadata.siteUrl + location.pathname}`,
     identifier: data.post.slug,
-    title: data.post.title
+    title: data.post.title,
+    url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
     <Layout>
       <SEO title="关于梨子" siteTitle="梨园" description="梨子梨子梨" />
       <h1>{data.post.title}</h1>
       <div className={styles.post}>
-        <MDXProvider components={{
-          hr: Hr,
-          alert: Alert
-        }}>
+        <MDXProvider
+          components={{
+            alert: Alert,
+            hr: Hr
+          }}
+        >
           <MDXRenderer>{data.post.childMdx.body}</MDXRenderer>
         </MDXProvider>
         <Alert

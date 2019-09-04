@@ -8,8 +8,10 @@
 import autobind from 'autobind-decorator'
 import { graphql, StaticQuery } from 'gatsby'
 import * as React from 'react'
+
 import Footer from '../footer'
 import '../layout.css'
+
 import Header from './header'
 import styles from './layout.module.styl'
 
@@ -23,20 +25,37 @@ interface LayoutState {
 
 export default class extends React.Component<LayoutProps, LayoutState> {
 
-  constructor(props: any) {
+  constructor (props: any) {
     super(props)
     this.state = {
       nightMode:
       // tslint:disable-next-line: strict-type-predicates
         typeof localStorage !== 'undefined'
           ? localStorage.getItem('nightMode') === 'true'
-          : false,
+          : false
     }
   }
 
-  public render() {
+  @autobind
+  public staticQueryRender (data: any) {
     const { children } = this.props
+    return (
+      <>
+        <Header
+          siteTitle={data.site.siteMetadata.title}
+        />
+        <div
+          className={`${styles.layout}
+               ${this.state.nightMode ? styles.nightMode : ''}`}
+        >
+          <main>{children}</main>
+          <Footer onNightModeToggled={this.onToggledNightMode} />
+        </div>
+      </>
+    )
+  }
 
+  public render () {
     return (
       <StaticQuery
         query={graphql`
@@ -48,28 +67,15 @@ export default class extends React.Component<LayoutProps, LayoutState> {
             }
           }
         `}
-        render={data => (
-          <>
-            <Header
-              siteTitle={data.site.siteMetadata.title}
-            />
-            <div
-              className={`${styles.layout}
-               ${this.state.nightMode ? styles.nightMode : ''}`}
-            >
-              <main>{children}</main>
-              <Footer onNightModeToggled={this.onToggledNightMode} />
-            </div>
-          </>
-        )}
+        render={this.staticQueryRender}
       />
     )
   }
 
   @autobind
-  private onToggledNightMode(nightMode: boolean) {
+  private onToggledNightMode (nightMode: boolean) {
     this.setState({
-      nightMode,
+      nightMode
     })
     if (this.props.onNightModeToggled) {
       this.props.onNightModeToggled(nightMode)

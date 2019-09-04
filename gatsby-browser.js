@@ -8,8 +8,8 @@ require('prismjs/themes/prism.css')
 const { version } = require('./package.json')
 
 if (
-  window.navigator.userAgent.indexOf('Firefox') === -1 &&
-  window.navigator.userAgent.indexOf('Chrome') !== -1
+  navigator.userAgent.indexOf('Firefox') === -1 &&
+  navigator.userAgent.indexOf('Chrome') !== -1
 ) {
   console.warn("You don't need Chrome.")
   console.warn(
@@ -21,13 +21,13 @@ if (
   console.warn('Privacy and network neutrality matter.')
 }
 
-document.akari = {
+window.akari = {
   version,
-  console: {},
+  console: {}
 }
 
 console.log(
-  `\n %c © 2645 实验室 | Akari v${document.akari.version} %c \n\n`,
+  `\n %c © 2645 实验室 | Akari v${window.akari.version} %c \n\n`,
   'color:#fefefe;background:linear-gradient(to right,#ee8e00,#f4c900,#fff796);padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;',
   'color:#fefefe;background:#fff796;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;'
 )

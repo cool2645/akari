@@ -1,5 +1,3 @@
-import { MDXProvider } from '@mdx-js/react'
-
 /**
  * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
  *
@@ -11,7 +9,7 @@ const { dom } = require('@fortawesome/fontawesome-svg-core')
 
 export const onPreRenderHTML = ({
   getHeadComponents,
-  replaceHeadComponents,
+  replaceHeadComponents
 }) => {
   const headComponents = getHeadComponents()
   headComponents.push(

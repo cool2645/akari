@@ -1,6 +1,6 @@
+import autobind from 'autobind-decorator'
 import * as React from 'react'
 
-import autobind from 'autobind-decorator'
 import styles from './scroll-to-top.module.styl'
 
 interface ScrollToTopState {
@@ -8,11 +8,11 @@ interface ScrollToTopState {
 }
 
 export default class extends React.Component<{}, ScrollToTopState> {
-  constructor() {
+  constructor () {
     super({})
 
     this.state = {
-      top: true,
+      top: true
     }
 
     // tslint:disable-next-line: strict-type-predicates
@@ -21,14 +21,14 @@ export default class extends React.Component<{}, ScrollToTopState> {
     }
   }
 
-  public componentWillUnmount() {
+  public componentWillUnmount () {
     // tslint:disable-next-line: strict-type-predicates
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll)
     }
   }
 
-  public render() {
+  public render () {
     return (
       <div
         className={`${styles.scrollToTop} ${this.state.top ? styles.hide : ''}`}
@@ -38,7 +38,7 @@ export default class extends React.Component<{}, ScrollToTopState> {
   }
 
   @autobind
-  private onScroll() {
+  private onScroll () {
     const scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop
     if (scrollTop <= 100) {
@@ -49,7 +49,7 @@ export default class extends React.Component<{}, ScrollToTopState> {
   }
 
   @autobind
-  private scrollToTop() {
+  private scrollToTop () {
     let currentY = document.documentElement.scrollTop || document.body.scrollTop
     const needScrollTop = 0 - currentY
     setTimeout(() => {
