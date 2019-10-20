@@ -5,6 +5,7 @@ import Masonry from 'react-masonry-component'
 import Hr from '../hr'
 import ScrollToTop from '../scroll-to-top'
 
+import EssayCard from './essay-card'
 import PostCard from './post-card'
 import styles from './status.module.styl'
 import TwitterCard from './twitter-card'
@@ -52,7 +53,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
           {
             this.state.displayedNodes.map((node: any) => (
               <div
-                key={node.slug || node.id_str}
+                key={node.slug || node.id_str || node.id}
                 className={styles.statusCard}
               >
                 {
@@ -76,8 +77,13 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
                       excerpt={node.childMdx.excerpt}
                       slug={node.slug}
                     />
-                    : node.type === 'essay' ? <>
-                    </> : ''
+                    : node.type === 'essay' ? <EssayCard
+                      time={node.publish_at}
+                      content={node.content}
+                      category={node.category.name}
+                      url={''}
+                      childFile={node.childFile}
+                    /> : ''
                 }
               </div>
             ))

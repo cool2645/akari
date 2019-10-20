@@ -55,4 +55,4 @@ class Layout extends React.Component<NightModeProps> {
   }
 }
 
-export default withNightMode(Layout)
+export default withNightMode<{}>(Layout)

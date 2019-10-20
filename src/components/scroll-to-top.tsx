@@ -8,8 +8,8 @@ interface ScrollToTopState {
 }
 
 export default class extends React.Component<{}, ScrollToTopState> {
-  constructor () {
-    super({})
+  constructor (props: {}) {
+    super(props)
 
     this.state = {
       top: true

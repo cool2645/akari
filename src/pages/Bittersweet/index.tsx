@@ -25,16 +25,6 @@ export const query = graphql`
       nodes {
         type
         publish_at
-        full_text
-        retweeted_status {
-          full_text
-          user {
-            screen_name
-            name
-          }
-        }
-        id_str
-        source
         childFile {
           childImageSharp {
             fluid {
@@ -42,9 +32,12 @@ export const query = graphql`
             }
           }
         }
+        id
         category {
           slug
+          name
         }
+        content
         title
         slug
         childMdx {

@@ -2,6 +2,8 @@ import { faRetweet } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 
+import Highlight from '../highlight'
+
 import Card from './card'
 
 interface TwitterCardProps {
@@ -24,6 +26,7 @@ export default (props: TwitterCardProps) => {
   if (props.retweeted_status) {
     fullText = fullText.replace(/^RT @[a-zA-Z0-9_]+:/, '')
   }
+  const tagBuilder = (e: string) => `https://twitter.com/hashtag/${e}`
   return (
     <Card
       time={props.time}
@@ -37,7 +40,7 @@ export default (props: TwitterCardProps) => {
             <a href={`https://twitter.com/${props.retweeted_status.user.screen_name}`}>
               <FontAwesomeIcon icon={faRetweet} /> {props.retweeted_status.user.name}</a>
           </> : ''
-      } {fullText}
+      } <Highlight text={fullText} tagBuilder={tagBuilder} />
     </Card>
   )
 }

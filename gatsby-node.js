@@ -97,11 +97,27 @@ exports.onCreateNode = async ({
     return
   }
 
-  if (node.internal.type === 'Essay') {
+  if (node.internal.type === 'StrapiEssay') {
+    let fileNode
+    if (node.cover) {
+      try {
+        fileNode = await createRemoteFileNode({
+          url: node.cover,
+          parentNodeId: node.id + '-status',
+          store,
+          cache,
+          createNode,
+          createNodeId: () => `${node.id}-status-local-image`
+        })
+      } catch (err) {
+        console.error('essay image download ERROR:', err)
+      }
+    }
     await createNode({
       ...node,
       id: node.id + '-status',
       type: 'essay',
+      children: fileNode ? [fileNode.id] : [],
       internal: {
         type: 'Status',
         content: node.content,
