@@ -3,9 +3,9 @@ import * as React from 'react'
 import Footer from '../footer'
 import withNightMode, { NightModeProps } from '../layout'
 import '../layout.css'
+import Nav, { NavProps } from '../Riko/nav'
 
 import styles from './layout.module.styl'
-import Nav, { NavProps } from './nav'
 
 export interface LayoutProps {
   navProps: NavProps,

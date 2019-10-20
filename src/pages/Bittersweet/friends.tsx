@@ -1,12 +1,12 @@
 import { graphql } from 'gatsby'
 import * as React from 'react'
 
-import Alert from '../../components/alert'
 import Friends from '../../components/Riko/friends'
 import Layout from '../../components/Riko/layout'
 import SEO from '../../components/seo'
 
 import { navProps } from './nav'
+import styles from './theme.module.styl'
 
 export default ({ data, location }: any) => {
   const disqusConfig = {
@@ -15,21 +15,16 @@ export default ({ data, location }: any) => {
     url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
-    <Layout navProps={navProps}>
-      <SEO title="友情链接" siteTitle={navProps.title} description="和梨子成为好朋友吧！" />
-      <Friends post={data.post} disqusConfig={disqusConfig}>
-        <Alert
-          content="需要更新链接请留言哦~"
-          level="info"
-        />
-      </Friends>
+    <Layout navProps={navProps} className={styles.themeColor}>
+      <SEO title="友情链接" siteTitle={navProps.title} description="和 BS 成为好朋友吧！" />
+      <Friends post={data.post} disqusConfig={disqusConfig} />
     </Layout>
   )
 }
 
 export const query = graphql`
   query {
-    post: post(slug: { eq: "riko-friends" }) {
+    post: post(slug: { eq: "bittersweet-friends" }) {
       childMdx {
         headings {
           depth

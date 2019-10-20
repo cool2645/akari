@@ -97,6 +97,20 @@ exports.onCreateNode = async ({
     return
   }
 
+  if (node.internal.type === 'Essay') {
+    await createNode({
+      ...node,
+      id: node.id + '-status',
+      type: 'essay',
+      internal: {
+        type: 'Status',
+        content: node.content,
+        contentDigest: createContentDigest(node)
+      }
+    })
+    return
+  }
+
   if (node.internal.type === 'twitterStatusesUserTimelineRikorikorilove') {
     let extended_entities = node.extended_entities
     if (!extended_entities && node.retweeted_status) {

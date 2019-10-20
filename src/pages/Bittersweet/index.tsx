@@ -1,15 +1,16 @@
 import { graphql } from 'gatsby'
 import * as React from 'react'
 
-import Layout from '../../components/Riko/layout'
+import Layout from '../../components/Bittersweet/layout'
 import Status from '../../components/Riko/status'
 import SEO from '../../components/seo'
 
 import { navProps } from './nav'
+import styles from './theme.module.styl'
 
 export default ({ data }: any) => (
-  <Layout navProps={navProps}>
-    <SEO title="最近动态" siteTitle={navProps.title} description="这只梨子最近在哪自闭呢？" />
+  <Layout navProps={navProps} className={styles.themeColor}>
+    <SEO title="最近动态" siteTitle={navProps.title} description="这只 BS 最近在哪自闭呢？" />
     <Status data={data} />
   </Layout>
 )
@@ -17,7 +18,7 @@ export default ({ data }: any) => (
 export const query = graphql`
   query {
     allStatus(
-      filter: { author: { name: { eq: "梨子" } } }
+      filter: { author: { name: { eq: "Bittersweet" } } }
       sort: { order: DESC, fields: publish_at }
       limit: 100
     ) {

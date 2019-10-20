@@ -8,9 +8,9 @@ module.exports = {
         name: 'Bittersweet',
         avatarUrl:
           'https://secure.gravatar.com/avatar/9f6bc88b62a0055492fd5ae916678aa5?s=96&d=mm&r=g',
-        homeUrl: '/404',
-        guestBookUrl: '/404',
-        friendsUrl: '/404',
+        homeUrl: '/Bittersweet',
+        guestBookUrl: '/Bittersweet/about',
+        friendsUrl: '/Bittersweet/friends',
         backgroundColor: '#a5dbf7',
         backgroundColorDark: '#005eae',
         color: ''
@@ -142,7 +142,7 @@ module.exports = {
       options: {
         apiURL: 'https://cms.cool2645.com',
         queryLimit: 1000, // Default to 100
-        contentTypes: ['post', 'author', 'category', 'tag']
+        contentTypes: ['post', 'essay', 'author', 'category']
       }
     },
     {

@@ -6,13 +6,22 @@ import * as React from 'react'
 
 import styles from './nav.module.styl'
 
+export interface NavProps {
+  title: string
+  href: string
+  links: Array<{
+    title: string
+    href: string
+  }>
+}
+
 interface NavState {
   mobileShowSideBar: boolean
 }
 
-export default class extends React.Component<{}, NavState> {
+export default class extends React.Component<NavProps, NavState> {
 
-  constructor (props: {}) {
+  constructor (props: NavProps) {
     super(props)
     this.state = {
       mobileShowSideBar: false
@@ -33,7 +42,7 @@ export default class extends React.Component<{}, NavState> {
           <a href="" onClick={this.toggleNavBar} className={styles.title}>
             <span><FontAwesomeIcon icon={faBars} size="sm" /></span>
             <h1>
-              梨园
+              {this.props.title}
             </h1>
           </a>
         </div>
@@ -44,26 +53,21 @@ export default class extends React.Component<{}, NavState> {
         <div className={`${styles.sideBar} ${this.state.mobileShowSideBar ? styles.show : ''}`}>
           <div className={styles.header}>
             <div className={styles.banner}>
-              <Link to="/Riko">
+              <Link to={this.props.href}>
                 <h1>
-                  梨园
+                  {this.props.title}
                 </h1>
               </Link>
             </div>
             <div className={styles.links}>
               <ul>
-                <Link to="/Riko/about" activeClassName={styles.active}>
-                  <li>关于梨子</li>
-                </Link>
-                <Link to="/Riko/friends" activeClassName={styles.active}>
-                  <li>友情链接</li>
-                </Link>
-                <Link to="/Riko" activeClassName={styles.active}>
-                  <li>最近动态</li>
-                </Link>
-                <Link to="/">
-                  <li>技术文章</li>
-                </Link>
+                {
+                  this.props.links.map((link) => (
+                    <Link key={link.href} to={link.href} activeClassName={styles.active}>
+                      <li>{link.title}</li>
+                    </Link>
+                  ))
+                }
               </ul>
             </div>
           </div>

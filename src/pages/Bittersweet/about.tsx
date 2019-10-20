@@ -12,6 +12,7 @@ import SEO from '../../components/seo'
 import styles from '../../templates/2645lab/post.module.styl'
 
 import { navProps } from './nav'
+import styles2 from './theme.module.styl'
 
 export default ({ data, location }: any) => {
   const disqusConfig = {
@@ -20,8 +21,8 @@ export default ({ data, location }: any) => {
     url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
-    <Layout navProps={navProps}>
-      <SEO title="关于梨子" siteTitle={navProps.title} description="梨子梨子梨" />
+    <Layout navProps={navProps} className={styles2.themeColor}>
+      <SEO title="关于 Bittersweet" siteTitle={navProps.title} description="BSBSB" />
       <h1>{data.post.title}</h1>
       <div className={styles.post}>
         <MDXProvider
@@ -45,7 +46,7 @@ export default ({ data, location }: any) => {
 
 export const query = graphql`
   query {
-    post: post(slug: { eq: "about-riko" }) {
+    post: post(slug: { eq: "about-bittersweet" }) {
       childMdx {
         headings {
           depth

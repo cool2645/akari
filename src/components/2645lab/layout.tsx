@@ -10,31 +10,13 @@ import { graphql, StaticQuery } from 'gatsby'
 import * as React from 'react'
 
 import Footer from '../footer'
+import withNightMode, { NightModeProps } from '../layout'
 import '../layout.css'
 
 import Header from './header'
 import styles from './layout.module.styl'
 
-export interface LayoutProps {
-  onNightModeToggled?: (nightMode: boolean) => void
-}
-
-interface LayoutState {
-  nightMode: boolean
-}
-
-export default class extends React.Component<LayoutProps, LayoutState> {
-
-  constructor (props: any) {
-    super(props)
-    this.state = {
-      nightMode:
-      // tslint:disable-next-line: strict-type-predicates
-        typeof localStorage !== 'undefined'
-          ? localStorage.getItem('nightMode') === 'true'
-          : false
-    }
-  }
+class Layout extends React.Component<NightModeProps> {
 
   @autobind
   public staticQueryRender (data: any) {
@@ -46,10 +28,10 @@ export default class extends React.Component<LayoutProps, LayoutState> {
         />
         <div
           className={`${styles.layout}
-               ${this.state.nightMode ? styles.nightMode : ''}`}
+               ${this.props.nightMode ? styles.nightMode : ''}`}
         >
           <main>{children}</main>
-          <Footer onNightModeToggled={this.onToggledNightMode} />
+          <Footer onNightModeToggled={this.props.onNightModeToggled} />
         </div>
       </>
     )
@@ -71,14 +53,6 @@ export default class extends React.Component<LayoutProps, LayoutState> {
       />
     )
   }
-
-  @autobind
-  private onToggledNightMode (nightMode: boolean) {
-    this.setState({
-      nightMode
-    })
-    if (this.props.onNightModeToggled) {
-      this.props.onNightModeToggled(nightMode)
-    }
-  }
 }
+
+export default withNightMode(Layout)
