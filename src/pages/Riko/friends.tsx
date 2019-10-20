@@ -6,8 +6,6 @@ import Friends from '../../components/Riko/friends'
 import Layout from '../../components/Riko/layout'
 import SEO from '../../components/seo'
 
-import { navProps } from './nav'
-
 export default ({ data, location }: any) => {
   const disqusConfig = {
     identifier: data.post.slug,
@@ -15,8 +13,8 @@ export default ({ data, location }: any) => {
     url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
-    <Layout navProps={navProps}>
-      <SEO title="友情链接" siteTitle={navProps.title} description="和梨子成为好朋友吧！" />
+    <Layout>
+      <SEO title="友情链接" siteTitle="梨园" description="和梨子成为好朋友吧！" />
       <Friends post={data.post} disqusConfig={disqusConfig}>
         <Alert
           content="需要更新链接请留言哦~"

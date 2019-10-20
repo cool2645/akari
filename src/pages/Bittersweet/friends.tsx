@@ -1,11 +1,10 @@
 import { graphql } from 'gatsby'
 import * as React from 'react'
 
+import Layout from '../../components/Bittersweet/layout'
 import Friends from '../../components/Riko/friends'
-import Layout from '../../components/Riko/layout'
 import SEO from '../../components/seo'
 
-import { navProps } from './nav'
 import styles from './theme.module.styl'
 
 export default ({ data, location }: any) => {
@@ -15,8 +14,8 @@ export default ({ data, location }: any) => {
     url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
-    <Layout navProps={navProps} className={styles.themeColor}>
-      <SEO title="友情链接" siteTitle={navProps.title} description="和 BS 成为好朋友吧！" />
+    <Layout className={styles.themeColor}>
+      <SEO title="友情链接" siteTitle="曜の船" description="和 BS 成为好朋友吧！" />
       <Friends post={data.post} disqusConfig={disqusConfig} />
     </Layout>
   )

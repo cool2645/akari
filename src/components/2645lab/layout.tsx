@@ -11,7 +11,6 @@ import * as React from 'react'
 
 import Footer from '../footer'
 import withNightMode, { NightModeProps } from '../layout'
-import '../layout.css'
 
 import Header from './header'
 import styles from './layout.module.styl'

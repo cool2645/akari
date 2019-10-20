@@ -11,8 +11,6 @@ import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import styles from '../../templates/2645lab/post.module.styl'
 
-import { navProps } from './nav'
-
 export default ({ data, location }: any) => {
   const disqusConfig = {
     identifier: data.post.slug,
@@ -20,8 +18,8 @@ export default ({ data, location }: any) => {
     url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
-    <Layout navProps={navProps}>
-      <SEO title="关于梨子" siteTitle={navProps.title} description="梨子梨子梨" />
+    <Layout>
+      <SEO title="关于梨子" siteTitle="梨园" description="梨子梨子梨" />
       <h1>{data.post.title}</h1>
       <div className={styles.post}>
         <MDXProvider

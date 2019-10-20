@@ -5,13 +5,12 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import * as React from 'react'
 
 import Alert from '../../components/alert'
+import Layout from '../../components/Bittersweet/layout'
 import Hr from '../../components/hr'
-import Layout from '../../components/Riko/layout'
 import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import styles from '../../templates/2645lab/post.module.styl'
 
-import { navProps } from './nav'
 import styles2 from './theme.module.styl'
 
 export default ({ data, location }: any) => {
@@ -21,8 +20,8 @@ export default ({ data, location }: any) => {
     url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
-    <Layout navProps={navProps} className={styles2.themeColor}>
-      <SEO title="关于 Bittersweet" siteTitle={navProps.title} description="BSBSB" />
+    <Layout className={styles2.themeColor}>
+      <SEO title="关于 Bittersweet" siteTitle="曜の船" description="BSBSB" />
       <h1>{data.post.title}</h1>
       <div className={styles.post}>
         <MDXProvider

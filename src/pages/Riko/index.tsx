@@ -5,11 +5,9 @@ import Layout from '../../components/Riko/layout'
 import Status from '../../components/Riko/status'
 import SEO from '../../components/seo'
 
-import { navProps } from './nav'
-
 export default ({ data }: any) => (
-  <Layout navProps={navProps}>
-    <SEO title="最近动态" siteTitle={navProps.title} description="这只梨子最近在哪自闭呢？" />
+  <Layout>
+    <SEO title="最近动态" siteTitle="梨园" description="这只梨子最近在哪自闭呢？" />
     <Status data={data} />
   </Layout>
 )

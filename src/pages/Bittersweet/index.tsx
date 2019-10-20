@@ -5,12 +5,11 @@ import Layout from '../../components/Bittersweet/layout'
 import Status from '../../components/Riko/status'
 import SEO from '../../components/seo'
 
-import { navProps } from './nav'
 import styles from './theme.module.styl'
 
 export default ({ data }: any) => (
-  <Layout navProps={navProps} className={styles.themeColor}>
-    <SEO title="最近动态" siteTitle={navProps.title} description="这只 BS 最近在哪自闭呢？" />
+  <Layout className={styles.themeColor}>
+    <SEO title="最近动态" siteTitle="曜の船" description="这只 BS 最近在哪自闭呢？" />
     <Status data={data} />
   </Layout>
 )
