@@ -36,7 +36,6 @@ export default (props: EssayCardProps) => {
     return ex.map((line) => line.join(' ')).join('\n')
   }
   const excerpt = fold(props.content, 300)
-  const tagBuilder = () => ''
   return (
     <Card
       time={props.time}
@@ -44,7 +43,7 @@ export default (props: EssayCardProps) => {
       href={props.url}
       cover_fluid={props.childFile ? props.childFile.childImageSharp.fluid : null}
     >
-      <Highlight text={excerpt} tagBuilder={tagBuilder} />
+      <Highlight text={excerpt} />
       {excerpt !== props.content ? '...' : ''}
     </Card>
   )

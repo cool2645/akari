@@ -38,7 +38,7 @@ export default (props: CardProps) => {
           props.href.startsWith('/') ? <Link to={props.href}>
               {props.cover_fluid ? coverImgFluid : coverImg}
             </Link>
-            : <a href={props.href} target="_blank">
+            : <a href={props.href} target="_blank" rel="nofollow noopener noreferrer">
               {props.cover_fluid ? coverImgFluid : coverImg}
             </a>
            : ''
@@ -57,7 +57,7 @@ export default (props: CardProps) => {
         <footer>
           <span><time>{new Date(props.time).toLocaleString()}</time></span><span>{
           props.href.startsWith('/') ? <Link to={props.href}>来自 {via}</Link>
-            : <a href={props.href} target="_blank">来自 {via}</a>
+            : <a href={props.href} target="_blank" rel="nofollow noopener noreferrer">来自 {via}</a>
         }</span>
         </footer>
       </div>

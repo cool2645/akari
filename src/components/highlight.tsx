@@ -1,9 +1,9 @@
 import * as React from 'react'
 const { Fragment } = React
 
-export default ({ text, tagBuilder }: { text: string, tagBuilder: (str: string) => string }) => {
-  function preventDefault (e: React.MouseEvent) {
-    e.preventDefault()
+export default ({ text, tagBuilder }: { text: string, tagBuilder?: (str: string) => string }) => {
+  function onClick (e: React.MouseEvent) {
+    if (!tagBuilder) e.preventDefault()
   }
 
   function ellipsis (str: string) {
@@ -12,6 +12,7 @@ export default ({ text, tagBuilder }: { text: string, tagBuilder: (str: string) 
   }
 
   const lines = text.split('\n')
+  const t = tagBuilder || (() => '')
   return (
     <>
       {
@@ -25,7 +26,14 @@ export default ({ text, tagBuilder }: { text: string, tagBuilder: (str: string) 
                     (word, key2) => {
                       if (word.startsWith('#')) {
                         return (<Fragment key={key2}>
-                          <a href={tagBuilder(word.substr(1))} onClick={preventDefault}>{word}</a>
+                          <a
+                            href={t(word.substr(1))}
+                            onClick={onClick}
+                            target="_blank"
+                            rel="nofollow noopener noreferrer"
+                          >
+                            {word}
+                          </a>
                           {key2 !== words.length - 1 ? ' ' : ''}
                         </Fragment>)
                       }

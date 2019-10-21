@@ -100,6 +100,7 @@ export default class extends React.Component<any> {
                 除特殊说明以外，本网站文章采用 <a
                   target="_blank"
                   href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  rel="nofollow noopener noreferrer"
                 >知识共享署名-相同方式共享 4.0 国际许可协议
                 </a> 进行许可。
               </>

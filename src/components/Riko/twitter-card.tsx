@@ -37,8 +37,13 @@ export default (props: TwitterCardProps) => {
       {
         props.retweeted_status ?
           <>
-            <a href={`https://twitter.com/${props.retweeted_status.user.screen_name}`}>
-              <FontAwesomeIcon icon={faRetweet} /> {props.retweeted_status.user.name}</a>
+            <a
+              href={`https://twitter.com/${props.retweeted_status.user.screen_name}`}
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faRetweet} /> {props.retweeted_status.user.name}
+            </a>
           </> : ''
       } <Highlight text={fullText} tagBuilder={tagBuilder} />
     </Card>
