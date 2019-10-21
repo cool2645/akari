@@ -26,5 +26,12 @@ export const onPreRenderHTML = ({
       async={true}
     />
   )
+  headComponents.push(
+    <meta
+      key="google-search-console"
+      name="google-site-verification"
+      content="vfBieEK9GH8ZUhz0vrwxJDaNOXdq8ztAv21tboXSCVI"
+    />
+  )
   replaceHeadComponents(headComponents)
 }
