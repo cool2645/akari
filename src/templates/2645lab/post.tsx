@@ -15,10 +15,6 @@ import styles from './post.module.styl'
 
 export default class extends React.Component<any> {
 
-  constructor (props: any) {
-    super(props)
-  }
-
   public componentDidMount () {
     if (top.MathJax) {
       top.MathJax.Hub.Queue(['Typeset', top.MathJax.Hub])

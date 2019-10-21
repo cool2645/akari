@@ -115,9 +115,24 @@ exports.onCreateNode = async ({
     }
     await createNode({
       ...node,
+      id: node.id + '-cover',
+      strapiId: node.id,
+      children: fileNode ? [fileNode.id] : [],
+      internal: {
+        type: 'Essay',
+        content: node.content,
+        contentDigest: createContentDigest(node)
+      }
+    })
+    return
+  }
+
+  if (node.internal.type === 'Essay') {
+    await createNode({
+      ...node,
       id: node.id + '-status',
       type: 'essay',
-      children: fileNode ? [fileNode.id] : [],
+      url: `/Bittersweet/essays/${node.strapiId}`,
       internal: {
         type: 'Status',
         content: node.content,
@@ -154,6 +169,7 @@ exports.onCreateNode = async ({
       author: {
         name: '梨子'
       },
+      url: `https://twitter.com/rikorikorilove/status/${node.id_str}`,
       publish_at: new Date(node.created_at).toISOString(),
       children: fileNode ? [fileNode.id] : [],
       internal: {
@@ -266,9 +282,37 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
+  const _bittersweet_essays = graphql(`
+    query {
+      allEssay(
+        filter: {
+          author: { name: { eq: "Bittersweet" } }
+          category: { slug: { eq: "bs_essay" } }
+        }
+      ) {
+        edges {
+          node {
+            strapiId
+          }
+        }
+      }
+    }
+  `).then(result => {
+    result.data.allEssay.edges.forEach(({ node, next, previous }) => {
+      createPage({
+        path: `Bittersweet/essays/${node.strapiId}`,
+        component: path.resolve('./src/templates/Bittersweet/essay.tsx'),
+        context: {
+          id: node.strapiId
+        }
+      })
+    })
+  })
+
   return Promise.chain([
     _2645lab_index_pages,
     _2645lab_public_posts,
-    _2645lab_private_posts
+    _2645lab_private_posts,
+    _bittersweet_essays
   ])
 }

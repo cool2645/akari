@@ -11,8 +11,6 @@ import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import styles from '../../templates/2645lab/post.module.styl'
 
-import styles2 from './theme.module.styl'
-
 export default ({ data, location }: any) => {
   const disqusConfig = {
     identifier: data.post.slug,
@@ -20,7 +18,7 @@ export default ({ data, location }: any) => {
     url: `${data.site.siteMetadata.siteUrl + location.pathname}`
   }
   return (
-    <Layout className={styles2.themeColor}>
+    <Layout>
       <SEO title="关于 Bittersweet" siteTitle="曜の船" description="BSBSB" />
       <h1>{data.post.title}</h1>
       <div className={styles.post}>

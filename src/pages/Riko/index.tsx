@@ -31,6 +31,7 @@ export const query = graphql`
           }
         }
         id_str
+        url
         source
         childFile {
           childImageSharp {

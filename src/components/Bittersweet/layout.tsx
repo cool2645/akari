@@ -6,11 +6,7 @@ import Nav from '../Riko/nav'
 
 import styles from './layout.module.styl'
 
-export interface LayoutProps {
-  className?: string
-}
-
-class Layout extends React.Component<LayoutProps & NightModeProps> {
+class Layout extends React.Component<NightModeProps> {
   private navProps = {
     href: '/Bittersweet',
     links: [{
@@ -33,7 +29,7 @@ class Layout extends React.Component<LayoutProps & NightModeProps> {
     const { children } = this.props
 
     return (
-      <div className={`${styles.container} ${this.props.className}`}>
+      <div className={`${styles.container} ${styles.themeColor}`}>
         <Nav {...this.navProps} />
         <div
           className={`${styles.page}
@@ -47,4 +43,4 @@ class Layout extends React.Component<LayoutProps & NightModeProps> {
   }
 }
 
-export default withNightMode<LayoutProps>(Layout)
+export default withNightMode<{}>(Layout)

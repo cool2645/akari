@@ -45,7 +45,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
 
   public render () {
     return (
-      <div className={styles.container}>
+      <>
         <h1>最近动态</h1>
         <Masonry
           updateOnEachImageLoad={true}
@@ -61,7 +61,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
                     <TwitterCard
                       time={node.publish_at}
                       full_text={node.full_text}
-                      url={`https://twitter.com/rikorikorilove/status/${node.id_str}`}
+                      url={node.url}
                       extended_entities={
                         node.extended_entities ||
                         (node.retweeted_status ? node.retweeted_status.extended_entities
@@ -81,7 +81,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
                       time={node.publish_at}
                       content={node.content}
                       category={node.category.name}
-                      url={''}
+                      url={node.url}
                       childFile={node.childFile}
                     /> : ''
                 }
@@ -92,7 +92,7 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
         <div id="end" />
         <Hr content="到底了" />
         <ScrollToTop />
-      </div>
+      </>
     )
   }
 

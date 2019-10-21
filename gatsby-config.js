@@ -136,7 +136,12 @@ module.exports = {
         ]
       }
     },
-    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        exclude: ['Bittersweet/essays/*']
+      }
+    },
     {
       resolve: 'gatsby-source-strapi',
       options: {
