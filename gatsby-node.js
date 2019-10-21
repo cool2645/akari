@@ -132,7 +132,7 @@ exports.onCreateNode = async ({
       ...node,
       id: node.id + '-status',
       type: 'essay',
-      url: `/Bittersweet/essays/${node.strapiId}`,
+      url: `/Bittersweet/essays/${node.strapiId}/`,
       internal: {
         type: 'Status',
         content: node.content,

@@ -40,7 +40,7 @@ export default class extends React.Component<any, IndexState> {
           const d = new Date(node.publish_at)
           return (
             <div key={node.slug} className={styles.post}>
-              <Link to={`/posts/${node.slug}`}>
+              <Link to={`/posts/${node.slug}/`}>
                 <h2 className={styles.title}>
                   <AuthorTag
                     key={index}
@@ -63,7 +63,7 @@ export default class extends React.Component<any, IndexState> {
               </Link>
               <p>
                 {node.childMdx.excerpt}
-                <Link to={`/posts/${node.slug}`}>
+                <Link to={`/posts/${node.slug}/`}>
                   <Button
                     text="阅读全文"
                     background={
@@ -82,9 +82,9 @@ export default class extends React.Component<any, IndexState> {
           (pageInfo.hasNextPage || pageInfo.hasPreviousPage)
             ? <SimplePagination
               previousName={pageInfo.hasNextPage ? '更早以前' : ''}
-              previousUrl={`/pages/${pageInfo.currentPage + 1}`}
+              previousUrl={`/pages/${pageInfo.currentPage + 1}/`}
               nextName={pageInfo.hasPreviousPage ? '更新以后' : ''}
-              nextUrl={`/pages/${pageInfo.currentPage - 1}`}
+              nextUrl={`/pages/${pageInfo.currentPage - 1}/`}
               force2col={true}
               showIcon={true}
             /> : ''

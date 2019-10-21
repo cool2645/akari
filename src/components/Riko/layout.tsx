@@ -12,21 +12,21 @@ export interface LayoutProps {
 
 class Layout extends React.Component<LayoutProps & NightModeProps> {
   private navProps = {
-    href: '/Riko',
+    href: '/Riko/',
     links: [{
-      href: '/Riko/about',
+      href: '/Riko/about/',
       title: '关于梨子'
     }, {
-      href: '/Riko/friends',
+      href: '/Riko/friends/',
       title: '友情链接'
     }, {
-      href: '/Riko',
+      href: '/Riko/',
       title: '最近动态'
     }, {
       href: '/',
       title: '技术文章'
     }],
-    title: '梨子'
+    title: '梨园'
   }
 
   public render () {

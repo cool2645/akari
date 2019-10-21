@@ -63,7 +63,11 @@ export default class extends React.Component<NavProps, NavState> {
               <ul>
                 {
                   this.props.links.map((link) => (
-                    <Link key={link.href} to={link.href} activeClassName={styles.active}>
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      activeClassName={styles.active}
+                    >
                       <li>{link.title}</li>
                     </Link>
                   ))

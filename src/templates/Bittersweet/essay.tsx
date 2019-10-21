@@ -17,7 +17,7 @@ export default class extends React.Component<any> {
     const { essay, site } = this.props.data
     const disqusConfig = {
       identifier: `Bittersweet/essays/${essay.strapiId}`,
-      title: '随笔',
+      title: 'Bittersweet 随笔',
       url: `${site.siteMetadata.siteUrl + this.props.location.pathname}`
     }
     let excerpt = essay.content.substr(0, 300)

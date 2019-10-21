@@ -34,6 +34,7 @@
     "gatsby-plugin-disqus": "^1.1.2",
     "gatsby-plugin-emotion": "^4.1.4",
     "gatsby-plugin-feed": "^2.3.8",
+    "gatsby-plugin-force-trailing-slashes": "^1.0.4",
     "gatsby-plugin-manifest": "^2.2.9",
     "gatsby-plugin-mdx": "^1.0.30",
     "gatsby-plugin-nprogress": "^2.1.4",

@@ -14,7 +14,7 @@ interface PostCardProps {
 export default (props: PostCardProps) => {
   return (
     <Card time={props.time} via="2645 实验室" href={`/posts/${props.slug}`}>
-      <Link to={`/posts/${props.slug}`}><h3 className={styles.h3}>{props.title}</h3></Link>
+      <Link to={`/posts/${props.slug}/`}><h3 className={styles.h3}>{props.title}</h3></Link>
       <p>{props.excerpt}</p>
     </Card>
   )

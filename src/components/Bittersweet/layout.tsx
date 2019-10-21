@@ -8,15 +8,15 @@ import styles from './layout.module.styl'
 
 class Layout extends React.Component<NightModeProps> {
   private navProps = {
-    href: '/Bittersweet',
+    href: '/Bittersweet/',
     links: [{
-      href: '/Bittersweet/about',
+      href: '/Bittersweet/about/',
       title: '关于 BS'
     }, {
-      href: '/Bittersweet/friends',
+      href: '/Bittersweet/friends/',
       title: '友情链接'
     }, {
-      href: '/Bittersweet',
+      href: '/Bittersweet/',
       title: '最近动态'
     }, {
       href: '/',
