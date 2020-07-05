@@ -170,7 +170,7 @@ export const query = graphql`
         }
         body
         rawBody
-        excerpt(pruneLength: 200)
+        excerpt(pruneLength: 200, truncate: true)
       }
       is_public
       is_repost

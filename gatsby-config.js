@@ -116,7 +116,7 @@ module.exports = {
                 ) {
                   nodes {
                     childMdx {
-                      excerpt(pruneLength: 300)
+                      excerpt(pruneLength: 300, truncate: true)
                     }
                     slug
                     publish_at

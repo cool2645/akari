@@ -46,7 +46,7 @@ export const query = graphql`
         title
         slug
         childMdx {
-          excerpt(pruneLength: 300)
+          excerpt(pruneLength: 300, truncate: true)
         }
         is_repost
       }
