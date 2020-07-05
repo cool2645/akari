@@ -129,7 +129,7 @@ export default class extends React.Component<any> {
 
   private countWords (): number {
     const str = this.props.data.post.childMdx.rawBody
-    const matches = str.match(/[\u00ff-\uffff]|\S+/g)
+    const matches = str.match(/[\u00ff-\uffff]|\w+/g)
     return matches ? matches.length : 0
   }
 
