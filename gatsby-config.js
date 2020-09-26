@@ -202,7 +202,7 @@ module.exports = {
           rikorikorilove: {
             endpoint: 'statuses/user_timeline',
             params: {
-              screen_name: 'rikorikorilove',
+              screen_name: '_satou_riko',
               include_rts: true,
               exclude_replies: true,
               tweet_mode: 'extended',

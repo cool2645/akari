@@ -24,7 +24,12 @@ export default class extends React.Component<any> {
     if (excerpt !== essay.content) excerpt += '...'
     return (
       <Layout>
-        <SEO title="随笔" siteTitle="曜の船" description={excerpt} />
+        <SEO
+          author={essay.author.name}
+          description={excerpt}
+          publishedTime={new Date(essay.publish_at).toISOString()}
+          title="随笔"
+        />
         <h1 className={styles2.header}>随笔</h1>
         <div className={styles.post}>
           {essay.childFile ?

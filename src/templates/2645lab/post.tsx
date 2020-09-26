@@ -38,8 +38,13 @@ export default class extends React.Component<any> {
     const d = this.dateOfUpdate()
     return (
       <Layout>
-        <SEO title={post.title} description={post.childMdx.excerpt} />
-        <div className={styles.post}>
+        <SEO
+          author={post.author.name}
+          description={post.childMdx.excerpt}
+          publishedTime={pd.toISOString()}
+          title={post.title}
+        />
+        <article className={styles.post}>
           <h1>{post.title}</h1>
           <div className={styles.authorMeta}>
             {
@@ -85,7 +90,7 @@ export default class extends React.Component<any> {
           >
             <MDXRenderer>{post.childMdx.body}</MDXRenderer>
           </MDXProvider>
-        </div>
+        </article>
         <div className={styles.copyrightNotice}>
           {
             post.childCopyrightNotice ?

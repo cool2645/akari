@@ -169,7 +169,7 @@ exports.onCreateNode = async ({
       author: {
         name: '梨子'
       },
-      url: `https://twitter.com/rikorikorilove/status/${node.id_str}`,
+      url: `https://twitter.com/_satou_riko/status/${node.id_str}`,
       publish_at: new Date(node.created_at).toISOString(),
       children: fileNode ? [fileNode.id] : [],
       internal: {
