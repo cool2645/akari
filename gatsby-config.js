@@ -157,6 +157,7 @@ module.exports = {
         gatsbyRemarkPlugins: [
           'gatsby-remark-mathjax',
           'gatsby-remark-external-links',
+          'gatsby-remark-unwrap-images',
           {
             resolve: 'gatsby-remark-images',
             options: {

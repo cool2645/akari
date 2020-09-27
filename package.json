@@ -52,6 +52,7 @@
     "gatsby-remark-images": "^3.1.17",
     "gatsby-remark-mathjax": "^1.0.0",
     "gatsby-remark-prismjs": "^3.3.9",
+    "gatsby-remark-unwrap-images": "^1.0.2",
     "gatsby-source-filesystem": "^2.1.16",
     "gatsby-source-strapi": "^0.0.9",
     "gatsby-source-twitter": "^3.0.0",
