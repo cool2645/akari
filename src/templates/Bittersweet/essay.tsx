@@ -27,21 +27,28 @@ export default class extends React.Component<any> {
         <SEO
           author={essay.author.name}
           description={excerpt}
+          cover={essay.childFile || ''}
           publishedTime={new Date(essay.publish_at).toISOString()}
           title="随笔"
         />
-        <h1 className={styles2.header}>随笔</h1>
-        <div className={styles.post}>
-          {essay.childFile ?
-            <Img
-              style={{
-                margin: '0 auto',
-                width: essay.childFile.childImageSharp.fluid.aspectRatio * 400
-              }}
-              fluid={essay.childFile.childImageSharp.fluid}
-              imgStyle={{ objectFit: 'contain' }}
-            /> : ''}
-          <Highlight text={essay.content} />
+        <article>
+          <h1 className={styles2.header}>随笔</h1>
+          <div className={styles.post}>
+            <header>
+              {essay.childFile ?
+                <Img
+                  style={{
+                    margin: '0 auto',
+                    width: essay.childFile.childImageSharp.fluid.aspectRatio * 400
+                  }}
+                  fluid={essay.childFile.childImageSharp.fluid}
+                  imgStyle={{ objectFit: 'contain' }}
+                /> : ''}
+            </header>
+            <Highlight text={essay.content} />
+          </div>
+        </article>
+        <div>
           <Disqus className={styles.disqus} config={disqusConfig} />
           <ScrollToTop />
         </div>

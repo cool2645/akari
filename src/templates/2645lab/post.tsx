@@ -7,6 +7,7 @@ import * as React from 'react'
 import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
 import Hr from '../../components/hr'
+import Img from '../../components/img'
 import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import SimplePagination from '../../components/simple-pagination'
@@ -46,46 +47,49 @@ export default class extends React.Component<any> {
         />
         <article className={styles.post}>
           <h1>{post.title}</h1>
-          <div className={styles.authorMeta}>
+          <header>
+            <div className={styles.authorMeta}>
+              {
+                post.is_repost ?
+                  <><span>由 </span>
+                    <span className={styles.author}>
+                      {post.author.name}
+                    </span>
+                    <span> 转载</span>
+                  </> : <span className={styles.author}>
+                      {post.author.name}
+                    </span>
+              }
+              ，
+              <span className={styles.publishTime}>
+                {pd.getFullYear()}-{pd.getMonth() + 1}-{pd.getDate()}
+              </span>
+            </div>
             {
-              post.is_repost ?
-                <><span>由 </span>
-                  <span className={styles.author}>
-                    {post.author.name}
-                  </span>
-                  <span> 转载</span>
-                </> : <span className={styles.author}>
-                    {post.author.name}
-                  </span>
+              this.dayByUpdate() > 365 ?
+                <Alert
+                  content={`本文最后更新于 ${
+                    this.dayByUpdate()
+                    } 天前（${
+                    d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()
+                    }），其中的信息可能已经有所发展或者不再适用于现阶段。`}
+                  level="warn"
+                /> : ''
             }
-            ，
-            <span className={styles.publishTime}>
-              {pd.getFullYear()}-{pd.getMonth() + 1}-{pd.getDate()}
-            </span>
-          </div>
-          {
-            this.dayByUpdate() > 365 ?
-              <Alert
-                content={`本文最后更新于 ${
-                  this.dayByUpdate()
-                  } 天前（${
-                  d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()
-                  }），其中的信息可能已经有所发展或者不再适用于现阶段。`}
-                level="warn"
-              /> : ''
-          }
-          <Alert
-            content={`本文全长 ${
-              this.countWords()
-              } 字，全部读完大约需要 ${
-              this.timeToRead()
-              } 分钟。`}
-            level="info"
-          />
+            <Alert
+              content={`本文全长 ${
+                this.countWords()
+                } 字，全部读完大约需要 ${
+                this.timeToRead()
+                } 分钟。`}
+              level="info"
+            />
+          </header>
           <MDXProvider
             components={{
               alert: Alert,
-              hr: Hr
+              hr: Hr,
+              img: Img
             }}
           >
             <MDXRenderer>{post.childMdx.body}</MDXRenderer>
