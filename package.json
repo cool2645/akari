@@ -79,8 +79,7 @@
   ],
   "license": "MIT",
   "pre-commit": [
-    "lint",
-    "gitadd"
+    "lint"
   ],
   "scripts": {
     "build": "gatsby build && cp _redirects public && cd ./public && font-spider --no-backup --map \"/static\",\"./static\" *.html",
@@ -89,8 +88,8 @@
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "type-check": "tsc --noEmit",
-    "lint": "eslint --fix . && tslint --fix --project .",
-    "gitadd": "git add -A"
+    "lint": "eslint . && tslint --project .",
+    "lint-fix": "eslint --fix . && tslint --fix --project ."
   },
   "repository": {
     "type": "git",

@@ -28,11 +28,11 @@ export default class extends React.Component<FooterProps, FooterState> {
   public render () {
     return (
       <footer>
-        © {new Date().getFullYear()}, Built with{' '}
+        © 2016 - {new Date().getFullYear()}, Built with{' '}
         <a target="__blank" href="https://www.gatsbyjs.org">
           Gatsby
         </a>{' '}
-        and{' '}
+        &{' '}
         <a target="__blank" href="https://strapi.io/">
           Strapi
         </a>

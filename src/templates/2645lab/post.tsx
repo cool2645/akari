@@ -1,4 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
+import autobind from 'autobind-decorator'
 import { graphql } from 'gatsby'
 import { Disqus } from 'gatsby-plugin-disqus'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -11,10 +12,22 @@ import Img from '../../components/img'
 import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import SimplePagination from '../../components/simple-pagination'
+import TOC from '../../components/toc'
 
 import styles from './post.module.styl'
 
-export default class extends React.Component<any> {
+interface PostState {
+  currentHeadingIndex: number
+}
+
+export default class extends React.Component<any, PostState> {
+
+  constructor (props: any) {
+    super(props)
+    this.state = {
+      currentHeadingIndex: -1
+    }
+  }
 
   public componentDidMount () {
     if (top.MathJax) {
@@ -45,9 +58,17 @@ export default class extends React.Component<any> {
           publishedTime={pd.toISOString()}
           title={post.title}
         />
-        <article className={styles.post}>
+        <article className={`${styles.post} ${styles.article}`}>
           <h1>{post.title}</h1>
           <header>
+            <div className={styles.tocContainer}>
+              <TOC
+                className={styles.toc}
+                currentHeadingIndex={this.state.currentHeadingIndex}
+                onChangeCurrentHeading={this.scrollToHeadingByIndex}
+                toc={post.childMdx.headings}
+              />
+            </div>
             <div className={styles.authorMeta}>
               {
                 post.is_repost ?
@@ -144,6 +165,13 @@ export default class extends React.Component<any> {
 
   private timeToRead (): number {
     return Math.ceil(this.countWords() / 350)
+  }
+
+  @autobind
+  private scrollToHeadingByIndex (index: number) {
+    this.setState({
+      currentHeadingIndex: index
+    })
   }
 
 }
