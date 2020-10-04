@@ -3,6 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 
 export function useHeadingWaypoint (maxDepth: number = 6) {
   const [currentHeadingIndex, _setCurrentHeadingIndex] = useState(0)
+  const currentHeadingIndexRef = useRef<number>(currentHeadingIndex)
+  function setCurrentHeadingIndex (index: number) {
+    currentHeadingIndexRef.current = index
+    _setCurrentHeadingIndex(index)
+  }
   const articleRef = useRef<HTMLDivElement>(null)
   let headingEls: NodeListOf<HTMLHeadingElement>
 
@@ -12,7 +17,7 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
     headingSelectors.push(`h${i}`)
   }
 
-  function setCurrentHeadingIndex (index: number) {
+  function setAndScrollToHeadingIndex (index: number) {
     if (!articleRef.current) return
     const articleEl = articleRef.current
     if (!headingEls) {
@@ -21,7 +26,7 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
     const el = headingEls.item(index)
     window.scrollTo(0, el.offsetTop - 20 + articleEl.offsetTop)
     navigate(`#${el.innerText}`, { replace: true })?.catch()
-    _setCurrentHeadingIndex(index)
+    setCurrentHeadingIndex(index)
   }
 
   useEffect(() => {
@@ -41,9 +46,9 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
             break
           }
         }
-        if (topElIndex !== currentHeadingIndex) {
+        if (topElIndex !== currentHeadingIndexRef.current) {
           navigate(`#${headingEls.item(topElIndex).innerText}`, { replace: true })?.catch()
-          _setCurrentHeadingIndex(topElIndex)
+          setCurrentHeadingIndex(topElIndex)
         }
       })
     }
@@ -56,20 +61,20 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
         const ele = headingEls.item(i)
         if ('#' + encodeURIComponent(ele.innerText) === location.hash) {
           window.scrollTo(0, ele.offsetTop - 20 + articleEl.offsetTop)
-          _setCurrentHeadingIndex(i)
+          setCurrentHeadingIndex(i)
           break
         }
       }
     }
-    document.addEventListener('scroll', checkCurrentFocusHeading)
+    document.addEventListener('scroll', checkCurrentFocusHeading.bind(this))
     return () => {
-      document.removeEventListener('scroll', checkCurrentFocusHeading)
+      document.removeEventListener('scroll', checkCurrentFocusHeading.bind(this))
     }
   }, [])
 
   return {
     articleRef,
     currentHeadingIndex,
-    setCurrentHeadingIndex
+    setCurrentHeadingIndex: setAndScrollToHeadingIndex
   }
 }
