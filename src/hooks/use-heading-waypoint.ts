@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 export function useHeadingWaypoint (maxDepth: number = 6) {
   const [currentHeadingIndex, _setCurrentHeadingIndex] = useState(0)
   const articleRef = useRef<HTMLDivElement>(null)
+  let headingEls: NodeListOf<HTMLHeadingElement>
 
   maxDepth = Math.min(6, maxDepth)
   const headingSelectors: string[] = []
@@ -14,7 +15,9 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
   function setCurrentHeadingIndex (index: number) {
     if (!articleRef.current) return
     const articleEl = articleRef.current
-    const headingEls: NodeListOf<HTMLHeadingElement> = articleEl.querySelectorAll(headingSelectors.join(', '))
+    if (!headingEls) {
+      headingEls = articleEl.querySelectorAll(headingSelectors.join(', '))
+    }
     const el = headingEls.item(index)
     window.scrollTo(0, el.offsetTop - 20 + articleEl.offsetTop)
     navigate(`#${el.innerText}`, { replace: true })?.catch()
@@ -26,7 +29,9 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
       setTimeout(() => {
         if (!articleRef.current) return
         const articleEl = articleRef.current
-        const headingEls: NodeListOf<HTMLHeadingElement> = articleEl.querySelectorAll(headingSelectors.join(', '))
+        if (!headingEls) {
+          headingEls = articleEl.querySelectorAll(headingSelectors.join(', '))
+        }
         let topElIndex = 0
         for (let i = 0; i < headingEls.length; i++) {
           const ele = headingEls.item(i)
@@ -36,13 +41,17 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
             break
           }
         }
-        navigate(`#${headingEls.item(topElIndex).innerText}`, { replace: true })?.catch()
-        _setCurrentHeadingIndex(topElIndex)
+        if (topElIndex !== currentHeadingIndex) {
+          navigate(`#${headingEls.item(topElIndex).innerText}`, { replace: true })?.catch()
+          _setCurrentHeadingIndex(topElIndex)
+        }
       })
     }
     if (articleRef.current) {
       const articleEl = articleRef.current
-      const headingEls: NodeListOf<HTMLHeadingElement> = articleEl.querySelectorAll(headingSelectors.join(', '))
+      if (!headingEls) {
+        headingEls = articleEl.querySelectorAll(headingSelectors.join(', '))
+      }
       for (let i = 0; i < headingEls.length; i++) {
         const ele = headingEls.item(i)
         if ('#' + encodeURIComponent(ele.innerText) === location.hash) {
