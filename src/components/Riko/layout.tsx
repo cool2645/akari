@@ -24,7 +24,7 @@ class Layout extends React.Component<LayoutProps & NightModeProps> {
       title: '最近动态'
     }, {
       href: '/',
-      title: '技术文章'
+      title: '博客文章'
     }],
     title: '梨园'
   }
