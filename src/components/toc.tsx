@@ -18,27 +18,40 @@ export interface TocProps {
 
 export default class extends React.Component<TocProps> {
   private readonly leftMargin = 10
-  private readonly headingRefs: Array<HTMLLIElement | null>
+  private readonly headingEls: Array<HTMLLIElement | null>
+  private scrollContainerEl: HTMLDivElement | null
 
   constructor (props: any) {
     super(props)
-    this.headingRefs = []
+    this.headingEls = []
   }
 
   public componentDidUpdate (prevProps: TocProps) {
     if (this.props.currentHeadingIndex !== prevProps.currentHeadingIndex) {
-      // console.log(this.headingRefs[this.props.currentHeadingIndex])
+      const currentHeadingEl = this.headingEls[this.props.currentHeadingIndex] as HTMLLIElement
+      const scrollContainerEl = this.scrollContainerEl as HTMLDivElement
+      if (!currentHeadingEl || !scrollContainerEl) return
+      if (scrollContainerEl.scrollTop + scrollContainerEl.offsetHeight <
+        currentHeadingEl.offsetTop + currentHeadingEl.offsetHeight) {
+        scrollContainerEl.scrollTo(0,
+          currentHeadingEl.offsetTop + currentHeadingEl.offsetHeight - scrollContainerEl.offsetHeight)
+      } else {
+        while (scrollContainerEl.scrollTop > 0 &&
+        scrollContainerEl.scrollTop + 2 * currentHeadingEl.offsetHeight > currentHeadingEl.offsetTop) {
+          scrollContainerEl.scrollTo(0, currentHeadingEl.offsetTop - 2 * currentHeadingEl.offsetHeight)
+        }
+      }
     }
   }
 
   public render () {
     const minDepth = this.props.toc.reduce((acc, curr) => Math.min(acc, curr.depth), Infinity)
-    const onHeaderClick = (e: React.MouseEvent<HTMLAnchorElement>) => this.onHeadingClick(-1, e)
+    const onHeaderClick = (e: React.MouseEvent<HTMLAnchorElement>) => this.onHeadingClick(0, e)
     return (
       <div className={`${styles.toc} ${this.props.className}`}>
-        <div className={`${styles.header} ${this.props.currentHeadingIndex === -1 ? styles.focus : ''}`}>
+        <div className={`${styles.header} ${this.props.currentHeadingIndex === 0 ? styles.focus : ''}`}>
           <a href="#" onClick={onHeaderClick}>
-            <div className={`${styles.anchor} ${-1 === this.props.currentHeadingIndex ? '' : styles.anchorHide}`}>
+            <div className={`${styles.anchor} ${0 === this.props.currentHeadingIndex ? '' : styles.anchorHide}`}>
               <div className={styles.anchorDot} />
             </div>
             <strong
@@ -50,10 +63,11 @@ export default class extends React.Component<TocProps> {
             </strong>
           </a>
         </div>
-        <div className={styles.scrollContainer}>
+        <div className={styles.scrollContainer} ref={(ref) => this.scrollContainerEl = ref}>
           <ul>
             {
               this.props.toc.map((toc, index) => {
+                index++
                 const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => this.onHeadingClick(index, e)
                 return (
                   <li
@@ -64,7 +78,7 @@ export default class extends React.Component<TocProps> {
                     z-index: ${10 - toc.depth};
                   ` : css`z-index: ${10 - toc.depth};`}
                     key={index}
-                    ref={(ref) => this.headingRefs[index] = ref}
+                    ref={(ref) => this.headingEls[index] = ref}
                   >
                     <a href={`#${toc.value}`} onClick={onClick} >
                       <div className={`${styles.anchor} ${index === this.props.currentHeadingIndex ? '' : styles.anchorHide}`}>
