@@ -50,14 +50,14 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       if (typeof window !== 'undefined') {
         if (!nightMode) {
           if (!window.akari.console.akari) {
-            window.akari.console.akari = 'Akari means brightness, 明り.'
+            window.akari.console.akari = '"Akari" is brightness (明り)'
             // tslint:disable-next-line:no-console
             console.log(window.akari.console.akari)
           }
         } else {
           if (!window.akari.console.hoshiakari) {
             window.akari.console.hoshiakari =
-              'HoshiAkari means light of the star, 星明かり.'
+              '"HoshiAkari" is starlight (星明かり)'
             // tslint:disable-next-line:no-console
             console.log(window.akari.console.hoshiakari)
           }
