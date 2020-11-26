@@ -36,11 +36,13 @@ class Layout extends React.Component<LayoutProps & NightModeProps> {
       <div className={`${styles.container} ${this.props.className}`}>
         <Nav {...this.navProps} />
         <div
-          className={`${styles.page}
-                 ${this.props.nightMode ? styles.nightMode : ''}`}
+          className={`${styles.page}`}
         >
           <main className={styles.main}>{children}</main>
-          <Footer onNightModeToggled={this.props.onNightModeToggled} />
+          <Footer
+            nightMode={this.props.nightMode}
+            onNightModeToggled={this.props.onNightModeToggled}
+          />
         </div>
       </div>
     )

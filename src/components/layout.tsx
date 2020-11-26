@@ -46,6 +46,31 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       this.setState({
         nightMode
       })
+      // tslint:disable-next-line: strict-type-predicates
+      if (typeof window !== 'undefined') {
+        if (!nightMode) {
+          if (!window.akari.console.akari) {
+            window.akari.console.akari = 'Akari means brightness, 明り.'
+            // tslint:disable-next-line:no-console
+            console.log(window.akari.console.akari)
+          }
+        } else {
+          if (!window.akari.console.hoshiakari) {
+            window.akari.console.hoshiakari =
+              'HoshiAkari means light of the star, 星明かり.'
+            // tslint:disable-next-line:no-console
+            console.log(window.akari.console.hoshiakari)
+          }
+        }
+
+        document.body.className = nightMode ? 'nightly' : ''
+
+        // tslint:disable-next-line: strict-type-predicates
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem('nightMode', nightMode + '')
+        }
+      }
+
       if (this.props.onNightModeToggled) {
         this.props.onNightModeToggled(nightMode)
       }

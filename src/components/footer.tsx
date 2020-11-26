@@ -5,24 +5,14 @@ import Button from './button'
 import styles from './Riko/layout.module.styl'
 
 export interface FooterProps {
-  onNightModeToggled?: (nightMode: boolean) => void
-}
-
-interface FooterState {
   nightMode: boolean
+  onNightModeToggled: (nightMode: boolean) => void
 }
 
-export default class extends React.Component<FooterProps, FooterState> {
+export default class extends React.Component<FooterProps, {}> {
   constructor (props: any) {
     super(props)
-    this.state = {
-      nightMode:
-        // tslint:disable-next-line: strict-type-predicates
-        typeof window !== 'undefined'
-          ? window.localStorage.getItem('nightMode') === 'true'
-          : false
-    }
-    this.onToggledNightMode()
+    this.props.onNightModeToggled(this.props.nightMode)
   }
 
   public render () {
@@ -42,7 +32,7 @@ export default class extends React.Component<FooterProps, FooterState> {
           href="https://github.com/cool2645/akari"
           className={styles.theme}
         >
-          {this.state.nightMode ? (
+          {this.props.nightMode ? (
             <span className={styles.hoshi}>Hoshi</span>
           ) : (
             ''
@@ -67,43 +57,7 @@ export default class extends React.Component<FooterProps, FooterState> {
 
   @autobind
   private toggleNightMode () {
-    this.setState(
-      {
-        nightMode: !this.state.nightMode
-      },
-      this.onToggledNightMode
-    )
+    this.props.onNightModeToggled(!this.props.nightMode)
   }
 
-  @autobind
-  private onToggledNightMode () {
-    // tslint:disable-next-line: strict-type-predicates
-    if (typeof window !== 'undefined') {
-      if (!this.state.nightMode) {
-        if (!window.akari.console.akari) {
-          window.akari.console.akari = 'Akari means brightness, 明り.'
-          // tslint:disable-next-line:no-console
-          console.log(window.akari.console.akari)
-        }
-      } else {
-        if (!window.akari.console.hoshiakari) {
-          window.akari.console.hoshiakari =
-            'HoshiAkari means light of the star, 星明かり.'
-          // tslint:disable-next-line:no-console
-          console.log(window.akari.console.hoshiakari)
-        }
-      }
-
-      document.body.className = this.state.nightMode ? 'nightly' : ''
-
-      if (this.props.onNightModeToggled) {
-        this.props.onNightModeToggled(this.state.nightMode)
-      }
-
-      // tslint:disable-next-line: strict-type-predicates
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem('nightMode', this.state.nightMode + '')
-      }
-    }
-  }
 }

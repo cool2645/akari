@@ -26,11 +26,13 @@ class Layout extends React.Component<NightModeProps> {
           siteTitle={data.site.siteMetadata.title}
         />
         <div
-          className={`${styles.layout}
-               ${this.props.nightMode ? styles.nightMode : ''}`}
+          className={`${styles.layout}`}
         >
           <main>{children}</main>
-          <Footer onNightModeToggled={this.props.onNightModeToggled} />
+          <Footer
+            nightMode={this.props.nightMode}
+            onNightModeToggled={this.props.onNightModeToggled}
+          />
         </div>
       </>
     )
