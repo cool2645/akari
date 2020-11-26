@@ -19,12 +19,15 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
   return class extends React.Component<P & OutputLayoutProps, LayoutState> {
     constructor (props: any) {
       super(props)
+      // tslint:disable-next-line: strict-type-predicates
+      const systemPreferNightMode = typeof window !== 'undefined'
+        && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
       this.state = {
         nightMode:
-        // tslint:disable-next-line: strict-type-predicates
+          // tslint:disable-next-line: strict-type-predicates
           typeof localStorage !== 'undefined'
-            ? localStorage.getItem('nightMode') === 'true'
-            : false
+            ? localStorage.getItem('nightMode') === 'true' || systemPreferNightMode
+            : systemPreferNightMode
       }
       this.onToggledNightMode = this.onToggledNightMode.bind(this)
     }
