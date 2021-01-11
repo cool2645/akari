@@ -10,7 +10,7 @@
   text-align center
 }
 
-.blockquote:before {
+.blockquote::before {
   color #222
   content "\201C"
   font-size 5em
@@ -22,7 +22,7 @@
   font-style italic
 }
 
-.blockquote:after {
+.blockquote::after {
   color #222
   content "\201D"
   font-size 5em
@@ -41,13 +41,13 @@
 }
 
 .from {
-  span:before {
+  span::before {
     content '—— '
   }
 }
 
 :global(.nightly) {
-  .blockquote, .blockquote:before, .blockquote:after {
+  .blockquote, .blockquote::before, .blockquote::after {
     color #fff
   }
 }

@@ -50,7 +50,7 @@
     }
   }
 
-  blockquote:before {
+  blockquote::before {
     color #888
     content "\201C"
     font-size 5em
@@ -62,7 +62,7 @@
     font-style italic
   }
 
-  blockquote:after {
+  blockquote::after {
     color #888
     content "\201D"
     font-size 5em
@@ -90,7 +90,7 @@
   }
 
   .post {
-    blockquote, blockquote:before, blockquote:after {
+    blockquote, blockquote::before, blockquote::after {
       color #ddd
     }
   }
