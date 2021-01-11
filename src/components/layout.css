@@ -14,7 +14,7 @@ body {
   min-height: 100%;
 }
 body.nightly {
-  background: #000;
+  background: #222;
   color: #cecece;
 }
 body.nightly h1,

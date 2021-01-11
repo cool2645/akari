@@ -11,7 +11,7 @@ export default (props: HrProps) => (
   <hr
     className={styles.hr}
     css={css`
-    &:after {
+    &::after {
       content: '${props.content || '◇'}';
     }
 `}
