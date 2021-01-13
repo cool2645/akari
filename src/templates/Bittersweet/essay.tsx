@@ -39,7 +39,7 @@ export default class extends React.Component<any> {
                 <Img
                   style={{
                     margin: '0 auto',
-                    width: essay.childFile.childImageSharp.fluid.aspectRatio * 400
+                    maxWidth: essay.childFile.childImageSharp.fluid.aspectRatio * 400
                   }}
                   fluid={essay.childFile.childImageSharp.fluid}
                   imgStyle={{ objectFit: 'contain' }}
