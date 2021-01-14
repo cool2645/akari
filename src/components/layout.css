@@ -232,6 +232,7 @@ body {
 }
 img {
   max-width: 100%;
+  max-height: 430px;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -408,6 +409,7 @@ p {
   margin-bottom: 1.45rem;
 }
 figure {
+  text-align: center;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -640,4 +642,7 @@ pre tt::after {
   html {
     font-size: 100%;
   }
+}
+.nightly .medium-zoom-overlay {
+  background: rgb(34, 34, 34) none repeat scroll 0% 0% !important;
 }

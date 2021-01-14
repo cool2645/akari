@@ -1,10 +1,10 @@
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import { Disqus } from 'gatsby-plugin-disqus'
 import * as React from 'react'
 
 import Layout from '../../components/Bittersweet/layout'
 import Highlight from '../../components/highlight'
+import Img from '../../components/img'
 import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import styles from '../2645lab/post.module.styl'
@@ -37,13 +37,8 @@ export default class extends React.Component<any> {
             <header>
               {essay.childFile ?
                 <Img
-                  className="gatsby-resp-image-image"
-                  style={{
-                    margin: '0 auto',
-                    maxWidth: essay.childFile.childImageSharp.fluid.aspectRatio * 400
-                  }}
-                  fluid={essay.childFile.childImageSharp.fluid}
-                  imgStyle={{ objectFit: 'contain' }}
+                  src={essay.childFile.url}
+                  alt="cover"
                 /> : ''}
             </header>
             <Highlight text={essay.content} />
@@ -70,12 +65,7 @@ export const query = graphql`
       content
       publish_at
       childFile {
-        childImageSharp {
-          fluid {
-            aspectRatio
-            ...GatsbyImageSharpFluid
-          }
-        }
+        url
       }
     }
     site {
