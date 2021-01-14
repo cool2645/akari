@@ -12,7 +12,7 @@ export interface FooterProps {
 export default class extends React.Component<FooterProps, {}> {
   constructor (props: any) {
     super(props)
-    this.props.onNightModeToggled(this.props.nightMode)
+    setTimeout(() => this.props.onNightModeToggled(this.props.nightMode))
   }
 
   public render () {
