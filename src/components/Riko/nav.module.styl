@@ -72,6 +72,7 @@
     font-size 2em
     color #fff
     text-align center
+    line-height 1.1
   }
 }
 
@@ -85,6 +86,15 @@
 .title {
   span {
     position absolute
+    top 0
+    bottom 0
+  }
+
+  span::after {
+    content ''
+    display inline-block
+    height 100%
+    vertical-align middle
   }
 }
 

@@ -47,7 +47,7 @@ export default class extends React.Component<FooterProps, {}> {
         ，成为
         <Button
           text="魔法少女"
-          background="#f4c900"
+          background={this.props.nightMode ? '#ee8e00' : '#f4c900'}
           onClick={this.toggleNightMode}
         />
         吧！
