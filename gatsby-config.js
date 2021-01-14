@@ -159,9 +159,9 @@ module.exports = {
           'gatsby-remark-external-links',
           'gatsby-remark-unwrap-images',
           {
-            resolve: 'gatsby-remark-images',
+            resolve: 'gatsby-remark-images-zoom',
             options: {
-              maxWidth: 590
+              margin: 15
             }
           },
           {
@@ -175,6 +175,9 @@ module.exports = {
               showLineNumbers: false
             }
           }
+        ],
+        plugins: [
+          'gatsby-remark-images-zoom'
         ]
       }
     },

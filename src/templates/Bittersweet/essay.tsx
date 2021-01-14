@@ -37,6 +37,7 @@ export default class extends React.Component<any> {
             <header>
               {essay.childFile ?
                 <Img
+                  className="gatsby-resp-image-image"
                   style={{
                     margin: '0 auto',
                     maxWidth: essay.childFile.childImageSharp.fluid.aspectRatio * 400

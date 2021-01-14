@@ -6,6 +6,6 @@ export interface ImgProps {
 
 export default (props: ImgProps) => (
   <figure>
-    <img {...props} />
+    <img className="gatsby-resp-image-image" {...props} />
   </figure>
 )
