@@ -159,7 +159,7 @@ module.exports = {
           'gatsby-remark-external-links',
           'gatsby-remark-unwrap-images',
           {
-            resolve: 'gatsby-remark-images-zoom',
+            resolve: 'gatsby-remark-images-medium-zoom',
             options: {
               margin: 15
             }
@@ -177,7 +177,7 @@ module.exports = {
           }
         ],
         plugins: [
-          'gatsby-remark-images-zoom'
+          'gatsby-remark-images-medium-zoom'
         ]
       }
     },
