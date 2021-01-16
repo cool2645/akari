@@ -52,7 +52,7 @@ export default class extends React.Component<{}, ScrollToTopState> {
   private scrollToTop () {
     let currentY = document.documentElement.scrollTop || document.body.scrollTop
     const needScrollTop = 0 - currentY
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       currentY += Math.ceil(needScrollTop / 10)
       window.scrollTo(0, currentY)
       if (needScrollTop > 10 || needScrollTop < -10) {
@@ -60,6 +60,6 @@ export default class extends React.Component<{}, ScrollToTopState> {
       } else {
         window.scrollTo(0, 0)
       }
-    }, 1)
+    })
   }
 }
