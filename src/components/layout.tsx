@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import KokoroProvider from './kokoro-provider'
 import './layout.css'
 
 export interface NightModeProps {
@@ -34,11 +35,22 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
 
     public render () {
       return (
-        <LayoutComponent
-          {...this.props}
-          nightMode={this.state.nightMode}
-          onNightModeToggled={this.onToggledNightMode}
-        />
+        <>
+          <LayoutComponent
+            {...this.props}
+            nightMode={this.state.nightMode}
+            onNightModeToggled={this.onToggledNightMode}
+          />
+          <KokoroProvider>
+            <kokoro-player
+              lang="zh_Hans"
+              top="100"
+              left="0"
+              mobileDefaultSide="right"
+            >{}
+            </kokoro-player>
+          </KokoroProvider>
+        </>
       )
     }
 

@@ -25,6 +25,15 @@ window.akari = {
   console: {}
 }
 
+const script = document.createElement('script')
+script.src = '//unpkg.com/kokoro-player/dist/kokoro-player.min.js'
+script.onload = () => {
+  window.akari.player = new window.KokoroPlayer.Kokoro()
+  window.customElements.define('kokoro-provider',
+    window.KokoroPlayer.Provider.connect(window.akari.player))
+}
+document.body.appendChild(script)
+
 console.log(
   `\n %c © 2645 实验室 | Akari v${window.akari.version} %c \n\n`,
   'color:#fefefe;background:linear-gradient(to right,#58c8f2,#eda4b2);padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;',

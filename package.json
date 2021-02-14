@@ -59,6 +59,7 @@
     "gatsby-source-twitter": "^3.0.0",
     "gatsby-transformer-remark": "^2.6.19",
     "gatsby-transformer-sharp": "^2.2.11",
+    "kokoro-player": "^0.1.0-beta.5",
     "pre-commit": "^1.2.2",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",

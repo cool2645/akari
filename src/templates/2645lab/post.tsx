@@ -8,6 +8,7 @@ import Layout from '../../components/2645lab/layout'
 import Alert from '../../components/alert'
 import Hr from '../../components/hr'
 import Img from '../../components/img'
+import KokoroProvider from '../../components/kokoro-provider'
 import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import SimplePagination from '../../components/simple-pagination'
@@ -109,15 +110,17 @@ export default (props: any) => {
             level="info"
           />
         </header>
-        <MDXProvider
-          components={{
-            alert: Alert,
-            hr: Hr,
-            img: Img
-          }}
-        >
-          <MDXRenderer>{post.childMdx.body}</MDXRenderer>
-        </MDXProvider>
+        <KokoroProvider>
+          <MDXProvider
+            components={{
+              alert: Alert,
+              hr: Hr,
+              img: Img
+            }}
+          >
+            <MDXRenderer>{post.childMdx.body}</MDXRenderer>
+          </MDXProvider>
+        </KokoroProvider>
       </article>
       <div className={styles.copyrightNotice}>
         {
