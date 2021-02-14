@@ -18,6 +18,8 @@ export interface LayoutState {
 
 export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightModeProps>) => {
   return class extends React.Component<P & OutputLayoutProps, LayoutState> {
+    private kokoroPlayerRef = React.createRef()
+
     constructor (props: any) {
       super(props)
       // tslint:disable-next-line: strict-type-predicates
@@ -43,6 +45,7 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
           />
           <KokoroProvider>
             <kokoro-player
+              ref={this.kokoroPlayerRef}
               lang="zh_Hans"
               top="100"
               left="0"
@@ -58,6 +61,9 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       this.setState({
         nightMode
       })
+      if (this.kokoroPlayerRef.current) {
+        (this.kokoroPlayerRef.current as any).darkMode = nightMode
+      }
       // tslint:disable-next-line: strict-type-predicates
       if (typeof window !== 'undefined') {
         if (!nightMode) {
