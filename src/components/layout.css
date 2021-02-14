@@ -647,7 +647,7 @@ pre tt::after {
   background: rgb(34, 34, 34) none repeat scroll 0% 0% !important;
 }
 kokoro-player {
-  z-index: 99;
+  z-index: 999;
 }
 kokoro-player, kokoro-single-card, kokoro-playlist-card {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
