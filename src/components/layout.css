@@ -432,6 +432,9 @@ pre {
   word-wrap: normal;
   padding: 1.45rem;
 }
+code {
+  word-wrap: break-word !important;
+}
 table {
   margin-left: 0;
   margin-right: 0;
