@@ -9,7 +9,9 @@ const { dom } = require('@fortawesome/fontawesome-svg-core')
 
 export const onPreRenderHTML = ({
   getHeadComponents,
-  replaceHeadComponents
+  replaceHeadComponents,
+  getPreBodyComponents,
+  replacePreBodyComponents
 }) => {
   const headComponents = getHeadComponents()
   headComponents.push(
@@ -34,4 +36,14 @@ export const onPreRenderHTML = ({
     />
   )
   replaceHeadComponents(headComponents)
+  const preBodyComponents = getPreBodyComponents()
+  preBodyComponents.unshift(
+    <script
+      key="prefers-dark-mode"
+      dangerouslySetInnerHTML={{
+        __html: "window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && (document.body.className = 'nightly')"
+      }}
+    />
+  )
+  replacePreBodyComponents(preBodyComponents)
 }
