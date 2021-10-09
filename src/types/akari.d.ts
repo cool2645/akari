@@ -9,6 +9,7 @@ declare global {
         hoshiakari?: string
       }
       player: Kokoro
+      nightMode: boolean
     }
   }
 }

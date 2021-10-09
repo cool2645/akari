@@ -25,12 +25,13 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       // tslint:disable-next-line: strict-type-predicates
       const systemPreferNightMode = typeof window !== 'undefined'
         && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      // tslint:disable-next-line: strict-type-predicates
+      const persistentNightMode = typeof localStorage !== 'undefined'
+        ? localStorage.getItem('nightMode') === 'true' || systemPreferNightMode
+        : systemPreferNightMode
       this.state = {
-        nightMode:
-          // tslint:disable-next-line: strict-type-predicates
-          typeof localStorage !== 'undefined'
-            ? localStorage.getItem('nightMode') === 'true' || systemPreferNightMode
-            : systemPreferNightMode
+        // tslint:disable-next-line: strict-type-predicates
+        nightMode: (typeof window !== 'undefined' && window.akari.nightMode) ?? persistentNightMode
       }
       this.onToggledNightMode = this.onToggledNightMode.bind(this)
     }
@@ -82,11 +83,8 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
         }
 
         document.body.className = nightMode ? 'nightly' : ''
-
-        // tslint:disable-next-line: strict-type-predicates
-        if (typeof window !== 'undefined') {
-          window.localStorage.setItem('nightMode', nightMode + '')
-        }
+        window.akari.nightMode = nightMode
+        window.localStorage.setItem('nightMode', nightMode + '')
       }
 
       if (this.props.onNightModeToggled) {

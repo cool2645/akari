@@ -649,6 +649,9 @@ pre tt::after {
 .nightly .medium-zoom-overlay {
   background: rgb(34, 34, 34) none repeat scroll 0% 0% !important;
 }
+.gray-site {
+  filter: grayscale(100%);
+}
 kokoro-player {
   z-index: 999;
 }
