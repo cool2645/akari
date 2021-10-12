@@ -1,8 +1,8 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import autobind from 'autobind-decorator'
 import * as React from 'react'
 
-import styles from './toc.module.styl'
+import * as styles from './toc.module.styl'
 
 export interface Heading {
   depth: number
@@ -18,7 +18,7 @@ export interface TocProps {
 
 export default class extends React.Component<TocProps> {
   private readonly leftMargin = 10
-  private readonly headingEls: Array<HTMLLIElement | null>
+  private readonly headingEls: (HTMLLIElement | null)[]
   private scrollContainerEl: HTMLDivElement | null
 
   constructor (props: any) {
@@ -51,7 +51,7 @@ export default class extends React.Component<TocProps> {
       <div className={`${styles.toc} ${this.props.className}`}>
         <div className={`${styles.header} ${this.props.currentHeadingIndex === 0 ? styles.focus : ''}`}>
           <a href="#" onClick={onHeaderClick}>
-            <div className={`${styles.anchor} ${0 === this.props.currentHeadingIndex ? '' : styles.anchorHide}`}>
+            <div className={`${styles.anchor} ${this.props.currentHeadingIndex === 0 ? '' : styles.anchorHide}`}>
               <div className={styles.anchorDot} />
             </div>
             <strong
@@ -63,7 +63,7 @@ export default class extends React.Component<TocProps> {
             </strong>
           </a>
         </div>
-        <div className={styles.scrollContainer} ref={(ref) => this.scrollContainerEl = ref}>
+        <div className={styles.scrollContainer} ref={(ref) => { this.scrollContainerEl = ref }}>
           <ul>
             {
               this.props.toc.map((toc, index) => {
@@ -72,13 +72,15 @@ export default class extends React.Component<TocProps> {
                 return (
                   <li
                     className={this.props.currentHeadingIndex === index ? styles.focus : ''}
-                    css={(toc.depth - minDepth === 0) ? css`
+                    css={(toc.depth - minDepth === 0)
+                      ? css`
                     position: sticky;
                     top: 0;
                     z-index: ${10 - toc.depth};
-                  ` : css`z-index: ${10 - toc.depth};`}
+                  `
+                      : css`z-index: ${10 - toc.depth};`}
                     key={index}
-                    ref={(ref) => this.headingEls[index] = ref}
+                    ref={(ref) => { this.headingEls[index] = ref }}
                   >
                     <a href={`#${toc.value}`} onClick={onClick} >
                       <div className={`${styles.anchor} ${index === this.props.currentHeadingIndex ? '' : styles.anchorHide}`}>

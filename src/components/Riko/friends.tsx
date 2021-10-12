@@ -3,12 +3,12 @@ import { Disqus } from 'gatsby-plugin-disqus'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import * as React from 'react'
 
-import styles from '../../templates/2645lab/post.module.styl'
+import * as styles from '../../templates/2645lab/post.module.styl'
 import Alert from '../alert'
 import Hr from '../hr'
 import ScrollToTop from '../scroll-to-top'
 
-import styles2 from './friends.module.styl'
+import * as styles2 from './friends.module.styl'
 
 export default ({ post, disqusConfig, children }: any) => {
   return (

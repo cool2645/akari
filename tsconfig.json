@@ -11,7 +11,8 @@
     "declarationDir": "./@types",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "types": ["@emotion/react/types/css-prop"]
   },
   "include": [
     "./src/**/*"

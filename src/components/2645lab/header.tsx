@@ -1,7 +1,7 @@
 import { Link } from 'gatsby'
 import * as React from 'react'
 
-import styles from './header.module.styl'
+import * as styles from './header.module.styl'
 
 export interface HeaderProps {
   siteTitle: string

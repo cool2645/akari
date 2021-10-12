@@ -9,6 +9,7 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
     _setCurrentHeadingIndex(index)
   }
   const articleRef = useRef<HTMLDivElement>(null)
+  // eslint-disable-next-line no-undef
   let headingEls: NodeListOf<HTMLHeadingElement>
 
   maxDepth = Math.min(6, maxDepth)

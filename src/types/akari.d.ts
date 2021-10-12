@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Kokoro } from 'kokoro-player'
 
 declare global {

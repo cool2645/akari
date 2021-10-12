@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator'
 import * as React from 'react'
 
-import styles from './scroll-to-top.module.styl'
+import * as styles from './scroll-to-top.module.styl'
 
 interface ScrollToTopState {
   top: boolean

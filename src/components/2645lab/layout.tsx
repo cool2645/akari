@@ -13,10 +13,9 @@ import Footer from '../footer'
 import withNightMode, { NightModeProps } from '../layout'
 
 import Header from './header'
-import styles from './layout.module.styl'
+import * as styles from './layout.module.styl'
 
 class Layout extends React.Component<NightModeProps> {
-
   @autobind
   public staticQueryRender (data: any) {
     const { children } = this.props

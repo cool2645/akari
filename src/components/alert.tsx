@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import styles from './alert.module.styl'
+import * as styles from './alert.module.styl'
 
 export interface AlertProps {
   content: string

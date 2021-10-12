@@ -4,15 +4,15 @@ import autobind from 'autobind-decorator'
 import { Link } from 'gatsby'
 import * as React from 'react'
 
-import styles from './nav.module.styl'
+import * as styles from './nav.module.styl'
 
 export interface NavProps {
   title: string
   href: string
-  links: Array<{
+  links: {
     title: string
     href: string
-  }>
+  }[]
 }
 
 interface NavState {
@@ -20,7 +20,6 @@ interface NavState {
 }
 
 export default class extends React.Component<NavProps, NavState> {
-
   constructor (props: NavProps) {
     super(props)
     this.state = {
@@ -52,14 +51,14 @@ export default class extends React.Component<NavProps, NavState> {
         />
         <div className={`${styles.sideBar} ${this.state.mobileShowSideBar ? styles.show : ''}`}>
           <div className={styles.header}>
-            <div className={styles.banner}>
+            <div>
               <Link to={this.props.href}>
                 <h1>
                   {this.props.title}
                 </h1>
               </Link>
             </div>
-            <div className={styles.links}>
+            <div>
               <ul>
                 {
                   this.props.links.map((link) => (

@@ -1,7 +1,7 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import * as React from 'react'
 
-import styles from './button.module.styl'
+import * as styles from './button.module.styl'
 import './font.css'
 
 export interface ButtonProps {

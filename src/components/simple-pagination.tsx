@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
 import * as React from 'react'
 
-import styles from './simple-pagination.module.styl'
+import * as styles from './simple-pagination.module.styl'
 
 export interface SimplePaginationProps {
   previousName: string
@@ -20,55 +20,71 @@ export default (props: SimplePaginationProps) => (
       props.force2col ? styles.force2row : ''
     }`}
   >
-    {props.nextName ? (
+    {props.nextName
+      ? (
       <div className={`${styles.link} ${styles.left}`}>
-        {props.nextUrl ? (
+        {props.nextUrl
+          ? (
           <Link to={props.nextUrl}>
-            {props.showIcon ? (
+            {props.showIcon
+              ? (
               <FontAwesomeIcon icon={faAngleLeft} size="sm" />
-            ) : (
-              ''
-            )}{' '}
+                )
+              : (
+                  ''
+                )}{' '}
             {props.nextName}
           </Link>
-        ) : (
+            )
+          : (
           <span>
-            {props.showIcon ? (
+            {props.showIcon
+              ? (
               <FontAwesomeIcon icon={faAngleLeft} size="sm" />
-            ) : (
-              ''
-            )}{' '}
+                )
+              : (
+                  ''
+                )}{' '}
             {props.nextName}
           </span>
-        )}
+            )}
       </div>
-    ) : (
+        )
+      : (
       <div />
-    )}
-    {props.previousName ? (
+        )}
+    {props.previousName
+      ? (
       <div className={`${styles.link} ${styles.right}`}>
-        {props.previousUrl ? (
+        {props.previousUrl
+          ? (
           <Link to={props.previousUrl}>
             {props.previousName}{' '}
-            {props.showIcon ? (
+            {props.showIcon
+              ? (
               <FontAwesomeIcon icon={faAngleRight} size="sm" />
-            ) : (
-              ''
-            )}
+                )
+              : (
+                  ''
+                )}
           </Link>
-        ) : (
+            )
+          : (
           <span>
             {props.previousName}{' '}
-            {props.showIcon ? (
+            {props.showIcon
+              ? (
               <FontAwesomeIcon icon={faAngleRight} size="sm" />
-            ) : (
-              ''
-            )}
+                )
+              : (
+                  ''
+                )}
           </span>
-        )}
+            )}
       </div>
-    ) : (
+        )
+      : (
       <div />
-    )}
+        )}
   </div>
 )

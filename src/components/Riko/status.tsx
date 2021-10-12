@@ -7,7 +7,7 @@ import ScrollToTop from '../scroll-to-top'
 
 import EssayCard from './essay-card'
 import PostCard from './post-card'
-import styles from './status.module.styl'
+import * as styles from './status.module.styl'
 import TwitterCard from './twitter-card'
 
 interface StatusPageProps {
@@ -19,7 +19,6 @@ interface StatusPageState {
 }
 
 export default class extends React.Component<StatusPageProps, StatusPageState> {
-
   private readonly perPage = 20
 
   constructor (props: StatusPageProps) {
@@ -57,33 +56,37 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
                 className={styles.statusCard}
               >
                 {
-                  node.type === 'twitter' ?
-                    <TwitterCard
+                  node.type === 'twitter'
+                    ? <TwitterCard
                       time={node.publish_at}
                       full_text={node.full_text}
                       url={node.url}
                       extended_entities={
                         node.extended_entities ||
-                        (node.retweeted_status ? node.retweeted_status.extended_entities
+                        (node.retweeted_status
+                          ? node.retweeted_status.extended_entities
                           : null)
                       }
                       source={node.source}
                       retweeted_status={node.retweeted_status}
                       childFile={node.childFile}
                     />
-                    : node.type === 'post' ? <PostCard
+                    : node.type === 'post'
+                      ? <PostCard
                       time={node.publish_at}
                       title={node.title}
                       excerpt={node.childMdx.excerpt}
                       slug={node.slug}
                     />
-                    : node.type === 'essay' ? <EssayCard
+                      : node.type === 'essay'
+                        ? <EssayCard
                       time={node.publish_at}
                       content={node.content}
                       category={node.category.name}
                       url={node.url}
                       childFile={node.childFile}
-                    /> : ''
+                    />
+                        : ''
                 }
               </div>
             ))
@@ -112,7 +115,8 @@ export default class extends React.Component<StatusPageProps, StatusPageState> {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
     const eleTop = this.getElementTop(document.querySelector(`.${styles.statusCard}:last-child`))
     const windowHeight = (window as any).visualViewport
-      ? (window as any).visualViewport.height : window.innerHeight + 100
+      ? (window as any).visualViewport.height
+      : window.innerHeight + 100
     if (scrollTop + windowHeight >= eleTop) this.showMore()
   }
 

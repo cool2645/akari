@@ -2,7 +2,7 @@ import { Link } from 'gatsby'
 import * as React from 'react'
 
 import Card from './card'
-import styles from './post-card.module.styl'
+import * as styles from './post-card.module.styl'
 
 interface PostCardProps {
   time: string

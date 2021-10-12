@@ -4,7 +4,7 @@ import * as React from 'react'
 import Layout from '../components/2645lab/layout'
 import SEO from '../components/seo'
 
-import styles from './404.module.styl'
+import * as styles from './404.module.styl'
 
 interface NotFoundPageState {
   hitokoto: string

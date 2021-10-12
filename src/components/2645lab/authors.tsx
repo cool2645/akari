@@ -1,8 +1,8 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import { Link } from 'gatsby'
 import * as React from 'react'
 
-import styles from './authors.module.styl'
+import * as styles from './authors.module.styl'
 
 export interface AuthorProps {
   name: string
@@ -24,19 +24,20 @@ const ListItem = (props: ListItemProps) => (
   <li className={`${styles.listItem}`}>
     <div className={styles.b0}>
       {
-        !props.href ?
-          <span>{props.text}</span> :
-          <Link to={props.href}>{props.text}</Link>
+        !props.href
+          ? <span>{props.text}</span>
+          : <Link to={props.href}>{props.text}</Link>
       }
     </div>
     <div className={styles.b1} >
-      {props.avatarUrl ?
-        <div
+      {props.avatarUrl
+        ? <div
           className={styles.img}
           css={css`
             background-image: url("${props.avatarUrl}");
           `}
-        /> : ''}
+        />
+        : ''}
     </div>
     <div className={styles.b2} />
   </li>

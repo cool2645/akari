@@ -1,3 +1,4 @@
+/* eslint-disable */
 // types/mdx.d.ts
 declare module 'gatsby-plugin-mdx' {
   let MDXComponent: (props: any) => JSX.Element

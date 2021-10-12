@@ -1,7 +1,7 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import * as React from 'react'
 
-import styles from './hr.module.styl'
+import * as styles from './hr.module.styl'
 
 export interface HrProps {
   content: string

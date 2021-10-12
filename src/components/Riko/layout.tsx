@@ -3,7 +3,7 @@ import * as React from 'react'
 import Footer from '../footer'
 import withNightMode, { NightModeProps } from '../layout'
 
-import styles from './layout.module.styl'
+import * as styles from './layout.module.styl'
 import Nav from './nav'
 
 export interface LayoutProps {

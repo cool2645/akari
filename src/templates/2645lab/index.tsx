@@ -11,14 +11,13 @@ import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
 import SimplePagination from '../../components/simple-pagination'
 
-import styles from './index.module.styl'
+import * as styles from './index.module.styl'
 
 interface IndexState {
   nightMode: boolean
 }
 
 export default class extends React.Component<any, IndexState> {
-
   constructor (props: any) {
     super(props)
     this.state = {
@@ -87,7 +86,8 @@ export default class extends React.Component<any, IndexState> {
               nextUrl={`/pages/${pageInfo.currentPage - 1}/`}
               force2col={true}
               showIcon={true}
-            /> : ''
+            />
+            : ''
         }
         <ScrollToTop />
       </Layout>
@@ -115,7 +115,6 @@ export default class extends React.Component<any, IndexState> {
   private onNightModeToggled (nightMode: boolean) {
     this.setState({ nightMode })
   }
-
 }
 
 export const query = graphql`

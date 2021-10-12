@@ -22,7 +22,7 @@ interface TwitterCardProps {
 
 export default (props: TwitterCardProps) => {
   const source = props.source.replace(/<[^>]+>/ig, '')
-  let fullText = props.full_text.replace(/https:\/\/t.co\/[^\/]+$/, '')
+  let fullText = props.full_text.replace(/https:\/\/t.co\/[^/]+$/, '')
   if (props.retweeted_status) {
     fullText = fullText.replace(/^RT @[a-zA-Z0-9_]+:/, '')
   }
@@ -35,8 +35,8 @@ export default (props: TwitterCardProps) => {
       cover_fluid={props.childFile ? props.childFile.childImageSharp.fluid : null}
     >
       {
-        props.retweeted_status ?
-          <>
+        props.retweeted_status
+          ? <>
             <a
               href={`https://twitter.com/${props.retweeted_status.user.screen_name}`}
               target="_blank"
@@ -44,7 +44,8 @@ export default (props: TwitterCardProps) => {
             >
               <FontAwesomeIcon icon={faRetweet} /> {props.retweeted_status.user.name}
             </a>
-          </> : ''
+          </>
+          : ''
       } <Highlight text={fullText} tagBuilder={tagBuilder} />
     </Card>
   )

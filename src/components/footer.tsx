@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator'
 import * as React from 'react'
 
 import Button from './button'
-import styles from './Riko/layout.module.styl'
+import * as styles from './Riko/layout.module.styl'
 
 export interface FooterProps {
   nightMode: boolean
@@ -33,11 +33,13 @@ export default class extends React.Component<FooterProps, {}> {
           href="https://github.com/cool2645/akari"
           className={styles.theme}
         >
-          {this.props.nightMode ? (
+          {this.props.nightMode
+            ? (
             <span className={styles.hoshi}>Hoshi</span>
-          ) : (
-            ''
-          )}
+              )
+            : (
+                ''
+              )}
           <span>Akari</span>
         </a>
         <br />
@@ -60,5 +62,4 @@ export default class extends React.Component<FooterProps, {}> {
   private toggleNightMode () {
     this.props.onNightModeToggled(!this.props.nightMode)
   }
-
 }

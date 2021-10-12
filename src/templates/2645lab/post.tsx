@@ -16,10 +16,9 @@ import TOC from '../../components/toc'
 import { useHeadingWaypoint } from '../../hooks/use-heading-waypoint'
 import { useMathJax } from '../../hooks/use-mathjax'
 
-import styles from './post.module.styl'
+import * as styles from './post.module.styl'
 
 export default (props: any) => {
-
   useMathJax()
   const { articleRef, currentHeadingIndex, setCurrentHeadingIndex } = useHeadingWaypoint()
 
@@ -63,43 +62,46 @@ export default (props: any) => {
         <h1>{post.title}</h1>
         <header>
           {
-            post.childMdx.headings.length > 1 ?
-              <div className={styles.tocContainer}>
+            post.childMdx.headings.length > 1
+              ? <div className={styles.tocContainer}>
                 <TOC
                   className={styles.toc}
                   currentHeadingIndex={currentHeadingIndex}
                   onChangeCurrentHeading={setCurrentHeadingIndex}
                   toc={post.childMdx.headings}
                 />
-              </div> : ''
+              </div>
+              : ''
           }
           <div className={styles.authorMeta}>
             {
-              post.is_repost ?
-                <><span>由 </span>
-                  <span className={styles.author}>
+              post.is_repost
+                ? <><span>由 </span>
+                  <span>
                       {post.author.name}
                     </span>
                   <span> 转载</span>
-                </> : <span className={styles.author}>
+                </>
+                : <span>
                       {post.author.name}
                     </span>
             }
             ，
-            <span className={styles.publishTime}>
+            <span>
                 {pd.getFullYear()}-{pd.getMonth() + 1}-{pd.getDate()}
               </span>
           </div>
           {
-            dayByUpdate() > 365 ?
-              <Alert
+            dayByUpdate() > 365
+              ? <Alert
                 content={`本文最后更新于 ${
                   dayByUpdate()
                 } 天前（${
                   d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()
                 }），其中的信息可能已经有所发展或者不再适用于现阶段。`}
                 level="warn"
-              /> : ''
+              />
+              : ''
           }
           <Alert
             content={`本文全长 ${
@@ -124,11 +126,11 @@ export default (props: any) => {
       </article>
       <div className={styles.copyrightNotice}>
         {
-          post.childCopyrightNotice ?
-            <MDXRenderer>
+          post.childCopyrightNotice
+            ? <MDXRenderer>
               {post.childCopyrightNotice.childMdx.body}
-            </MDXRenderer> :
-            <>
+            </MDXRenderer>
+            : <>
               除特殊说明以外，本网站文章采用 <a
                 target="_blank"
                 href="http://creativecommons.org/licenses/by-sa/4.0/"
@@ -139,13 +141,14 @@ export default (props: any) => {
         }
       </div>
       {
-        post.is_public ?
-          <SimplePagination
+        post.is_public
+          ? <SimplePagination
             previousName={previous ? `上一篇：${previous.title}` : '已是第一篇'}
             previousUrl={previous ? `/posts/${previous.slug}/` : ''}
             nextName={next ? `下一篇：${next.title}` : '已是最后一篇'}
             nextUrl={next ? `/posts/${next.slug}/` : ''}
-          /> : ''
+          />
+          : ''
       }
       <Disqus className={styles.disqus} config={disqusConfig} />
       <ScrollToTop />

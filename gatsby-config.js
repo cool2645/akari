@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   siteMetadata: {
     title: '2645 实验室',
@@ -31,7 +33,8 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-typescript',
-    'gatsby-plugin-webpack-bundle-analyzer',
+    'gatsby-plugin-dts-css-modules',
+    'gatsby-plugin-webpack-bundle-analyser-v2',
     'gatsby-plugin-stylus',
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
@@ -39,7 +42,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/src/images`
+        path: path.join(__dirname, 'src/images')
       }
     },
     'gatsby-transformer-sharp',
@@ -140,7 +143,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
-        exclude: ['/Bittersweet/essays/*']
+        excludes: ['/Bittersweet/essays/*']
       }
     },
     {
@@ -148,7 +151,7 @@ module.exports = {
       options: {
         apiURL: 'https://cms.cool2645.com',
         queryLimit: 1000, // Default to 100
-        contentTypes: ['post', 'essay', 'author', 'category']
+        collectionTypes: ['post', 'essay', 'author', 'category']
       }
     },
     {

@@ -7,12 +7,11 @@ import Highlight from '../../components/highlight'
 import Img from '../../components/img'
 import ScrollToTop from '../../components/scroll-to-top'
 import SEO from '../../components/seo'
-import styles from '../2645lab/post.module.styl'
+import * as styles from '../2645lab/post.module.styl'
 
-import styles2 from './essay.module.styl'
+import * as styles2 from './essay.module.styl'
 
 export default class extends React.Component<any> {
-
   public render () {
     const { essay, site } = this.props.data
     const disqusConfig = {
@@ -35,11 +34,12 @@ export default class extends React.Component<any> {
           <h1 className={styles2.header}>随笔</h1>
           <div className={styles.post}>
             <header>
-              {essay.childFile ?
-                <Img
+              {essay.childFile
+                ? <Img
                   src={essay.childFile.url}
                   alt="cover"
-                /> : ''}
+                />
+                : ''}
             </header>
             <Highlight text={essay.content} />
           </div>
@@ -51,7 +51,6 @@ export default class extends React.Component<any> {
       </Layout>
     )
   }
-
 }
 
 export const query = graphql`

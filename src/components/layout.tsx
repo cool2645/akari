@@ -23,8 +23,8 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
     constructor (props: any) {
       super(props)
       // tslint:disable-next-line: strict-type-predicates
-      const systemPreferNightMode = typeof window !== 'undefined'
-        && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      const systemPreferNightMode = typeof window !== 'undefined' &&
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
       // tslint:disable-next-line: strict-type-predicates
       const persistentNightMode = typeof localStorage !== 'undefined'
         ? localStorage.getItem('nightMode') === 'true' || systemPreferNightMode
@@ -92,5 +92,4 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       }
     }
   }
-
 }
