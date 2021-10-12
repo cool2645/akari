@@ -66,7 +66,8 @@ export default class extends React.Component<FooterProps, {}> {
             字体偏好：
             <a href="" className={styles2.font} onClick={this.setFontFaceSerif}
             >宋体</a> / <a href="" className={styles2.font} onClick={this.setFontFaceSansSerif}
-          >黑体</a>
+          >黑体</a> / <a href="" className={styles2.font} onClick={this.setFontFaceLxgw}
+          >霞鹜文楷</a>
           </div>
         </div>
         <br />
@@ -89,5 +90,11 @@ export default class extends React.Component<FooterProps, {}> {
   private setFontFaceSansSerif (e: React.MouseEvent) {
     e.preventDefault()
     this.props.onFontToggled('sans-serif')
+  }
+
+  @autobind
+  private setFontFaceLxgw (e: React.MouseEvent) {
+    e.preventDefault()
+    this.props.onFontToggled('lxgw')
   }
 }

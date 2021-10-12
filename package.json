@@ -82,7 +82,7 @@
     "lint"
   ],
   "scripts": {
-    "build": "gatsby build && cp _redirects public && cd ./public && font-spider --no-backup --map \"/static\",\"./static\" *.html pages/**/*.html posts/**/*.html Bittersweet/**/*.html Riko/**/*.html",
+    "build": "gatsby build && cp _redirects public && cd ./public && font-spider --no-backup --map \"/static\",\"./static\" --ignore \"http\" *.html pages/**/*.html posts/**/*.html Bittersweet/**/*.html Riko/**/*.html",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",

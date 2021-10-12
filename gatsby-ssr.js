@@ -15,6 +15,13 @@ export const onPreRenderHTML = ({
 }) => {
   const headComponents = getHeadComponents()
   headComponents.push(
+    <link
+      key="lxgw-webfont"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts/dist/LXGWWenKai-Regular.css"
+    />
+  )
+  headComponents.push(
     <style
       id="fontawesome-ssr"
       key="fontawesome-ssr"

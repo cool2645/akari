@@ -236,6 +236,9 @@ body.font-serif {
 body.font-sans-serif {
   font-family: Arial, sans-serif;
 }
+body.font-lxgw {
+  font-family: "LXGWWenKai";
+}
 img {
   max-width: 100%;
   max-height: 430px;
