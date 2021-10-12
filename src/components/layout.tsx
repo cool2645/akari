@@ -6,6 +6,7 @@ import './layout.css'
 export interface NightModeProps {
   nightMode: boolean
   onNightModeToggled: (nightMode: boolean) => void
+  onFontToggled: (fontFace: string) => void
 }
 
 export interface OutputLayoutProps {
@@ -18,7 +19,7 @@ export interface LayoutState {
 
 export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightModeProps>) => {
   return class extends React.Component<P & OutputLayoutProps, LayoutState> {
-    private kokoroPlayerRef = React.createRef()
+    kokoroPlayerRef = React.createRef()
 
     constructor (props: any) {
       super(props)
@@ -34,15 +35,24 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
         nightMode: (typeof window !== 'undefined' && window.akari.nightMode) ?? persistentNightMode
       }
       this.onToggledNightMode = this.onToggledNightMode.bind(this)
+      this.onToggledFont = this.onToggledFont.bind(this)
     }
 
-    public render () {
+    componentDidMount () {
+      // tslint:disable-next-line: strict-type-predicates
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('font')) {
+        this.onToggledFont(localStorage.getItem('font') as string)
+      }
+    }
+
+    render () {
       return (
         <>
           <LayoutComponent
             {...this.props}
             nightMode={this.state.nightMode}
             onNightModeToggled={this.onToggledNightMode}
+            onFontToggled={this.onToggledFont}
           />
           <KokoroProvider>
             <kokoro-player
@@ -58,7 +68,7 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       )
     }
 
-    private onToggledNightMode (nightMode: boolean) {
+    onToggledNightMode (nightMode: boolean) {
       this.setState({
         nightMode
       })
@@ -82,7 +92,11 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
           }
         }
 
-        document.body.className = nightMode ? 'nightly' : ''
+        if (nightMode) {
+          document.body.classList.add('nightly')
+        } else {
+          document.body.classList.remove('nightly')
+        }
         window.akari.nightMode = nightMode
         window.localStorage.setItem('nightMode', nightMode + '')
       }
@@ -90,6 +104,15 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       if (this.props.onNightModeToggled) {
         this.props.onNightModeToggled(nightMode)
       }
+    }
+
+    onToggledFont (fontFace: string) {
+      document.body.className = document.body.className
+        .split(' ')
+        .filter(cn => !cn.startsWith('font'))
+        .join(' ')
+      document.body.classList.add(`font-${fontFace}`)
+      window.localStorage.setItem('font', fontFace)
     }
   }
 }

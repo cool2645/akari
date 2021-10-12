@@ -42,6 +42,7 @@ class Layout extends React.Component<LayoutProps & NightModeProps> {
           <Footer
             nightMode={this.props.nightMode}
             onNightModeToggled={this.props.onNightModeToggled}
+            onFontToggled={this.props.onFontToggled}
           />
         </div>
       </div>
