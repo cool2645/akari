@@ -231,7 +231,7 @@ body {
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
 body.font-serif {
-  font-family: georgia, serif;
+  font-family: georgia, 'Noto Serif SC', serif;
 }
 body.font-sans-serif {
   font-family: Arial, sans-serif;
