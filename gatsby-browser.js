@@ -4,7 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-require('prismjs/themes/prism.css')
 const { version } = require('./package.json')
 
 if (
@@ -33,6 +32,21 @@ script.onload = () => {
     window.KokoroPlayer.Provider.connect(window.akari.player))
 }
 document.body.appendChild(script)
+
+const webfontjs = document.createElement('script')
+webfontjs.src = '//cdn.jsdelivr.net/npm/webfontloader@1/webfontloader.min.js'
+webfontjs.onload = () => {
+  window.WebFont.load({
+    google: {
+      families: ['Noto Serif SC']
+    },
+    custom: {
+      families: ['LXGWWenkai'],
+      urls: ['https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts/dist/LXGWWenKai-Regular.css']
+    }
+  })
+}
+document.body.appendChild(webfontjs)
 
 console.log(
   `\n %c © 2645 实验室 | Akari v${window.akari.version} %c \n\n`,

@@ -14,19 +14,6 @@ export const onPreRenderHTML = ({
   replacePreBodyComponents
 }) => {
   const headComponents = getHeadComponents()
-  headComponents.push(...[
-    <link key="googleapis" rel="preconnect" href="https://fonts.googleapis.com" />,
-    <link key="gstatic" rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />,
-    <link key="noto-serif" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap" rel="stylesheet" />,
-    <link
-      key="lxgw-webfont"
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts/dist/LXGWWenKai-Regular.css"
-    />,
-    <script key="script" defer>
-
-    </script>
-  ])
   headComponents.push(
     <style
       id="fontawesome-ssr"

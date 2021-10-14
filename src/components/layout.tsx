@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import KokoroProvider from './kokoro-provider'
 import './layout.css'
+import './prism.styl'
 
 export interface NightModeProps {
   nightMode: boolean
@@ -43,6 +44,7 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       if (typeof localStorage !== 'undefined' && localStorage.getItem('font')) {
         this.onToggledFont(localStorage.getItem('font') as string)
       }
+      this.onToggledNightMode(this.state.nightMode)
     }
 
     render () {
@@ -94,8 +96,10 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
 
         if (nightMode) {
           document.body.classList.add('nightly')
+          document.body.classList.remove('daily')
         } else {
           document.body.classList.remove('nightly')
+          document.body.classList.add('daily')
         }
         window.akari.nightMode = nightMode
         window.localStorage.setItem('nightMode', nightMode + '')

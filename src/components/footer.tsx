@@ -12,12 +12,6 @@ export interface FooterProps {
 }
 
 export default class extends React.Component<FooterProps, {}> {
-  constructor (props: any) {
-    super(props)
-    // 控制台打印日志，不是非常必要，留到下一个宏任务
-    setTimeout(() => this.props.onNightModeToggled(this.props.nightMode))
-  }
-
   public render () {
     return (
       <footer>

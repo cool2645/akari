@@ -77,21 +77,19 @@
 }
 
 .author-meta {
-
   margin 1rem 0
   color #888
   font-size 1.1rem
-
 }
 
 :global(.nightly) {
   .author-meta {
-    color #ddd
+    color #c0c0c0
   }
 
   .post {
     blockquote, blockquote::before, blockquote::after {
-      color #ddd
+      color #c0c0c0
     }
   }
 }
@@ -107,6 +105,14 @@
 
   p:last-child {
     margin-bottom 0
+  }
+}
+
+:global(.nightly) {
+  .copyright-notice {
+    background-color #2d2d2d
+    border #c0c0c0 2px dashed
+    color: #cecece
   }
 }
 
