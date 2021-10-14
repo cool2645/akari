@@ -22,7 +22,10 @@ export const onPreRenderHTML = ({
       key="lxgw-webfont"
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/satouriko/LxgwWenKai_Webfonts/dist/LXGWWenKai-Regular.css"
-    />
+    />,
+    <script key="script" defer>
+
+    </script>
   ])
   headComponents.push(
     <style
