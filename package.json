@@ -2,7 +2,7 @@
   "name": "akari",
   "private": true,
   "description": "New generation (2019) of our blog's frontend.",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": "rikakomoe",
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.4",
