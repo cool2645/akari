@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import KokoroProvider from './kokoro-provider'
 import './layout.css'
 import './prism.styl'
 
@@ -20,8 +19,6 @@ export interface LayoutState {
 
 export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightModeProps>) => {
   return class extends React.Component<P & OutputLayoutProps, LayoutState> {
-    kokoroPlayerRef = React.createRef()
-
     constructor (props: any) {
       super(props)
       // tslint:disable-next-line: strict-type-predicates
@@ -56,16 +53,6 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
             onNightModeToggled={this.onToggledNightMode}
             onFontToggled={this.onToggledFont}
           />
-          <KokoroProvider>
-            <kokoro-player
-              ref={this.kokoroPlayerRef}
-              lang="zh_Hans"
-              top="100"
-              left="0"
-              mobileDefaultSide="right"
-            >{}
-            </kokoro-player>
-          </KokoroProvider>
         </>
       )
     }
@@ -74,8 +61,9 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
       this.setState({
         nightMode
       })
-      if (this.kokoroPlayerRef.current) {
-        (this.kokoroPlayerRef.current as any).darkMode = nightMode
+      if (document.querySelector('kokoro-player')) {
+        // tslint:disable-next-line: no-unnecessary-type-assertion
+        (document.querySelector('kokoro-player') as any).darkMode = nightMode
       }
       // tslint:disable-next-line: strict-type-predicates
       if (typeof window !== 'undefined') {

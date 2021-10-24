@@ -11,7 +11,9 @@ export const onPreRenderHTML = ({
   getHeadComponents,
   replaceHeadComponents,
   getPreBodyComponents,
-  replacePreBodyComponents
+  replacePreBodyComponents,
+  getPostBodyComponents,
+  replacePostBodyComponents
 }) => {
   const headComponents = getHeadComponents()
   headComponents.push(
@@ -46,4 +48,16 @@ export const onPreRenderHTML = ({
     />
   )
   replacePreBodyComponents(preBodyComponents)
+  const postBodyComponents = getPostBodyComponents()
+  postBodyComponents.push(
+    <kokoro-provider>
+      <kokoro-player
+        lang="zh_Hans"
+        top="100"
+        left="0"
+        mobileDefaultSide="right"
+      />
+    </kokoro-provider>
+  )
+  replacePostBodyComponents(postBodyComponents)
 }
