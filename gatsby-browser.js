@@ -8,9 +8,15 @@ const { version } = require('./package.json')
 
 if (
   navigator.userAgent.indexOf('Firefox') === -1 &&
-  navigator.userAgent.indexOf('Chrome') !== -1
+  navigator.userAgent.indexOf('AppleWebKit') !== -1
 ) {
-  console.warn('EVIL MONOPOLIST Google IS UNDERMINING NETWORK NEUTRALITY.')
+  if (navigator.userAgent.indexOf('Chrome') !== -1) {
+    console.warn('EVIL MONOPOLIST Google IS UNDERMINING NETWORK NEUTRALITY.')
+    console.warn('Read more: https://news.ycombinator.com/item?id=18064537')
+  } else {
+    console.warn('EVIL MONOPOLIST Apple IS KILLING THE WEB.')
+    console.warn('Read more: https://httptoolkit.tech/blog/safari-is-killing-the-web/')
+  }
   console.warn(
     'Try Firefox Developer Edition, specially designed for web developers: https://www.mozilla.org/firefox/developer/'
   )
