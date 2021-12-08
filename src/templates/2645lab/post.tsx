@@ -88,8 +88,9 @@ export default (props: any) => {
             }
             ，
             <span>
-                {pd.getFullYear()}-{pd.getMonth() + 1}-{pd.getDate()}
-              </span>
+              {pd.getFullYear()}-{pd.getMonth() + 1}-{pd.getDate()}
+              {+d !== +pd && `，更新于 ${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`}
+            </span>
           </div>
           {
             dayByUpdate() > 365

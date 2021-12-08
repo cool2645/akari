@@ -60,9 +60,11 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
       }
       for (let i = 0; i < headingEls.length; i++) {
         const ele = headingEls.item(i)
-        if ('#' + encodeURIComponent(ele.innerText) === location.hash) {
-          window.scrollTo(0, ele.offsetTop - 20 + articleEl.offsetTop)
-          setCurrentHeadingIndex(i)
+        if ('#' + encodeURI(ele.innerText) === location.hash && i !== 0) {
+          setTimeout(() => {
+            window.scrollTo(0, ele.offsetTop - 20 + articleEl.offsetTop)
+            setCurrentHeadingIndex(i)
+          })
           break
         }
       }
