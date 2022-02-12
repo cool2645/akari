@@ -60,7 +60,7 @@ export default class extends React.Component<any, IndexState> {
                 </span>
                 </h2>
               </Link>
-              <p>
+              <p className={styles.postExcerpt}>
                 {node.childMdx.excerpt}
                 <Link to={`/posts/${node.slug}/`}>
                   <Button
