@@ -509,6 +509,11 @@ pre tt::after {
     font-size: 100%;
   }
 }
+@media only screen and (min-width: 480px) and (max-height: 850px) {
+  html {
+    font-size: 1.05em;
+  }
+}
 .nightly .medium-zoom-overlay {
   background: rgb(34, 34, 34) none repeat scroll 0% 0% !important;
 }
