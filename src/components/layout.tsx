@@ -22,18 +22,21 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
     constructor (props: any) {
       super(props)
       // tslint:disable-next-line: strict-type-predicates
-      const systemPreferNightMode = typeof window !== 'undefined' &&
-        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      // tslint:disable-next-line: strict-type-predicates
-      const persistentNightMode = typeof localStorage !== 'undefined'
-        ? localStorage.getItem('nightMode') === 'true' || systemPreferNightMode
-        : systemPreferNightMode
+      const persistentNightMode = (typeof localStorage !== 'undefined' && localStorage.getItem('userNightMode'))
+        ? localStorage.getItem('userNightMode') === 'true'
+        : undefined
       this.state = {
         // tslint:disable-next-line: strict-type-predicates
-        nightMode: (typeof window !== 'undefined' && window.akari.nightMode) ?? persistentNightMode
+        nightMode: persistentNightMode ?? this.systemPreferNightMode
       }
       this.onToggledNightMode = this.onToggledNightMode.bind(this)
       this.onToggledFont = this.onToggledFont.bind(this)
+    }
+
+    get systemPreferNightMode () {
+      // tslint:disable-next-line: strict-type-predicates
+      return typeof window !== 'undefined' &&
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     }
 
     componentDidMount () {
@@ -90,7 +93,11 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
           document.body.classList.add('daily')
         }
         window.akari.nightMode = nightMode
-        window.localStorage.setItem('nightMode', nightMode + '')
+        if (nightMode !== this.systemPreferNightMode) {
+          window.localStorage.setItem('userNightMode', nightMode + '')
+        } else {
+          window.localStorage.removeItem('userNightMode')
+        }
       }
 
       if (this.props.onNightModeToggled) {
