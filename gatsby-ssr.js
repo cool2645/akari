@@ -43,7 +43,7 @@ export const onPreRenderHTML = ({
     <script
       key="prefers-dark-mode"
       dangerouslySetInnerHTML={{
-        __html: "(localStorage.getItem('userNightMode') === 'true' || window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) && (document.body.className = 'nightly')"
+        __html: "(localStorage.getItem('userNightMode') === 'true' || localStorage.getItem('userNightMode') !== 'false' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) && (document.body.className = 'nightly')"
       }}
     />
   )
