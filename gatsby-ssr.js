@@ -41,7 +41,7 @@ export const onPreRenderHTML = ({
     <script
       key="prefers-dark-mode"
       dangerouslySetInnerHTML={{
-        __html: "(localStorage.getItem('userNightMode') === 'true' || localStorage.getItem('userNightMode') !== 'false' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) && document.documentElement.classList.toggle('dark', true)"
+        __html: "(localStorage.getItem('userNightMode') === 'true' || localStorage.getItem('userNightMode') !== 'false' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) && document.documentElement.classList.toggle('nightly', true)"
       }}
     />
   )
@@ -50,8 +50,8 @@ export const onPreRenderHTML = ({
       key="dark-mode-super"
       dangerouslySetInnerHTML={{
         __html: `
-      html.dark {
-        background-color: #222;
+      html.nightly, html.nightly > body {
+        background: #222;
         color: #cecece;
       }`
       }}

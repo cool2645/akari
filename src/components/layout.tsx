@@ -86,11 +86,11 @@ export default <P extends {}> (LayoutComponent: React.ComponentType<P & NightMod
         }
 
         if (nightMode) {
-          document.body.classList.add('nightly')
-          document.body.classList.remove('daily')
+          document.documentElement.classList.add('nightly')
+          document.documentElement.classList.remove('daily')
         } else {
-          document.body.classList.remove('nightly')
-          document.body.classList.add('daily')
+          document.documentElement.classList.remove('nightly')
+          document.documentElement.classList.add('daily')
         }
         window.akari.nightMode = nightMode
         if (nightMode !== this.systemPreferNightMode) {

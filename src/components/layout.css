@@ -13,16 +13,16 @@ body {
   transition: all .2s ease-in-out 0s;
   min-height: 100%;
 }
-body.nightly {
+html.nightly, html.nightly > body {
   background: #222;
   color: #cecece;
 }
-body.nightly h1,
-body.nightly h2,
-body.nightly h3,
-body.nightly h4,
-body.nightly h5,
-body.nightly h6 {
+html.nightly h1,
+html.nightly h2,
+html.nightly h3,
+html.nightly h4,
+html.nightly h5,
+html.nightly h6 {
   color: #d3d3d3;
 }
 article,
