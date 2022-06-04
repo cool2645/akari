@@ -37,17 +37,27 @@ export const onPreRenderHTML = ({
       content="vfBieEK9GH8ZUhz0vrwxJDaNOXdq8ztAv21tboXSCVI"
     />
   )
-  replaceHeadComponents(headComponents)
-  const preBodyComponents = getPreBodyComponents()
-  preBodyComponents.unshift(
+  headComponents.unshift(
     <script
       key="prefers-dark-mode"
       dangerouslySetInnerHTML={{
-        __html: "(localStorage.getItem('userNightMode') === 'true' || localStorage.getItem('userNightMode') !== 'false' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) && (document.body.className = 'nightly')"
+        __html: "(localStorage.getItem('userNightMode') === 'true' || localStorage.getItem('userNightMode') !== 'false' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) && document.documentElement.classList.toggle('dark', true)"
       }}
     />
   )
-  replacePreBodyComponents(preBodyComponents)
+  headComponents.unshift(
+    <style
+      key="dark-mode-super"
+      dangerouslySetInnerHTML={{
+        __html: `
+      html.dark {
+        background-color: #222;
+        color: #cecece;
+      }`
+      }}
+    />
+  )
+  replaceHeadComponents(headComponents)
   const postBodyComponents = getPostBodyComponents()
   postBodyComponents.push(
     <kokoro-provider>
