@@ -26,7 +26,7 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
     }
     const el = headingEls.item(index)
     window.scrollTo(0, el.offsetTop - 20 + articleEl.offsetTop)
-    navigate(`#${el.innerText}`, { replace: true })?.catch()
+    navigate(`#${encodeURI(el.innerText)}`, { replace: true })?.catch()
     setCurrentHeadingIndex(index)
   }
 
@@ -48,7 +48,7 @@ export function useHeadingWaypoint (maxDepth: number = 6) {
           }
         }
         if (topElIndex !== currentHeadingIndexRef.current) {
-          navigate(`#${headingEls.item(topElIndex).innerText}`, { replace: true })?.catch()
+          navigate(`#${encodeURI(headingEls.item(topElIndex).innerText)}`, { replace: true })?.catch()
           setCurrentHeadingIndex(topElIndex)
         }
       })

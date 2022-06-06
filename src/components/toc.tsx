@@ -82,7 +82,7 @@ export default class extends React.Component<TocProps> {
                     key={index}
                     ref={(ref) => { this.headingEls[index] = ref }}
                   >
-                    <a href={`#${toc.value}`} onClick={onClick} >
+                    <a href={`#${encodeURI(toc.value)}`} onClick={onClick} >
                       <div className={`${styles.anchor} ${index === this.props.currentHeadingIndex ? '' : styles.anchorHide}`}>
                         <div className={styles.anchorDot} />
                       </div>
