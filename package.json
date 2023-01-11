@@ -52,7 +52,7 @@
     "gatsby-source-filesystem": "^4.7.0",
     "gatsby-source-strapi": "^1.0.3",
     "gatsby-source-twitter": "^4.0.0",
-    "gatsby-transformer-remark": "^5.7.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^4.7.0",
     "kokoro-player": "^1.0.1",
     "pre-commit": "^1.2.2",
